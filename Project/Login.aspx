@@ -161,7 +161,7 @@
         <div class="login">
 
             <div class="image ">
-                <img src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
+                <img class= "loginImg" src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
             </div>
             <h1 class="mb-5" align="center">Login</h1>
             <div class="form-group">
@@ -186,23 +186,32 @@
                 </div>
                 <div style="clear: both;"></div>
             </div>
-            <asp:Button ID="btnLogin" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnLogin_Click" CausesValidation="False"/>
             <%--<asp:ValidationSummary ID="ValidationSummary1" runat="server" class="erroMsg"/>--%>
-            <asp:Label ID="lblErrorMsg" runat="server" Text="Label" class="erroMsg" Visible="False"></asp:Label>
+            <asp:Label ID="lblErrorMsg" runat="server" Text="Label" class="errorMsg" Visible="False"></asp:Label>
         </div>
 
-        <div id="resetPwPopup" class="forgetPwModal">
+        <div id="forgetPwPopup" class="forgetPwModal">
             <!-- Modal content -->
-            <div class="modal-content">
+            <div class="forgetPwModal-content">
                 <span class="forgetPwClose">&times;</span>
-                <p>Email Address</p>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <h3 class="mb-4" align="center">Forgot Password?</h3>
+                <p style="font-size: 14px;">Enter your email address and get a recovery code to reset your password.</p>
+                <label class="form-label">Email Address</label>
+                <span style="color: #FF0000">*</span>
+                <asp:TextBox ID="txtEmailPopUp" runat="server" class="form-control" placeholder="Email Address*" />
+                <asp:Button ID="btnSubmitPopUp" runat="server" Text="Submit" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnSubmit_Click"/>                
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="14px">&nbsp</asp:RegularExpressionValidator>                
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" Font-Size="14px">&nbsp</asp:RequiredFieldValidator>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" Font-Size="14px"/>
             </div>
         </div>
 
+        <asp:Label ID="lblStoreResetEmail" runat="server" Text="" Visible="false"></asp:Label>
+
         <script>
             // Get the modal
-            var modal = document.getElementById("resetPwPopup");
+            var modal = document.getElementById("forgetPwPopup");
 
             // Get the button that opens the modal
             var btn = document.getElementById("btnForgetPw");
@@ -212,6 +221,7 @@
 
             // When the user clicks the button, open the modal 
             btn.onclick = function () {
+                document.getElementById("txtEmailPopUp").value = "";
                 modal.style.display = "block";
             }
 
@@ -226,6 +236,7 @@
                     modal.style.display = "none";
                 }
             }
+
         </script>
     </form>
 </body>
