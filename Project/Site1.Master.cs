@@ -11,7 +11,8 @@ namespace FYP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //temp 
+            //abc.Style.Add("display", "none");
         }
     }
 }
