@@ -195,7 +195,7 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="forgetPwClose">&times;</span>
-                <p>Some text in the Modal..</p>
+                <p>Email Address</p>
                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             </div>
         </div>
