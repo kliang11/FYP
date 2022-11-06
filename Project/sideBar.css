@@ -4,10 +4,13 @@
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    min-height: 100%;
 }
+
 
 p {
     font-family: 'Poppins', sans-serif;
@@ -26,7 +29,6 @@ a:focus {
 }
 
 .navbar {
-    padding: 15px 15px;
     background: #fff;
     border: none;
     border-radius: 0;
@@ -59,24 +61,25 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #7481c7; 
     color: #fff;
     transition: all 0.3s;
 }
+/*#585d72*/
 
-    #sidebar.active {
-        margin-left: -250px;
-    }
+#sidebar.active {
+    margin-left: -250px;
+}
 
     #sidebar .sidebar-header {
         padding: 20px;
-        background: #6d7fcc;
+        background: #7481c7;
     }
 
-    #sidebar ul.components {
+/*    #sidebar ul.components {
         padding: 20px 0;
         border-bottom: 1px solid #47748b;
-    }
+    }*/
 
     #sidebar ul p {
         color: #fff;
@@ -115,7 +118,6 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
 }
 
 ul.CTAs {
@@ -148,7 +150,7 @@ a.article:hover {
 #content {
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
+    min-height: 92.2vh;
     transition: all 0.3s;
 }
 
@@ -169,3 +171,181 @@ a.article:hover {
         display: none;
     }
 }
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+
+.dashboard-header .navbar {
+    padding: 0px;
+    border-bottom: 1px solid #e6e6f2;
+    -webkit-box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
+    box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13);
+    -webkit-transition: all 0.3s ease;
+    min-height: 60px;
+}
+
+
+.navbar-right-top {
+}
+
+    .navbar-right-top .nav-item {
+        border-right: 1px solid #e6e6f2;
+    }
+
+        .navbar-right-top .nav-item:last-child {
+            border: none;
+        }
+
+        .navbar-right-top .nav-item .nav-link {
+            padding: 13px 20px;
+            font-size: 16px;
+            line-height: 2;
+            color: #82849f;
+        }
+
+
+
+
+
+
+@keyframes beatHeart {
+    0% {
+        transform: scale(0.9);
+    }
+
+    25% {
+        transform: scale(1.1);
+    }
+
+    40% {
+        transform: scale(0.9);
+    }
+
+    60% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+/* ----- User Nav Dropdown -----*/
+
+.nav-user {
+}
+
+.nav-user-dropdown {
+    padding: 0px;
+    min-width: 230px;
+    margin: 0px;
+}
+
+.nav-user-name {
+}
+
+.nav-user-info {
+    background-color: #5969ff;
+    line-height: 1.4;
+    padding: 12px;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 2px 2px 0 0;
+}
+
+    .nav-user-info .status {
+        float: left;
+        top: 7px;
+        left: 0px;
+    }
+
+.nav-user-dropdown {
+}
+
+    .nav-user-dropdown .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 12px 22px 15px;
+        clear: both;
+        font-weight: 400;
+        color: #686972;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        font-size: 13px;
+        line-height: 0.4;
+    }
+
+        .nav-user-dropdown .dropdown-item:hover {
+            background-color: #d9d9db;
+        }
+
+/*---- User icon sizes ---*/
+
+.user-avatar-xxl {
+    height: 128px;
+    width: 128px;
+}
+
+.user-avatar-xl {
+    height: 90px;
+    width: 90px;
+}
+
+.user-avatar-lg {
+    height: 48px;
+    width: 48px;
+}
+
+.user-avatar-md {
+    height: 32px;
+    width: 32px;
+}
+
+.user-avatar-sm {
+    height: 24px;
+    width: 24px;
+}
+
+.user-avatar-xs {
+    height: 18px;
+    width: 18px;
+}
+
+
+
+.avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 2px solid #F7F9FA;
+    background: #F7F9FA;
+    color: #fff;
+}
+
+
+.media-attachment div.avatar {
+    border: none;
+}
+
+.avatar.bg-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .avatar.bg-primary i {
+        font-size: 14px;
+    }
+
+li{
+    padding-top:10px;
+}
+

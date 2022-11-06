@@ -84,8 +84,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="HtmlPage1.html" />
-    <Content Include="Image\app-store.png" />
+    <Content Include="Image\company_logo.png" />
     <Content Include="Image\loginIcon.png" />
+    <Content Include="Image\smile.gif" />
     <Content Include="Project\attendance.aspx" />
     <Content Include="Project\sideBar.css" />
     <Content Include="Project\style.css" />

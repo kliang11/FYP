@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
+
     <link rel="stylesheet" href="sideBar.css">
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -23,21 +24,36 @@
 <body>
 
     <form id="form1" runat="server">
-        <nav class="navbar navbar-light" style="background-color: black;">
-            <a class="navbar-brand" href="#" style="margin-left:5%">
-                <img src="../Image/app-store.png" width="30" height="30" alt="">
-            </a>
-        </nav>
+        <div>
+            <nav class="navbar navbar-light" style="background-color: #6d7fcc;"> <%-- #51576a--%>
+                <a class="navbar-brand" href="#" style="margin-left: 4%">
+                    <img src="../Image/company_logo.png" width="50" height="40" alt="">
+                </a>
+
+                <div class="form-inline my-2 my-lg-0" style="padding-right: 20px;">
+                    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="../Image/smile.gif" style="width: 50px; height: 44px" alt="" class="user-avatar-md rounded-circle"></a>
+                    <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                        <div class="nav-user-info" style="background-color: #5969ff">
+                            <h5 class="mb-0 text-white nav-user-name">Wong Yi Xuan</h5>
+                            <span class="status"></span><span class="ml-2">Staff</span>
+                        </div>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3 style="text-align: center">HR Managment System</h3>
+                    <h3 style="text-align: center;font-weight:700">HRMS</h3>
                 </div>
 
                 <ul class="list-unstyled components">
-                    <p>Navigation</p>
-                    <li class="active">
-                        <a href="#"><i class="bx bx-grid-alt"></i>Dashboard</a>
+                    <li>
+                        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
                     <li id="abc" runat="server">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
