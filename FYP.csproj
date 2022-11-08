@@ -132,6 +132,8 @@
     </Compile>
     <Compile Include="Project\rfid.aspx.designer.cs">
       <DependentUpon>rfid.aspx</DependentUpon>
+		<SubType>ASPXCodeBehind</SubType>
+	</Compile>
     <Compile Include="Project\payroll.aspx.cs">
       <DependentUpon>payroll.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
