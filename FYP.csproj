@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +69,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Database.mdf" />
+    <Content Include="App_Data\Database_log.ldf">
+      <DependentUpon>Database.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -85,12 +90,17 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="Image\bin.png" />
+    <Content Include="Image\cancel.png" />
     <Content Include="Image\company_logo.png" />
+    <Content Include="Image\editing.png" />
     <Content Include="Image\loginIcon.png" />
     <Content Include="Image\smile.gif" />
+    <Content Include="Image\tick.png" />
     <Content Include="Project\attendance.aspx" />
-    <Content Include="Project\payroll.aspx" />
     <Content Include="Project\Logout.aspx" />
+    <Content Include="Project\rfid.aspx" />
+    <Content Include="Project\payroll.aspx" />
     <Content Include="Project\sideBar.css" />
     <Content Include="Project\style.css" />
     <Content Include="Project\Login.aspx" />
@@ -124,6 +134,14 @@
     <Compile Include="Project\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project\rfid.aspx.cs">
+      <DependentUpon>rfid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\rfid.aspx.designer.cs">
+      <DependentUpon>rfid.aspx</DependentUpon>
+		<SubType>ASPXCodeBehind</SubType>
+	  </Compile>
     <Compile Include="Project\payroll.aspx.cs">
       <DependentUpon>payroll.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
