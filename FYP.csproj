@@ -89,6 +89,8 @@
     <Content Include="Image\loginIcon.png" />
     <Content Include="Image\smile.gif" />
     <Content Include="Project\attendance.aspx" />
+    <Content Include="Project\payroll.aspx" />
+    <Content Include="Project\Logout.aspx" />
     <Content Include="Project\sideBar.css" />
     <Content Include="Project\style.css" />
     <Content Include="Project\Login.aspx" />
@@ -114,6 +116,13 @@
     </Compile>
     <Compile Include="Project\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\payroll.aspx.cs">
       <DependentUpon>payroll.aspx</DependentUpon>
