@@ -1,7 +1,4 @@
-﻿/*
-    DEMO STYLE
-*/
-
+﻿
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
@@ -11,6 +8,29 @@ body {
     min-height: 100%;
 }
 
+.label {
+    display: inline-block;
+}
+
+.label_green {
+    color: #00bd14;
+    background-color: #c3ffaf;
+    width: 129px;
+    text-align: center;
+    padding: 6px 30px;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
+
+.label_red {
+    color: #bd0000;
+    background-color: #ffafaf;
+    width: 129px;
+    text-align: center;
+    padding: 6px 40px;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
 
 p {
     font-family: 'Poppins', sans-serif;
@@ -348,4 +368,6 @@ a.article:hover {
 li{
     padding-top:10px;
 }
+
+
 
