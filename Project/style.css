@@ -1,14 +1,12 @@
-﻿.navbar .container-fluid {
+﻿﻿ /*.navbar .container-fluid {
     flex-direction: column;
 }
-
 .navbar {
     width: 15%;
     height: 100vh;
-    position: fixed;
-    /*align-items: flex-start;*/
-}
-
+    position: fixed;*/
+/*align-items: flex-start;*/
+/*}*/
 .loginImg {
     display: block;
     margin-left: auto;
@@ -30,7 +28,7 @@
     background: #ffffff;
 }
 
-    .login form .form-group {
+    .login .form-group {
         margin-bottom: 12px;
     }
 
@@ -40,6 +38,7 @@
 
 .alignright {
     float: right;
+    margin-right: 10px;
 }
 
 .errorMsg {
@@ -115,4 +114,219 @@
         color: #000;
         text-decoration: none;
         cursor: pointer;
+    }
+
+.changePassword {
+    width: 500px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+    .changePassword .form-group {
+        margin-bottom: 12px;
+    }
+
+    .changePassword .label {
+        display: block;
+        margin-bottom: .3rem;
+    }
+
+
+.profilePanel {
+    width: 100%;
+    height: min-content;
+    padding: 10px 20px 10px 20px;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+    .profilePanel .subtitle {
+        font-size: 1.45rem;
+        display: block;
+        color: #007bff !important;
+        border-bottom: 1px solid #c9c9c9;
+        padding-top: 2%;
+        padding-bottom: 1%;
+    }
+
+.profileMenuButton {
+    border: none;
+    background-color: white;
+    padding-left: 6%;
+    padding-right: 6%;
+    font-size: 1.15em;
+    margin: 1.2%;
+    /*font-family: Arial;*/
+    cursor: pointer;
+    background: #fafafa;
+    color: gray;
+}
+
+    .profileMenuButtonActive, .profileMenuButton:hover {
+        font-size: 1.25em;
+        color: black;
+        border-top: 2px solid black;
+    }
+
+.profileContentPanel {
+    overflow-y: scroll;
+    height: 65vh;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    .profileContentPanel .form-group .rows {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .profileContentPanel .form-group .column {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 49%;
+    }
+
+    /* width */
+    .profileContentPanel::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    .profileContentPanel::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    .profileContentPanel::-webkit-scrollbar-thumb {
+        background: #929bd3;
+    }
+
+        /* Handle on hover */
+        .profileContentPanel::-webkit-scrollbar-thumb:hover {
+            background: #3b4991;
+        }
+
+.file-upload {
+    display: block;
+    /*overflow: hidden;*/
+    text-align: center;
+    vertical-align: middle;
+    /*font-family: Arial;*/
+    border: 1px solid #124d77;
+    background: #007dc1;
+    color: #fff;
+    /*border-radius: 6px;*/
+    /*-moz-border-radius: 6px;*/
+    cursor: pointer;
+    text-shadow: #000 1px 1px 2px;
+    -webkit-border-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .file-upload:hover {
+        /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));*/
+        /*background: -moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);*/
+        /*background: -webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);*/
+        /*background: -o-linear-gradient(top, #0061a7 5%, #007dc1 100%);*/
+        /*background: -ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);*/
+        background: linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+        /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);*/
+        background-color: #0061a7;
+    }
+
+/* The button size */
+.file-upload {
+    height: 6vh;
+}
+
+    .file-upload, .file-upload span {
+        width: 15vh;
+    }
+
+        .file-upload input {
+            top: 0;
+            left: 0;
+            margin: 0;
+            font-size: 11px;
+            font-weight: bold;
+            /* Loses tab index in webkit if width is set to 0 */
+            opacity: 0;
+            width: 0;
+            /*filter: alpha(opacity=0);*/
+        }
+
+        .file-upload strong {
+            font: normal 12px Tahoma,sans-serif;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .file-upload span {
+            top: 0;
+            left: 0;
+            display: block;
+            /* Adjust button text vertical alignment */
+            padding-top: 5px;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+.profileImage {
+    width: 20vh;
+    height: 20vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    border: 1.5px solid gray;
+}
+
+.crossButton {
+    font-size: 2rem;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: inherit;
+    color: black;
+    font-size: 24px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    margin-bottom: 1.3%;
+}
+
+.hint {
+    visibility: hidden;
+    width: 60px;
+    border: 0.5px solid gray;
+    color: black;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    margin-left: 1%;
+    font-size: 0.87rem;
+}
+
+.crossButton:hover + .hint {
+    /*background-color: #eee;*/
+    visibility: visible;
+}
+
+
+.addEmployees {
+    width: 100%;
+    height: min-content;
+    padding: 10px 20px 10px 20px;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+    .addEmployees .form-group {
+        margin-bottom: 12px;
     }

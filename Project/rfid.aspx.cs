@@ -18,8 +18,7 @@ namespace FYP.Project
             if (!IsPostBack)
             {
                 this.BindGrid();
-
-
+                ddlBind();
             }
         }
         private void BindGrid()
@@ -50,24 +49,13 @@ namespace FYP.Project
                     }
                 }
             }
-            if(txt_rfidid.Text != "")
-            {
-                txt_date.Text = "";
-                txt_rfidid.Text = "";
-                txt_staffid.Text = "";
-
-            }
-        }
-
-        protected void gvList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         protected void OnRowEditing(object sender, GridViewEditEventArgs e)
         {
             gvList.EditIndex = e.NewEditIndex;
             BindGrid();
+
         }
 
         protected void OnRowCancelingEdit(object sender, EventArgs e)
@@ -80,12 +68,12 @@ namespace FYP.Project
         {
             GridViewRow row = gvList.Rows[e.RowIndex];
 
-            string card_id = gvList.DataKeys[e.RowIndex]["Card_ID"].ToString();  //temporarily will not be editable
-            string card_status ;
-            DateTime date = Convert.ToDateTime((row.FindControl("txtDate") as TextBox).Text);
-            string staff_id = (row.FindControl("txtStaffID") as TextBox).Text;
+            string card_id = gvList.DataKeys[e.RowIndex]["TagID"].ToString();  
+            string card_status;
+            string dateString = (row.FindControl("txtDate") as TextBox).Text;
+            string staff_id = (row.FindControl("ddlEditName") as DropDownList).SelectedItem.Value.ToString();
 
-            if (staff_id == "-")
+            if (staff_id == "")
             {
                 card_status = "Available";
             }
@@ -101,10 +89,10 @@ namespace FYP.Project
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Action", "UPDATE");
-                    cmd.Parameters.AddWithValue("@Card_ID", card_id);
-                    cmd.Parameters.AddWithValue("@Card_Status", card_status);
+                    cmd.Parameters.AddWithValue("@Tag_ID", card_id);
+                    cmd.Parameters.AddWithValue("@Tag_Status", card_status);
                     cmd.Parameters.AddWithValue("@Staff_ID", staff_id);
-                    cmd.Parameters.AddWithValue("@Date", date);
+                    cmd.Parameters.AddWithValue("@Date", Convert.ToDateTime(dateString));
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -113,6 +101,7 @@ namespace FYP.Project
             }
             gvList.EditIndex = -1;
             this.BindGrid();
+            ddlBind();
         }
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -122,9 +111,28 @@ namespace FYP.Project
                     (e.Row.FindControl("lblCardStatus") as Label).CssClass = "label_red";
                 else if ((e.Row.FindControl("lblCardStatus") as Label).Text.Equals("Available"))
                     (e.Row.FindControl("lblCardStatus") as Label).CssClass = "label_green";
+                if ((e.Row.FindControl("lblStaffName") as Label).Text.Equals(""))
+                    (e.Row.FindControl("lblStaffName") as Label).Text = "-";
                 (e.Row.Cells[4].Controls[2] as ImageButton).Attributes["onclick"] = "if(!confirm('Are you sure you want to delete?')) return false;";
-            }
 
+            }
+            if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex == gvList.EditIndex)
+            {
+                (e.Row.FindControl("txtDate") as TextBox).Text = DateTime.Now.ToString("yyyy-MM-dd");
+                DropDownList ddList = (DropDownList)e.Row.FindControl("ddlEditName");
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                SqlConnection con = new SqlConnection(constr);
+                SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL", con);
+                DataTable dt = new DataTable();
+                adpt.Fill(dt);
+                ddList.DataSource = dt;
+                ddList.DataBind();
+                ddList.DataTextField = "name";
+                ddList.DataValueField = "Staff_ID";
+                ddList.DataBind();
+                ddList.Items.Insert(0, new ListItem("- None -", ""));
+
+            }
         }
 
 
@@ -133,7 +141,7 @@ namespace FYP.Project
 
             GridViewRow row = gvList.Rows[e.RowIndex];
 
-            string card_id = gvList.DataKeys[e.RowIndex]["Card_ID"].ToString();
+            string card_id = gvList.DataKeys[e.RowIndex]["TagID"].ToString();
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -141,7 +149,7 @@ namespace FYP.Project
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Action", "DELETE");
-                    cmd.Parameters.AddWithValue("@Card_ID", card_id);
+                    cmd.Parameters.AddWithValue("@Tag_ID", card_id);
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -149,16 +157,17 @@ namespace FYP.Project
                 }
             }
             this.BindGrid();
+            ddlBind();
         }
         //need to handle the duplicate primary key exception 
-        protected void btnConfirm_Click(object sender, EventArgs e) 
+        protected void btnConfirm_Click(object sender, EventArgs e)
         {
             string card_id = txt_rfidid.Text.ToString();
             DateTime reg_date = Convert.ToDateTime(txt_date.Text.ToString());
             string card_status;
-            string staff_id = txt_staffid.Text.ToString();
-            
-            if(staff_id == "")
+            string staff_id = ddlStaffName.SelectedItem.Value.ToString();
+
+            if (staff_id == "")
             {
                 card_status = "Available";
                 staff_id = "-";
@@ -175,8 +184,8 @@ namespace FYP.Project
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Action", "INSERT");
-                    cmd.Parameters.AddWithValue("@Card_ID", card_id);
-                    cmd.Parameters.AddWithValue("@Card_Status", card_status);
+                    cmd.Parameters.AddWithValue("@Tag_ID", card_id);
+                    cmd.Parameters.AddWithValue("@Tag_Status", card_status);
                     cmd.Parameters.AddWithValue("@Staff_ID", staff_id);
                     cmd.Parameters.AddWithValue("@Date", reg_date);
                     cmd.Connection = con;
@@ -185,9 +194,33 @@ namespace FYP.Project
                     con.Close();
                 }
             }
-            this.BindGrid();
+            BindGrid();
+            ddlBind();
+            txt_date.Text = "";
+            txt_rfidid.Text = "";
+            ddlStaffName.SelectedIndex = 0;
 
         }
+
+        private void ddlBind()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(constr);
+            SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL", con);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            ddlStaffName.DataSource = dt;
+            ddlStaffName.DataBind();
+            ddlStaffName.DataTextField = "name";
+            ddlStaffName.DataValueField = "Staff_ID";
+            ddlStaffName.DataBind();
+        }
+
+        protected void ddlStaffName_DataBound(object sender, EventArgs e)
+        {
+            ddlStaffName.Items.Insert(0, new ListItem("- Select -", ""));
+        }
+
     }
 
 }

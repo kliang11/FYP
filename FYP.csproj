@@ -98,6 +98,7 @@
     <Content Include="Image\smile.gif" />
     <Content Include="Image\tick.png" />
     <Content Include="Project\attendance.aspx" />
+    <Content Include="Project\attendanceDetails.aspx" />
     <Content Include="Project\Logout.aspx" />
     <Content Include="Project\rfid.aspx" />
     <Content Include="Project\payroll.aspx" />
@@ -120,6 +121,13 @@
     </Compile>
     <Compile Include="Project\attendance.aspx.designer.cs">
       <DependentUpon>attendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\attendanceDetails.aspx.cs">
+      <DependentUpon>attendanceDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\attendanceDetails.aspx.designer.cs">
+      <DependentUpon>attendanceDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
