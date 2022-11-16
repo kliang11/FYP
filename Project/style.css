@@ -1,4 +1,4 @@
-﻿﻿ /*.navbar .container-fluid {
+﻿/*.navbar .container-fluid {
     flex-direction: column;
 }
 .navbar {
@@ -7,6 +7,7 @@
     position: fixed;*/
 /*align-items: flex-start;*/
 /*}*/
+
 .loginImg {
     display: block;
     margin-left: auto;

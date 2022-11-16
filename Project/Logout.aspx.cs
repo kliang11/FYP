@@ -30,7 +30,9 @@ namespace FYP.Project
                 Response.Buffer = true;
                 Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
                 Response.Expires = -1000;
-                Response.CacheControl = "no-cache";                
+                Response.CacheControl = "no-cache";
+                Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
             }
             catch (Exception ex)
             {
