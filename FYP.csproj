@@ -101,6 +101,7 @@
     <Content Include="Image\tick.png" />
     <Content Include="Project\AddEmployee.aspx" />
     <Content Include="Project\attendance.aspx" />
+    <Content Include="Project\attendanceDetails.aspx" />
     <Content Include="Project\ChangePassword.aspx" />
     <Content Include="Project\EmployeeList.aspx" />
     <Content Include="Project\Logout.aspx" />
@@ -134,6 +135,12 @@
     <Compile Include="Project\attendance.aspx.designer.cs">
       <DependentUpon>attendance.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project\attendanceDetails.aspx.cs">
+      <DependentUpon>attendanceDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\attendanceDetails.aspx.designer.cs">
+      <DependentUpon>attendanceDetails.aspx</DependentUpon>
     <Compile Include="Project\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
