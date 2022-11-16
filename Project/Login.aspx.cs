@@ -9,6 +9,8 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FYP.Project
 {
@@ -18,65 +20,110 @@ namespace FYP.Project
         {
             if (!IsPostBack) //IsPostBack = false
             {
-                //do something
+                if (Request.Cookies["userEmail"] != null && Request.Cookies["userPassword"] != null)
+                {
+                    txtEmail.Text = Request.Cookies["userEmail"].Value;                   
+                    txtPassword.Text = Request.Cookies["userPassword"].Value;
+                    txtPassword.Attributes["type"] = "password";
+                    chkbxRememberMe.Checked = true;
+                    btnLogin_Click(btnLogin, EventArgs.Empty);
+                }
+
+
+                txtPassword.Attributes["type"] = "password";
             }
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             //for focus the textbox that not fill up
-            bool bolFilled = false;
+            bool IsWrong = true;
+
             if (txtEmail.Text == "")
-                txtEmail.Focus();
-            else if (txtPassword.Text == "")
-                txtPassword.Focus();
-            else if (txtEmail.Text != "" && txtPassword.Text != "")
-                bolFilled = true;
-
-
-            //search database
-            //do something
-
-
-            //for reset password purpose in next page
-            if (lblStoreResetEmail.Text != "" && lblStoreResetEmail.Text == txtEmail.Text) //may change by using database check "true" then do something
             {
-                //do something 
-                //maybe need add a field in database as ResetPassword = true/false
-                //database show true then display reset password screen
-                //this for avoid the user close the webpage and relogin again with random password
-                //also good for, when admin create account for new staff
-
-                //set true to database
-                //then when navigate to next page can show reset password page
+                txtEmail.Focus();
+                return;
+            }
+            else if (txtPassword.Text == "")
+            {
+                txtPassword.Focus();
+                return;
             }
 
+            SqlConnection con = new SqlConnection();
+            string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            con = new SqlConnection(strCon);
+            con.Open();
+            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmail.Text.Trim() + "'" + " And Password = '" + txtPassword.Text + "'"; //temp id
+            SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
+            SqlDataReader rd = cmdSelect.ExecuteReader();
+
+            while (rd.Read())
+            {
+                IsWrong = false;
+                Session["email"] = txtEmail.Text.ToString();
+                Session["role"] = rd["Role"].ToString();
+                Session["id"] = rd["Staff_ID"].ToString();
+                
+                if (chkbxRememberMe.Checked == true)
+                {
+                    Response.Cookies["userEmail"].Value = txtEmail.Text;
+                    Response.Cookies["userPassword"].Value = txtPassword.Text;
+                    Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(15);
+                    Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(15);
+                }
+                else
+                {
+                    Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
+                }                
+            }
+            con.Close();
+
             //for wrong email or password   //temp
-            if (txtEmail.Text != "Ali" && txtPassword.Text != "123" && bolFilled == true)
+            if (IsWrong == true)
             {
                 lblErrorMsg.Visible = true;
                 lblErrorMsg.Text = "Sorry, you have entered an invalid email address or password.";
-                txtEmail.Text = "";
-                txtPassword.Text = "";
             }
-            else  //successful login
+            else //successful login
             {
-                Session["userEmail"] = txtEmail.Text.ToString();
-                //Session["usertype"] = usertype;
-                if (chkbxRememberMe.Checked)
-                {
-                    //do something
-                    //cookies???
-                }
-
-                //Response.Redirect("home.aspx");
+                //Response.Redirect("home.aspx");  //temp
             }
 
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            bool IsEmailExist = true;
             lblStoreResetEmail.Text = txtEmailPopUp.Text;
-            String pw = Membership.GeneratePassword(6, 2);
-            email(pw);
+
+            SqlConnection con = new SqlConnection();
+            string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            con = new SqlConnection(strCon);
+            con.Open();
+            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmailPopUp.Text.Trim() + "'"; //temp id
+            SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
+            SqlDataReader rd = cmdSelect.ExecuteReader();
+
+            while (rd.Read())
+            {
+                IsEmailExist = false;
+                lblStoreResetEmail.Text = "0";
+            }
+            con.Close();
+
+            if(IsEmailExist == true)
+            {
+                lblStoreResetEmail.Text = "1";
+                txtEmailPopUp.Focus();
+            }
+            else 
+            {
+                String pw = Membership.GeneratePassword(6, 2);
+                email(pw);
+                string message = "A temporary password has been sent to the entered email address.";
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
+            }
+            
         }
 
         private void email(String password)
@@ -91,7 +138,7 @@ namespace FYP.Project
             string from = "fyptarc99@gmail.com"; //From address  
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Here is your temporary password: " + password;     //temp
+            string mailbody = "Here is your temporary password: " + password + "<br>" + "Use this temporary password to log into your account.";   //temp
             message.Subject = "Forgot Password";
             message.Body = mailbody;
             message.BodyEncoding = Encoding.UTF8;

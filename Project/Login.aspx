@@ -8,7 +8,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="style.css" />
     <style type="text/css">
         body {
@@ -16,163 +18,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgb(248,249,253);
+            background-color: rgb(236,239,241);
         }
     </style>
 </head>
 <body>
 
-    <form id="form2" runat="server">
+    <form id="form1" runat="server">
 
-        <%--<form id="form1" runat="server">--%>
-
-        <%--        <nav class="navbar navbar-expand d-flex flex-column align-item-start bg-light" id="sidebar">
-            <div class="container-fluid">
-                <ul class="navbar-nav d-flex flex-column mt-5 w-100">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link 1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link 2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link 3</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <h1 style="margin-left:15%">ABCDEFG</h1>
-        <h1 style="margin-left:15%">asd</h1>--%>
-
-        <%--        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-7 col-lg-5">
-                        <div class="login-wrap p-4 p-md-5">
-                            <div class="icon d-flex align-items-center justify-content-center">
-                                <span class="fa fa-user-o"></span>
-                            </div>
-                            <h3 class="text-center mb-4">Sign In</h3>
-                            <table style="width: 100%;" class="login-form">
-                                <tr>
-                                    <div class="form-group">
-                                        <asp:TextBox ID="TextBox1" runat="server" class="form-control rounded-left" placeholder="Username"></asp:TextBox>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="form-group d-flex">
-                                        <asp:TextBox ID="TextBox2" runat="server" class="form-control rounded-left" placeholder="Password" TextMode="Password"></asp:TextBox>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="form-group">
-                                        <asp:Button ID="Button1" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3" />
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="form-group d-md-flex">
-                                        <div class="w-50">
-                                            <label class="checkbox-wrap checkbox-primary">
-                                                Remember Me                                            
-                                            <asp:CheckBox ID="CheckBox1" runat="server" />
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <div class="w-50 text-md-right">
-                                            <a href="#">Forgot Password</a>
-                                        </div>
-                                    </div>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>--%>
-
-        <%--<div>
-            <asp:TextBox ID="TextBox1" runat="server" class="form-control rounded-left" placeholder="Username"></asp:TextBox>
-        </div>--%>
-
-        <%-- <section>
-
-            <div class="container">
-
-                <div class="row justify-content-center">
-                    <table class="MyTable">
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h3 class="text-center mb-4">Sign In</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:TextBox ID="txtUsername" runat="server" class="form-control" placeholder="Username" /></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style1" />
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:TextBox ID="txtPassword" runat="server" class="form-control col-sm-3" placeholder="Password" TextMode="Password" /></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style1" />
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btnLogin" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3" /></td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style1" />
-                        </tr>
-                        <tr>
-                            <td class="row">
-                                <label class="checkbox-wrap checkbox-primary col-sm-6">
-                                    Remember Me
-                        <asp:CheckBox ID="CheckBox1" runat="server" />
-                                    <span class="checkmark"></span>
-                                </label>
-                                <div class="w-50 text-md col-sm-3" align="right">
-                                    <a href="#">Forgot Password</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="center">
-
-            </div>
-        </section>--%>
-        <%--</form>--%>
         <div class="login">
 
             <div class="image ">
-                <img class= "loginImg" src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
+                <img class="loginImg" src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
             </div>
             <h1 class="mb-5" align="center">Login</h1>
             <div class="form-group">
                 <label class="form-label">Email Address</label>
                 <span style="color: #FF0000">*</span>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Email" ControlToValidate="txtEmail" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Display="Dynamic"></asp:RegularExpressionValidator>
                 <asp:TextBox ID="txtEmail" runat="server" class="form-control" placeholder="Email Address*" />
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
                 <span style="color: #FF0000">*</span>
-                <asp:TextBox ID="txtPassword" runat="server" class="form-control col-sm-3" placeholder="Password*" TextMode="Password" />
+                <div class="input-group mb-3">
+                    <asp:TextBox ID="txtPassword" runat="server" class="form-control col-sm-3" placeholder="Password*" />
+                    <span class="input-group-text"><i class="far fa-eye-slash" id="togglePassword" style="cursor: pointer"></i></span>
+                </div>
             </div>
             <div class="mt-2">
                 <label class="checkbox-wrap checkbox-primary alignleft">
@@ -186,7 +58,7 @@
                 </div>
                 <div style="clear: both;"></div>
             </div>
-            <asp:Button ID="btnLogin" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnLogin_Click" CausesValidation="False"/>
+            <asp:Button ID="btnLogin" runat="server" Text="Login" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnLogin_Click" CausesValidation="False" />
             <%--<asp:ValidationSummary ID="ValidationSummary1" runat="server" class="erroMsg"/>--%>
             <asp:Label ID="lblErrorMsg" runat="server" Text="Label" class="errorMsg" Visible="False"></asp:Label>
         </div>
@@ -200,16 +72,18 @@
                 <label class="form-label">Email Address</label>
                 <span style="color: #FF0000">*</span>
                 <asp:TextBox ID="txtEmailPopUp" runat="server" class="form-control" placeholder="Email Address*" />
-                <asp:Button ID="btnSubmitPopUp" runat="server" Text="Submit" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnSubmit_Click"/>                
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="14px">&nbsp</asp:RegularExpressionValidator>                
+                <asp:Button ID="btnSubmitPopUp" runat="server" Text="Submit" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnSubmit_Click" />
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="14px">&nbsp</asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" Font-Size="14px">&nbsp</asp:RequiredFieldValidator>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" Font-Size="14px"/>
+                <span id="lblEmailNotExist" style="color:red; font-size: 21px; margin-left: -0.21rem;">&#x2022 <span style="font-size: 14px; margin-left: 0.29rem;">Email entered is not exists*</span></span>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" Font-Size="14px" />
             </div>
         </div>
 
-        <asp:Label ID="lblStoreResetEmail" runat="server" Text="" Visible="false"></asp:Label>
+        <asp:Label ID="lblStoreResetEmail" runat="server" Text="0" Width="0" Height="0"></asp:Label>
 
-        <script>
+        <script type="text/javascript">
+
             // Get the modal
             var modal = document.getElementById("forgetPwPopup");
 
@@ -223,19 +97,46 @@
             btn.onclick = function () {
                 document.getElementById("txtEmailPopUp").value = "";
                 modal.style.display = "block";
+                document.getElementById('<%= lblStoreResetEmail.ClientID %>').innerText = "0";
             }
 
             // When the user clicks on <span> (x), close the modal
             span.onclick = function () {
                 modal.style.display = "none";
+                document.getElementById('<%= lblStoreResetEmail.ClientID %>').innerText = "0";
             }
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    document.getElementById('<%= lblStoreResetEmail.ClientID %>').innerText = "0";
                 }
             }
+
+            document.getElementById('<%= lblStoreResetEmail.ClientID %>').style.display = "none";
+            var x = null;
+            x = document.getElementById('<%= lblStoreResetEmail.ClientID %>').innerText
+            document.getElementById("lblEmailNotExist").style.visibility = "hidden";
+            if ( x === "1") {
+                modal.style.display = "block";
+                document.getElementById("lblEmailNotExist").style.visibility = "visible";
+                document.getElementById('<%= lblStoreResetEmail.ClientID %>').style.display = "none";
+            }
+
+
+            const togglePassword = document.querySelector("#togglePassword");
+            const password = document.querySelector("#txtPassword");
+
+            togglePassword.addEventListener("click", function () {
+
+                // toggle the type attribute
+                const type = password.getAttribute("type") === "password" ? "text" : "password";
+                password.setAttribute("type", type);
+                // toggle the eye icon
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
 
         </script>
     </form>
