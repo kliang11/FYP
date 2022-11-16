@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Project\attendanceDetails.aspx.designer.cs">
       <DependentUpon>attendanceDetails.aspx</DependentUpon>
+	</Compile>
     <Compile Include="Project\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
