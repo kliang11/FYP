@@ -190,7 +190,13 @@ namespace FYP.Project
                     cmd.Parameters.AddWithValue("@Date", reg_date);
                     cmd.Connection = con;
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    try{
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (System.Data.SqlClient.SqlException) 
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('The Card ID is existed! Please try agian.')", true);
+                    }
                     con.Close();
                 }
             }

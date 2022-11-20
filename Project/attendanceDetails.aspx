@@ -40,7 +40,7 @@
              <div class="form-group">
                 <div class="rows">
                     <label class="column" style="margin-right: 2%">Attendance Status</label>
-                    <label class="column">On-Time / Late</label>                                   
+                    <label class="column">Arrival</label>                                   
                 </div>
                 <div class="rows">
                     <asp:TextBox ID="txtAttdStatus" runat="server" CssClass="form-control column" Enabled="False" Style="margin-right: 2%"></asp:TextBox>
