@@ -102,6 +102,7 @@
     <Content Include="Project\AddEmployee.aspx" />
     <Content Include="Project\attendance.aspx" />
     <Content Include="Project\attendanceDetails.aspx" />
+    <Content Include="Project\attendanceStaff.aspx" />
     <Content Include="Project\ChangePassword.aspx" />
     <Content Include="Project\EmployeeList.aspx" />
     <Content Include="Project\Logout.aspx" />
@@ -141,7 +142,14 @@
     </Compile>
     <Compile Include="Project\attendanceDetails.aspx.designer.cs">
       <DependentUpon>attendanceDetails.aspx</DependentUpon>
-	</Compile>
+    </Compile>
+    <Compile Include="Project\attendanceStaff.aspx.cs">
+      <DependentUpon>attendanceStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\attendanceStaff.aspx.designer.cs">
+      <DependentUpon>attendanceStaff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

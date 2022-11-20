@@ -16,15 +16,13 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                string id = "";
-                id = Request.QueryString["id"];   //temp
+                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                string id = Request.QueryString["id"];  
                 if (id != null)
                 {
                     databind(id);
                 }
-
             }
-
         }
 
         private void databind(string id)
@@ -45,10 +43,6 @@ namespace FYP.Project
                 if (rd["Photo"].ToString() != "")
                 {
                     imgProfile.ImageUrl = "data:Image/png;base64," + Convert.ToBase64String((byte[])rd["Photo"]);
-                }
-                else
-                {
-                    //default profile pic
                 }
 
                 txtAttdID.Text = "A" + rd["AttendanceID"].ToString();
@@ -77,13 +71,13 @@ namespace FYP.Project
         }
         private string checkHour(string time)
         {
-            if (time == "0.00")
+            if (time == "")
             {
                 return "-";
             }
             else
             {
-                return time + " hours";
+                return time + " hrs";
             }
         }
 
@@ -111,7 +105,10 @@ namespace FYP.Project
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Project/attendance.aspx");
+
+            object refUrl = ViewState["RefUrl"];
+            if (refUrl != null)
+                Response.Redirect((string)refUrl);
         }
     }
 }

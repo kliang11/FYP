@@ -60,6 +60,7 @@ namespace FYP.Project
             }
             presentCount(constr,date);
             pendingCount(constr,date);
+            onLeaveCount(constr, date);
            
         }
 
@@ -91,6 +92,22 @@ namespace FYP.Project
 
                     var count = Convert.ToInt32(cmd.ExecuteScalar());
                     countPresent.InnerText = count.ToString();
+                }
+            }
+        }
+
+        private void onLeaveCount(string constr, DateTime date)
+        {
+            using (SqlConnection mycon = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Leave WHERE (LeaveDateStart= @date AND LeaveStatus='Approved') OR (LeaveDateEnd= @date AND LeaveStatus='Approved')", mycon))
+                {
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.CommandType = CommandType.Text;
+                    mycon.Open();
+
+                    var count = Convert.ToInt32(cmd.ExecuteScalar());
+                    CountOnLeave.InnerText = count.ToString();
                 }
             }
         }
@@ -242,8 +259,7 @@ namespace FYP.Project
             if (workingHour > otHour)
             {
                 overtime = Math.Round((workingHour - otHour), 2);
-                workingHour = otHour;
-
+                //workingHour = otHour;
             }
         }
 

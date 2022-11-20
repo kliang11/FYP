@@ -3,18 +3,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style>
+<%--    <style>
         .card {
             box-shadow: 1px 1px 1px rgb(0 0 0 / 10%), -1px 0 1px rgb(0 0 0 / 5%);
         }
 
-        .button {
+        .gvbutton {
             max-width: 20px;
             max-height: 20px;
             margin: 0px 10px;
         }
 
-            .button:hover {
+            .gvbutton:hover {
                 transform: scale(1.2);
             }
 
@@ -27,7 +27,7 @@
                 background-color: #ededed;
                 cursor: pointer;
             }
-    </style>
+    </style>--%>
 
     <div class="card-deck" style="margin-bottom: 25px">
         <div class="col-xl-3 col-sm-6 col-12">
@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="align-self-center">
-                                <i class="fa fa-check fa-3x float-left" style="color: white"></i>
+                                <i class="fas fa-calendar-check fa-3x float-left" style="color: white"></i>
                             </div>
                             <div class="media-body text-right">
                                 <h2 id="countPresent" runat="server" style="color: white">8</h2>
@@ -142,7 +142,7 @@
                                 <asp:TextBox ID="txtTimeOut" runat="server" Text='<%# Eval("AttendanceTimeOut") %>' TextMode="Time"></asp:TextBox>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:CommandField ButtonType="Image" ShowEditButton="true" EditImageUrl="~/Image/editing.png" ControlStyle-CssClass="button"
+                        <asp:CommandField ButtonType="Image" ShowEditButton="true" EditImageUrl="~/Image/editing.png" ControlStyle-CssClass="gvbutton"
                             UpdateImageUrl="~/Image/tick.png" CancelImageUrl="~/Image/cancel.png" DeleteImageUrl="~/Image/bin.png" ShowDeleteButton="true" ShowSelectButton="true" SelectImageUrl="~/Image/detail.png"
                             HeaderText="Actions" ItemStyle-Width="16.5%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" />
                     </Columns>
