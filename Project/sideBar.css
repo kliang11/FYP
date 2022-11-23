@@ -62,10 +62,6 @@ body {
     border-radius: 25px;
 }
 
-.card {
-    box-shadow: 1px 1px 1px rgb(0 0 0 / 10%), -1px 0 1px rgb(0 0 0 / 5%);
-}
-
 .gvbutton {
     max-width: 20px;
     max-height: 20px;
