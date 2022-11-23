@@ -80,6 +80,9 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Project\ApplyClaim.aspx" />
+    <Content Include="Project\ClaimDetails.aspx" />
+    <Content Include="Project\ClaimType.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -97,6 +100,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="Image\approved.png" />
     <Content Include="Image\bin.png" />
     <Content Include="Image\cancel.png" />
     <Content Include="Image\company_logo.png" />
@@ -105,6 +109,7 @@
     <Content Include="Image\download.png" />
     <Content Include="Image\editing.png" />
     <Content Include="Image\loginIcon.png" />
+    <Content Include="Image\reject.png" />
     <Content Include="Image\smile.gif" />
     <Content Include="Image\tick.png" />
     <Content Include="Project\AddEmployee.aspx" />
@@ -113,7 +118,9 @@
     <Content Include="Project\AttendanceReport.aspx" />
     <Content Include="Project\attendanceStaff.aspx" />
     <Content Include="Project\ChangePassword.aspx" />
+    <Content Include="Project\ClaimList.aspx" />
     <Content Include="Project\EmployeeList.aspx" />
+    <Content Include="Image\loader.gif" />
     <Content Include="Project\Logout.aspx" />
     <Content Include="Project\rfid.aspx" />
     <Content Include="Project\payroll.aspx" />
@@ -130,6 +137,27 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Project\ApplyClaim.aspx.cs">
+      <DependentUpon>ApplyClaim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ApplyClaim.aspx.designer.cs">
+      <DependentUpon>ApplyClaim.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ClaimDetails.aspx.cs">
+      <DependentUpon>ClaimDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ClaimDetails.aspx.designer.cs">
+      <DependentUpon>ClaimDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ClaimType.aspx.cs">
+      <DependentUpon>ClaimType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ClaimType.aspx.designer.cs">
+      <DependentUpon>ClaimType.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project\AddEmployee.aspx.cs">
       <DependentUpon>AddEmployee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -197,6 +225,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    <Compile Include="Project\ClaimList.aspx.cs">
+      <DependentUpon>ClaimList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ClaimList.aspx.designer.cs">
+      <DependentUpon>ClaimList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\EmployeeList.aspx.cs">
       <DependentUpon>EmployeeList.aspx</DependentUpon>

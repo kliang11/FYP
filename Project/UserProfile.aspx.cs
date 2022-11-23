@@ -124,6 +124,9 @@ namespace FYP.Project
 
         private void ResetAllDefault()
         {
+            btnProfile.CausesValidation = false;
+            btnJob.CausesValidation = false;
+            btnSalary.CausesValidation = false;
 
             btnEditt.Visible = true;
             btnSave.Visible = false;
@@ -174,6 +177,10 @@ namespace FYP.Project
 
         private void ResetDisable()
         {
+            btnProfile.CausesValidation = false;
+            btnJob.CausesValidation = false;
+            btnSalary.CausesValidation = false;
+
             txtName.Enabled = false;
             txtEmail.Enabled = false;
             ddlGender.Enabled = false;
@@ -214,6 +221,9 @@ namespace FYP.Project
             btnEditt.Visible = false;
             btnSave.Visible = true;
 
+            btnProfile.CausesValidation = true;
+            btnJob.CausesValidation = true;
+            btnSalary.CausesValidation = true;
             //RegularExpressionValidator1.ControlToValidate = "FileUpLoad1";
             //lblFileUpload.Visible = true;
             FileUpload1.Visible = true;

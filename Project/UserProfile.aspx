@@ -11,7 +11,7 @@
             <asp:Label ID="lblTitle" runat="server" Text="Staff" CssClass="alignleft mt-2"></asp:Label>
             <asp:LinkButton ID="btnEditt" runat="server" CssClass="alignright btn btn-danger" OnClientClick="return showUploadFile()" OnClick="btnEditt_Click" CausesValidation="False"><i class="fas fa-edit"></i> Edit </asp:LinkButton>
             <asp:LinkButton ID="btnSave" runat="server" CssClass="alignright btn btn-success" OnClientClick="return hideUploadFileDeleteButton()" OnClick="btnSave_Click" Visible="False"><i class="fas fa-save"></i> Save </asp:LinkButton>
-            <asp:LinkButton ID="btnBack" runat="server" CssClass="alignright btn btn-light"  CausesValidation="False" OnClick="btnBack_Click"><i class="fa fa-angle-left"></i> Back </asp:LinkButton>
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="alignright btn btn-light" CausesValidation="False" OnClientClick="return alertConfirmBack()" OnClick="btnBack_Click"><i class="fa fa-angle-left"></i> Back </asp:LinkButton>
             <div style="clear: both;"></div>
         </header>
 
@@ -24,7 +24,7 @@
             </div>
 
             <div style="text-align: center; position: relative;">
-                <asp:LinkButton ID="btnDeletes" runat="server" CssClass="btn btn-light mb-2" OnClientClick="hideDeleteButton()" OnClick="btnDelete_Click" CausesValidation="False" style="display: inline-block;"><i class="fas fa-save"></i> Delete </asp:LinkButton>
+                <asp:LinkButton ID="btnDeletes" runat="server" CssClass="btn btn-light mb-2" OnClientClick="hideDeleteButton()" OnClick="btnDelete_Click" CausesValidation="False" Style="display: inline-block;"><i class="fas fa-save"></i> Delete </asp:LinkButton>
                 <%--<span class="hint">Delete</span>--%>
             </div>
 
@@ -150,7 +150,10 @@
         <asp:Panel ID="jobPanel" runat="server" CssClass="profileContentPanel mt-2 mb-2" ScrollBars="Auto" Visible="False">
             <label class="subtitle">Job</label>
             <div class="form-group">
-                <label>Date Joined</label>
+                <label>
+                    Date Joined
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="Date Joined Required" ControlToValidate="txtDateJoin" ForeColor="Red"></asp:RequiredFieldValidator>
+                </label>
                 <asp:TextBox ID="txtDateJoin" runat="server" CssClass="form-control" placeholder="Date Joined*" type="date"></asp:TextBox>
             </div>
             <div class="form-group">
@@ -184,7 +187,10 @@
             <label class="subtitle">Salary</label>
             <div class="form-group">
                 <div class="rows">
-                    <label class="column" style="margin-right: 2%">Salary Effective Date</label>
+                    <label class="column" style="margin-right: 2%">
+                        Salary Effective Date
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="Salary Effective Date Required" ControlToValidate="txtSalaryEffectiveDate" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </label>
                     <label class="column">
                         Basic Salary
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Basic Salary Required" ControlToValidate="txtBasicSalary" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -396,7 +402,7 @@
         var x = null;
         x = document.getElementById('<%= btnSave.ClientID %>');
         var y = null;
-        y = document.getElementById('<%= btnEditt.ClientID %>');        
+        y = document.getElementById('<%= btnEditt.ClientID %>');
         if (x === null || y !== null) {
             document.getElementById("lblFileUpload").style.display = "none";
             document.getElementById('<%= btnDeletes.ClientID %>').style.display = "none";
@@ -419,8 +425,12 @@
         }
 
         function hideUploadFileDeleteButton() {
-            document.getElementById("lblFileUpload").style.display = "none";
-            document.getElementById('<%= btnDeletes.ClientID %>').style.display = "none";
+            <%--document.getElementById("lblFileUpload").style.display = "none";
+            document.getElementById('<%= btnDeletes.ClientID %>').style.display = "none";--%>
+            if (x === null || y !== null) {
+                document.getElementById("lblFileUpload").style.display = "none";
+                document.getElementById('<%= btnDeletes.ClientID %>').style.display = "none";
+            }
             return true;
         }
 
@@ -430,9 +440,18 @@
         }
 
         function checkAndShow() {
-
             return true;
         }
+
+        function alertConfirmBack() {
+            if (x !== null || y === null) {
+                return confirm("Are you sure you want to back without saving?");
+            }
+            else {
+                return true;
+            }
+        }
+
     </script>
 
 </asp:Content>
