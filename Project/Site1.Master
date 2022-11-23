@@ -16,7 +16,7 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-   
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -24,7 +24,7 @@
 
     <form id="form1" runat="server">
         <div>
-            <nav class="navbar navbar-light" style="background-color: #6d7fcc;"> <%-- #51576a--%>
+            <nav class="navbar navbar-light" style="background-color: #6d7fcc;box-shadow: 0 0 25px rgb(0 0 0 / 10%);"> <%-- #51576a--%>
                 <a class="navbar-brand" href="#" style="margin-left: 4%">
                     <img src="../Image/company_logo.png" width="50" height="40" alt="">
                 </a>

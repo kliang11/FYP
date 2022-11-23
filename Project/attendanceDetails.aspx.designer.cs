@@ -11,107 +11,89 @@ namespace FYP.Project
 {
 
 
-    public partial class attendance
+    public partial class attendanceDetails
     {
 
         /// <summary>
-        /// countPresent control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl countPresent;
+        protected global::System.Web.UI.WebControls.LinkButton btnBack;
 
         /// <summary>
-        /// countPending control.
+        /// attendancePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl countPending;
+        protected global::System.Web.UI.WebControls.Panel attendancePanel;
 
         /// <summary>
-        /// CountOnLeave control.
+        /// imgProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CountOnLeave;
+        protected global::System.Web.UI.WebControls.Image imgProfile;
 
         /// <summary>
-        /// btnLeft control.
+        /// txtAttdID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeft;
+        protected global::System.Web.UI.WebControls.TextBox txtAttdID;
 
         /// <summary>
-        /// txtSelectDate control.
+        /// txtAttedDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSelectDate;
+        protected global::System.Web.UI.WebControls.TextBox txtAttedDate;
 
         /// <summary>
-        /// btnRight control.
+        /// txtStaffID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRight;
+        protected global::System.Web.UI.WebControls.TextBox txtStaffID;
 
         /// <summary>
-        /// gvList control.
+        /// txtStaffName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList;
+        protected global::System.Web.UI.WebControls.TextBox txtStaffName;
 
         /// <summary>
-        /// ddlStaffName control.
+        /// txtAttdStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStaffName;
+        protected global::System.Web.UI.WebControls.TextBox txtAttdStatus;
 
         /// <summary>
-        /// SqlDataSource1 control.
+        /// txtIsLate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// txtDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDate;
-
-        /// <summary>
-        /// lbldateError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbldateError;
+        protected global::System.Web.UI.WebControls.TextBox txtIsLate;
 
         /// <summary>
         /// txtTimeIn control.
@@ -123,15 +105,6 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.TextBox txtTimeIn;
 
         /// <summary>
-        /// lblTimeInError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeInError;
-
-        /// <summary>
         /// txtTimeOut control.
         /// </summary>
         /// <remarks>
@@ -141,21 +114,21 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.TextBox txtTimeOut;
 
         /// <summary>
-        /// lblTimeOutError control.
+        /// txtWorkHour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeOutError;
+        protected global::System.Web.UI.WebControls.TextBox txtWorkHour;
 
         /// <summary>
-        /// btnConfirm control.
+        /// txtOvertime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfirm;
+        protected global::System.Web.UI.WebControls.TextBox txtOvertime;
     }
 }
