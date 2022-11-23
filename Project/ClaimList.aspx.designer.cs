@@ -11,17 +11,17 @@ namespace FYP.Project
 {
 
 
-    public partial class EmployeeList
+    public partial class ClaimList
     {
 
         /// <summary>
-        /// btnAdd control.
+        /// pnlClaimAppliedList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Panel pnlClaimAppliedList;
 
         /// <summary>
         /// gvList control.
@@ -51,31 +51,31 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.LinkButton btnRejectClose;
 
         /// <summary>
-        /// txtStaffEmailPopUp control.
+        /// lblPopUpID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStaffEmailPopUp;
+        protected global::System.Web.UI.WebControls.Label lblPopUpID;
 
         /// <summary>
-        /// lbl_EmailError control.
+        /// txtRejectReasonPopUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_EmailError;
+        protected global::System.Web.UI.WebControls.TextBox txtRejectReasonPopUp;
 
         /// <summary>
-        /// ddlRole control.
+        /// lbl_reasonError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRole;
+        protected global::System.Web.UI.WebControls.Label lbl_reasonError;
 
         /// <summary>
         /// btnSubmitPopUp control.
