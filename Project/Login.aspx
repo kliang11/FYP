@@ -31,7 +31,7 @@
             <div class="image ">
                 <img class="loginImg" src="../Image/loginIcon.png" alt="Login Icon" height="100" width="100" />
             </div>
-            <h1 class="mb-5" align="center">Login</h1>
+            <h1 class="mb-4" align="center">Login</h1>
             <div class="form-group">
                 <label class="form-label">Email Address</label>
                 <span style="color: #FF0000">*</span>
@@ -65,18 +65,25 @@
 
         <div id="forgetPwPopup" class="forgetPwModal">
             <!-- Modal content -->
-            <div class="forgetPwModal-content">
-                <span class="forgetPwClose">&times;</span>
-                <h3 class="mb-4" align="center">Forgot Password?</h3>
-                <p style="font-size: 14px;">Enter your email address and get a recovery code to reset your password.</p>
-                <label class="form-label">Email Address</label>
-                <span style="color: #FF0000">*</span>
-                <asp:TextBox ID="txtEmailPopUp" runat="server" class="form-control" placeholder="Email Address*" />
-                <asp:Button ID="btnSubmitPopUp" runat="server" Text="Submit" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnSubmit_Click" />
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="14px">&nbsp</asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" Font-Size="14px">&nbsp</asp:RequiredFieldValidator>
-                <span id="lblEmailNotExist" style="color:red; font-size: 21px; margin-left: -0.21rem;">&#x2022 <span style="font-size: 14px; margin-left: 0.29rem;">Email entered is not exists*</span></span>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" Font-Size="14px" />
+            <div class="forgetPwModal-content" style="width: 40%;">
+                <div class="modal-header" style="padding: 1rem 1rem; border-bottom: 1px solid #dee2e6;">
+                    <h5 class="pt-2">Forgot Password?</h5>
+                    <span class="forgetPwClose pb-1">&times;</span>
+                </div>
+                <div class="modal-body" style="padding: 1rem;">
+                    <p style="font-size: 14px;">Enter your email address and get a recovery code to reset your password.</p>
+                    <label class="form-label">Email Address</label>
+                    <span style="color: #FF0000">*</span>
+                    <asp:TextBox ID="txtEmailPopUp" runat="server" class="form-control" placeholder="Email Address*" />
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Font-Size="14px">&nbsp</asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please enter valid email*" ControlToValidate="txtEmailPopUp" ForeColor="Red" Font-Size="14px">&nbsp</asp:RequiredFieldValidator>
+                    <span id="lblEmailNotExist" style="color: red; font-size: 21px; margin-left: -0.21rem;">&#x2022 <span style="font-size: 14px; margin-left: 0.29rem;">The entered email address does not exist*</span></span>
+                    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" Font-Size="14px" />
+                </div>
+                <div class="modal-footer" style="padding: .75rem; border-top: 1px solid #dee2e6; border-bottom-right-radius: calc(.3rem - 1px); border-bottom-left-radius: calc(.3rem - 1px);">
+                    <asp:Button ID="btnSubmitPopUp" runat="server" Text="Submit" class="form-control btn btn-primary rounded submit px-3 mt-3" OnClick="btnSubmit_Click" />                    
+                </div>
+
             </div>
         </div>
 
@@ -118,7 +125,7 @@
             var x = null;
             x = document.getElementById('<%= lblStoreResetEmail.ClientID %>').innerText
             document.getElementById("lblEmailNotExist").style.visibility = "hidden";
-            if ( x === "1") {
+            if (x === "1") {
                 modal.style.display = "block";
                 document.getElementById("lblEmailNotExist").style.visibility = "visible";
                 document.getElementById('<%= lblStoreResetEmail.ClientID %>').style.display = "none";

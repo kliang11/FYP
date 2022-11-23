@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FYP.Project
+namespace FYP
 {
 
 
-    public partial class EmployeeList
+    public partial class ClaimType
     {
 
         /// <summary>
-        /// btnAdd control.
+        /// pnlClaimTypeList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Panel pnlClaimTypeList;
 
         /// <summary>
         /// gvList control.
@@ -33,57 +33,48 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.GridView gvList;
 
         /// <summary>
-        /// rejectReasonPopup control.
+        /// txt_ClaimType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel rejectReasonPopup;
+        protected global::System.Web.UI.WebControls.TextBox txt_ClaimType;
 
         /// <summary>
-        /// btnRejectClose control.
+        /// lbl_ClaimTypeError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRejectClose;
+        protected global::System.Web.UI.WebControls.Label lbl_ClaimTypeError;
 
         /// <summary>
-        /// txtStaffEmailPopUp control.
+        /// txt_Amount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStaffEmailPopUp;
+        protected global::System.Web.UI.WebControls.TextBox txt_Amount;
 
         /// <summary>
-        /// lbl_EmailError control.
+        /// lbl_AmountError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_EmailError;
+        protected global::System.Web.UI.WebControls.Label lbl_AmountError;
 
         /// <summary>
-        /// ddlRole control.
+        /// btnConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRole;
-
-        /// <summary>
-        /// btnSubmitPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmitPopUp;
+        protected global::System.Web.UI.WebControls.Button btnConfirm;
     }
 }
