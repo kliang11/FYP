@@ -3,31 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<%--    <style>
-        .card {
-            box-shadow: 1px 1px 1px rgb(0 0 0 / 10%), -1px 0 1px rgb(0 0 0 / 5%);
-        }
-
-        .gvbutton {
-            max-width: 20px;
-            max-height: 20px;
-            margin: 0px 10px;
-        }
-
-            .gvbutton:hover {
-                transform: scale(1.2);
-            }
-
-        .btnDateStlye {
-            background-color: white;
-            border: 1px solid #cccccc;
-        }
-
-            .btnDateStlye:hover {
-                background-color: #ededed;
-                cursor: pointer;
-            }
-    </style>--%>
+    <link rel="stylesheet" href="style.css">
 
     <div class="card-deck" style="margin-bottom: 25px">
         <div class="col-xl-3 col-sm-6 col-12">
@@ -88,7 +64,7 @@
             <p class="text-primary m-0 fw-bold" style="font-size: 21px;">Attendance</p>
         </div>
         <div style="position: absolute; margin-top: 16px; margin-right: 21px; top: 0; right: 0;">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">+</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" style="padding: 6px 13px">+</button>
         </div>
         <div class="card-body" style="overflow-y: hidden;">
             <div class="table-responsive">

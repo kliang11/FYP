@@ -7,6 +7,9 @@
     position: fixed;*/
 /*align-items: flex-start;*/
 /*}*/
+.card {
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 10%), -1px 0 1px rgb(0 0 0 / 5%);
+}
 
 .loginImg {
     display: block;
