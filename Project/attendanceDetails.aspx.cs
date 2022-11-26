@@ -92,7 +92,7 @@ namespace FYP.Project
 
         private string checkIsLate(string isLate, string atdStatus)
         {
-            if(atdStatus == "Pending" || atdStatus=="On Leave")
+            if(atdStatus == "Pending" || atdStatus=="On Leave" || atdStatus=="Absent")
             {
                 return "-";
             }

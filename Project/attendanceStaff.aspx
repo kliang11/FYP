@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Project/Site1.Master" AutoEventWireup="true" CodeBehind="attendanceStaff.aspx.cs" Inherits="FYP.Project.attendanceStaff" %>
 
-<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -65,7 +63,7 @@
             <p class="text-primary m-0 fw-bold" style="font-size: 21px;">Attendance</p>
         </div>
         <div style="position: absolute; margin-top: 16px; margin-right: 21px; top: 0; right: 0;">
-            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="btnReport_Click" CssClass="btn btn-primary" OnClientClick="SetTarget();" ImageUrl="~/Image/download.png" style ="padding: 10px 11px;"  />
+            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="btnReport_Click" CssClass="btn btn-primary" OnClientClick="SetTarget();" ImageUrl="~/Image/download.png" Style="padding: 10px 11px;" />
         </div>
         <div class="card-body" style="overflow-y: hidden;">
             <div class="table-responsive">
@@ -118,7 +116,7 @@
             </div>
         </div>
     </div>
-    <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+
     <script type="text/javascript">
         function SetTarget() {
             document.forms[0].target = "_blank";
