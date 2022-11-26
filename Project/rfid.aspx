@@ -42,6 +42,7 @@
                                 <asp:Label ID="lblStaffName" runat="server" Text='<%# Eval("Name")%>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
+                                 <asp:Label ID="lblStaffName2" runat="server" Text='<%# Eval("StaffID")%>' style="display:none"></asp:Label>
                                 <asp:DropDownList ID="ddlEditName" runat="server" DataTextField="Name" DataValueField="Staff_ID"></asp:DropDownList>
                             </EditItemTemplate>
                         </asp:TemplateField>

@@ -15,15 +15,6 @@ namespace FYP.Project
     {
 
         /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
         /// reportPanel control.
         /// </summary>
         /// <remarks>
@@ -40,15 +31,6 @@ namespace FYP.Project
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect ddlSelect;
-
-        /// <summary>
-        /// lblSelectError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSelectError;
 
         /// <summary>
         /// rqvSelect control.
@@ -69,15 +51,6 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.TextBox txtMonth;
 
         /// <summary>
-        /// lblMonthError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMonthError;
-
-        /// <summary>
         /// rqvMonth control.
         /// </summary>
         /// <remarks>
@@ -96,15 +69,6 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
-        /// lblDateError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDateError;
-
-        /// <summary>
         /// rqvDate control.
         /// </summary>
         /// <remarks>
@@ -121,14 +85,5 @@ namespace FYP.Project
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGenerateReport;
-
-        /// <summary>
-        /// CrystalReportViewer1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
     }
 }

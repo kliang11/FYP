@@ -61,7 +61,7 @@
         
             <div class="form-group">
                 <div class="rows">
-                    <label class="column" style="margin-right: 2%">Working Hour</label>
+                    <label class="column" style="margin-right: 2%">Total Working Hour</label>
                     <label class="column">Overtime</label>                                   
                 </div>
                 <div class="rows">

@@ -72,10 +72,18 @@ namespace FYP.Project
             string card_status;
             string dateString = (row.FindControl("txtDate") as TextBox).Text;
             string staff_id = (row.FindControl("ddlEditName") as DropDownList).SelectedItem.Value.ToString();
+            string original_staff_id = (row.FindControl("lblStaffName2") as Label).Text;
 
-            if (staff_id == "")
+
+            if (staff_id == "" || (staff_id == "NoChange" && original_staff_id == "") )
             {
                 card_status = "Available";
+                staff_id = null;
+            }
+            else if(staff_id == "NoChange")
+            {
+                card_status = "In Use";
+                staff_id = original_staff_id;
             }
             else
             {
@@ -130,7 +138,8 @@ namespace FYP.Project
                 ddList.DataTextField = "name";
                 ddList.DataValueField = "Staff_ID";
                 ddList.DataBind();
-                ddList.Items.Insert(0, new ListItem("- None -", ""));
+                ddList.Items.Insert(0, new ListItem("- Select -","NoChange"));
+                ddList.Items.Insert(1, new ListItem("None",""));
 
             }
         }
@@ -159,7 +168,6 @@ namespace FYP.Project
             this.BindGrid();
             ddlBind();
         }
-        //need to handle the duplicate primary key exception 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
             string card_id = txt_rfidid.Text.ToString();
@@ -170,7 +178,7 @@ namespace FYP.Project
             if (staff_id == "")
             {
                 card_status = "Available";
-                staff_id = "-";
+                staff_id = null;
             }
             else
             {
