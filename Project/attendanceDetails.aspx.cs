@@ -28,7 +28,6 @@ namespace FYP.Project
         private void databind(string id)
         {
 
-
             SqlConnection con = new SqlConnection();
             string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             con = new SqlConnection(strCon);

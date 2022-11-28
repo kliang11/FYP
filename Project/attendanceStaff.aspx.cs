@@ -14,7 +14,7 @@ namespace FYP.Project
 {
     public partial class attendanceStaff : System.Web.UI.Page
     {
-        private string staffID = "2";
+        private string staffID = "2";  //staff id 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
