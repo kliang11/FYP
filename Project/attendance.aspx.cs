@@ -259,7 +259,7 @@ namespace FYP.Project
             if (workingHour > otHour)
             {
                 overtime = Math.Round((workingHour - otHour), 2);
-                //workingHour = otHour;
+                workingHour = otHour;
             }
         }
 

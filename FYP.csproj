@@ -80,6 +80,9 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Image\approved.png" />
+    <Content Include="Image\detail.png" />
+    <Content Include="Image\reject.png" />
     <Content Include="Project\ApplyClaim.aspx" />
     <Content Include="Project\AttendanceReportG.aspx" />
     <Content Include="Project\ClaimDetails.aspx" />
@@ -100,17 +103,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="HtmlPage1.html" />
-    <Content Include="Image\approved.png" />
     <Content Include="Image\bin.png" />
     <Content Include="Image\cancel.png" />
     <Content Include="Image\company_logo.png" />
     <Content Include="Image\defaultProfileImg.png" />
-    <Content Include="Image\detail.png" />
     <Content Include="Image\download.png" />
     <Content Include="Image\editing.png" />
     <Content Include="Image\loginIcon.png" />
-    <Content Include="Image\reject.png" />
     <Content Include="Image\smile.gif" />
     <Content Include="Image\tick.png" />
     <Content Include="Project\AddEmployee.aspx" />
@@ -122,7 +121,9 @@
     <Content Include="Project\ClaimList.aspx" />
     <Content Include="Project\EmployeeList.aspx" />
     <Content Include="Image\loader.gif" />
-    <Content Include="Project\Leave.aspx" />
+    <Content Include="Project\LeaveDetailsStaff.aspx" />
+    <Content Include="Project\LeaveList.aspx" />
+    <Content Include="Project\LeaveStaff.aspx" />
     <Content Include="Project\Logout.aspx" />
     <Content Include="Project\rfid.aspx" />
     <Content Include="Project\payroll.aspx" />
@@ -192,12 +193,26 @@
     <Compile Include="Project\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Project\Leave.aspx.cs">
-      <DependentUpon>Leave.aspx</DependentUpon>
+    <Compile Include="Project\LeaveDetailsStaff.aspx.cs">
+      <DependentUpon>LeaveDetailsStaff.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Project\Leave.aspx.designer.cs">
-      <DependentUpon>Leave.aspx</DependentUpon>
+    <Compile Include="Project\LeaveDetailsStaff.aspx.designer.cs">
+      <DependentUpon>LeaveDetailsStaff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\LeaveList.aspx.cs">
+      <DependentUpon>LeaveList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\LeaveList.aspx.designer.cs">
+      <DependentUpon>LeaveList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\LeaveStaff.aspx.cs">
+      <DependentUpon>LeaveStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\LeaveStaff.aspx.designer.cs">
+      <DependentUpon>LeaveStaff.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\staffReport.aspx.cs">
       <DependentUpon>staffReport.aspx</DependentUpon>
