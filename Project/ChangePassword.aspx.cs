@@ -29,7 +29,7 @@ namespace FYP.Project
                 con = new SqlConnection(strCon);
                 con.Open();
 
-                string strSqlQuery = "Select * from Staff Where Staff_ID = " + "7"; //temp id
+                string strSqlQuery = "Select * from Staff Where Staff_ID = " + "6"; //temp id
                 SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
                 SqlDataReader rd = cmdSelect.ExecuteReader();
 
@@ -114,7 +114,7 @@ namespace FYP.Project
             string url = "";
             try
             {
-                string s = "7"; //temp                
+                string s = "6"; //temp                
                 int id = Int16.Parse(s);
                 //database
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;

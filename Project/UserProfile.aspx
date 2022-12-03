@@ -100,7 +100,6 @@
             <label class="subtitle">Family</label>
 
 
-
             <div class="form-group">
                 <label>Marital Status</label>
                 <asp:DropDownList ID="ddlMaritalStatus" runat="server" onchange="maritalstatuschange(this)" CssClass="form-control" OnSelectedIndexChanged="ddlMaritalStatus_SelectedIndexChanged">
@@ -174,9 +173,7 @@
                 <label>Job Type</label>
                 <asp:DropDownList ID="ddlJobType" runat="server" CssClass="form-control">
                     <asp:ListItem>Permenant</asp:ListItem>
-                    <asp:ListItem>Contract</asp:ListItem>
                     <asp:ListItem>Part Time</asp:ListItem>
-                    <asp:ListItem>Internship</asp:ListItem>
                 </asp:DropDownList>
             </div>
         </asp:Panel>
@@ -185,7 +182,7 @@
 
         <asp:Panel ID="salaryPanel" runat="server" CssClass="profileContentPanel mt-2 mb-2" ScrollBars="Auto" Visible="False">
             <label class="subtitle">Salary</label>
-            <div class="form-group">
+            <%--<div class="form-group">
                 <div class="rows">
                     <label class="column" style="margin-right: 2%">
                         Salary Effective Date
@@ -200,7 +197,16 @@
                     <asp:TextBox ID="txtSalaryEffectiveDate" runat="server" CssClass="form-control column" placeholder="NRIC*" Style="margin-right: 2%" type="date"></asp:TextBox>
                     <asp:TextBox ID="txtBasicSalary" runat="server" CssClass="form-control column" placeholder="Basic Salary*" Text="0" TextMode="Number" step="any" min="0"></asp:TextBox>
                 </div>
+            </div>--%>
+
+            <div class="form-group">
+                <label>
+                    Basic Salary
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Basic Salary Required" ControlToValidate="txtBasicSalary" ForeColor="Red"></asp:RequiredFieldValidator>
+                </label>
+                <asp:TextBox ID="txtBasicSalary" runat="server" CssClass="form-control" placeholder="Basic Salary*" Text="0" TextMode="Number" step="any" min="0"></asp:TextBox>
             </div>
+
             <div class="form-group">
                 <div class="rows">
                     <label class="column" style="margin-right: 2%">
@@ -243,7 +249,6 @@
                     <asp:DropDownList ID="ddlPayPeriod" runat="server" CssClass="form-control column" Style="margin-right: 2%">
                         <asp:ListItem>Monthly</asp:ListItem>
                         <asp:ListItem>Weekly</asp:ListItem>
-                        <asp:ListItem>Semi-Monthly</asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlPayMethod" runat="server" CssClass="form-control column">
                         <asp:ListItem>Bank</asp:ListItem>
@@ -260,38 +265,38 @@
                 </div>
                 <div class="rows">
                     <asp:DropDownList ID="ddlEmployerEpfRate" runat="server" CssClass="form-control column" Style="margin-right: 2%">
-                        <asp:ListItem Value="0.00">No Contribution</asp:ListItem>
-                        <asp:ListItem Value="0.04">4%</asp:ListItem>
-                        <asp:ListItem Value="0.06">6%</asp:ListItem>
+                        <asp:ListItem Value="0.000">No Contribution</asp:ListItem>
+                        <asp:ListItem Value="0.040">4%</asp:ListItem>
+                        <asp:ListItem Value="0.060">6%</asp:ListItem>
                         <asp:ListItem Value="0.065">6.5%</asp:ListItem>
-                        <asp:ListItem Value="0.12">12%</asp:ListItem>
-                        <asp:ListItem Value="0.13">13%</asp:ListItem>
-                        <asp:ListItem Value="0.14">14%</asp:ListItem>
-                        <asp:ListItem Value="0.15">15%</asp:ListItem>
-                        <asp:ListItem Value="0.16">16%</asp:ListItem>
-                        <asp:ListItem Value="0.17">17%</asp:ListItem>
-                        <asp:ListItem Value="0.18">18%</asp:ListItem>
-                        <asp:ListItem Value="0.19">19%</asp:ListItem>
-                        <asp:ListItem Value="0.20">20%</asp:ListItem>
+                        <asp:ListItem Value="0.120">12%</asp:ListItem>
+                        <asp:ListItem Value="0.130">13%</asp:ListItem>
+                        <asp:ListItem Value="0.140">14%</asp:ListItem>
+                        <asp:ListItem Value="0.150">15%</asp:ListItem>
+                        <asp:ListItem Value="0.160">16%</asp:ListItem>
+                        <asp:ListItem Value="0.170">17%</asp:ListItem>
+                        <asp:ListItem Value="0.180">18%</asp:ListItem>
+                        <asp:ListItem Value="0.190">19%</asp:ListItem>
+                        <asp:ListItem Value="0.200">20%</asp:ListItem>
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlEmployeeEpfRate" runat="server" CssClass="form-control column">
-                        <asp:ListItem Value="0.00">No Contribution</asp:ListItem>
-                        <asp:ListItem Value="0.04">4%</asp:ListItem>
+                        <asp:ListItem Value="0.000">No Contribution</asp:ListItem>
+                        <asp:ListItem Value="0.040">4%</asp:ListItem>
                         <asp:ListItem Value="0.055">5.5%</asp:ListItem>
-                        <asp:ListItem Value="0.07">7%</asp:ListItem>
-                        <asp:ListItem Value="0.08">8%</asp:ListItem>
-                        <asp:ListItem Value="0.09">9%</asp:ListItem>
-                        <asp:ListItem Value="0.10">10%</asp:ListItem>
-                        <asp:ListItem Value="0.11">11%</asp:ListItem>
-                        <asp:ListItem Value="0.12">12%</asp:ListItem>
-                        <asp:ListItem Value="0.13">13%</asp:ListItem>
-                        <asp:ListItem Value="0.14">14%</asp:ListItem>
-                        <asp:ListItem Value="0.15">15%</asp:ListItem>
-                        <asp:ListItem Value="0.16">16%</asp:ListItem>
-                        <asp:ListItem Value="0.17">17%</asp:ListItem>
-                        <asp:ListItem Value="0.18">18%</asp:ListItem>
-                        <asp:ListItem Value="0.19">19%</asp:ListItem>
-                        <asp:ListItem Value="0.20">20%</asp:ListItem>
+                        <asp:ListItem Value="0.070">7%</asp:ListItem>
+                        <asp:ListItem Value="0.080">8%</asp:ListItem>
+                        <asp:ListItem Value="0.090">9%</asp:ListItem>
+                        <asp:ListItem Value="0.100">10%</asp:ListItem>
+                        <asp:ListItem Value="0.110">11%</asp:ListItem>
+                        <asp:ListItem Value="0.120">12%</asp:ListItem>
+                        <asp:ListItem Value="0.130">13%</asp:ListItem>
+                        <asp:ListItem Value="0.140">14%</asp:ListItem>
+                        <asp:ListItem Value="0.150">15%</asp:ListItem>
+                        <asp:ListItem Value="0.160">16%</asp:ListItem>
+                        <asp:ListItem Value="0.170">17%</asp:ListItem>
+                        <asp:ListItem Value="0.180">18%</asp:ListItem>
+                        <asp:ListItem Value="0.190">19%</asp:ListItem>
+                        <asp:ListItem Value="0.200">20%</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>
