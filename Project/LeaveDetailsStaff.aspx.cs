@@ -132,6 +132,7 @@ namespace FYP.Project
 
         private void UpdateApproveReject(String approveReject, String reason,string leaveType,string leaveCount,string staffID)
         {
+            DateTime leaveFrom = Convert.ToDateTime(txtLeaveFrom.Text);
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -163,6 +164,27 @@ namespace FYP.Project
                         leaveCount = leaveCount.Remove(leaveCount.Length - 4);
                         cmd.Parameters.AddWithValue("@Count", leaveCount);
                         cmd.Parameters.AddWithValue("@Staff_ID", staffID);
+                        cmd.Connection = con;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+                if (leaveType == "Sick Leave" && DateTime.Compare(leaveFrom, DateTime.Now) <= 0)
+                {
+                    int count = int.Parse(leaveCount) - 1;
+                    DateTime leaveTo = DateTime.Now;
+                    if (DateTime.Compare(leaveFrom.AddDays(count), DateTime.Now) < 0)
+                    {
+                        leaveTo = leaveFrom.AddDays(count);
+                    }
+                    using (SqlCommand cmd = new SqlCommand("Attendance_CRUD"))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Action", "UPDATE_STATUS");
+                        cmd.Parameters.AddWithValue("@Staff_ID", staffID);
+                        cmd.Parameters.AddWithValue("@date1", leaveFrom);
+                        cmd.Parameters.AddWithValue("@date2", leaveTo);
                         cmd.Connection = con;
                         con.Open();
                         cmd.ExecuteNonQuery();

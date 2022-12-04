@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -198,7 +199,16 @@ namespace FYP.Project
         protected void btnReport_Click(object sender, EventArgs e)
         {
             string date = txtSelectMonth.Text;
-            Response.Redirect(string.Format("~/Project/staffReport.aspx?date={0}&id={1}",date,staffID));
+            string url = string.Format("/Project/staffReport.aspx?date={0}&id={1}", date, staffID);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<script type = 'text/javascript'>");
+            sb.Append("window.open('");
+            sb.Append(url);
+            sb.Append("');");
+            sb.Append("</script>");
+            ClientScript.RegisterStartupScript(this.GetType(),"script", sb.ToString());
+
+
         }
     }
 }
