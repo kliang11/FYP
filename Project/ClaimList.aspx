@@ -29,6 +29,10 @@
             min-height: 100%;
         }
 
+        .hideGridColumn {
+            display: none;
+        }
+
         #divImage {
             display: none;
             z-index: 1000;
@@ -80,9 +84,14 @@
                                     <asp:Label ID="lblClaimAmount" runat="server" Text='<%# "RM"+ Eval("ClaimAmount")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-CssClass="hideGridColumn" HeaderStyle-CssClass="hideGridColumn">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblImageUrl" runat="server" Text='<%#"data:Image/png;base64," +  Convert.ToBase64String((byte[])Eval("ClaimAttachment"))%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Claim Attachment" ItemStyle-Width="20%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgBtnClaimAttachment" runat="server" ImageUrl='<%# Eval("ClaimAttachment")%>' AlternateText="attachment" Width="100px" Height="100px" Style="cursor: pointer; max-width: 100px; max-height: 100px;" OnClientClick="return LoadDiv(this.src);" />
+                                   <asp:Button ID="btnView" runat="server" Text="View" ForeColor="Blue" Style="border: none; background: none; padding: 0; text-decoration-line: underline; cursor: pointer" OnClientClick="return LoadDiv(this);" />                              
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Action" ItemStyle-Width="20%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
@@ -139,11 +148,12 @@
         </div>
     </asp:Panel>
 
-
-    <%--<asp:Label ID="lblStoreRejectReason" runat="server" Text="" Width="0" Height="0"></asp:Label>--%>
-
     <script type="text/javascript">
-        function LoadDiv(url) {
+        function LoadDiv(Position) {
+
+            var row = Position.parentNode.parentNode;
+            var url = row.cells[5].getElementsByTagName('span')[0].innerHTML;
+
             var img = new Image();
             var bcgDiv = document.getElementById("divBackground");
             var imgDiv = document.getElementById("divImage");

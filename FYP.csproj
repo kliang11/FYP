@@ -79,10 +79,14 @@
     <Content Include="Image\approved.png" />
     <Content Include="Image\detail.png" />
     <Content Include="Image\magnifier.png" />
+    <Content Include="Image\process.png" />
     <Content Include="Image\reject.png" />
+    <Content Include="Image\send.png" />
     <Content Include="Project\ApplyClaim.aspx" />
     <Content Include="Project\AttendanceReportG.aspx" />
+    <Content Include="Project\ChangePassword.aspx" />
     <Content Include="Project\ClaimDetails.aspx" />
+    <Content Include="Project\ClaimList.aspx" />
     <Content Include="Project\ClaimType.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -114,21 +118,24 @@
     <Content Include="Project\attendanceDetails.aspx" />
     <Content Include="Project\AttendanceReport.aspx" />
     <Content Include="Project\attendanceStaff.aspx" />
-    <Content Include="Project\ChangePassword.aspx" />
-    <Content Include="Project\ClaimList.aspx" />
     <Content Include="Project\EmployeeList.aspx" />
     <Content Include="Image\loader.gif" />
     <Content Include="Project\LeaveDetailsStaff.aspx" />
     <Content Include="Project\LeaveList.aspx" />
     <Content Include="Project\LeaveStaff.aspx" />
     <Content Include="Project\Logout.aspx" />
-    <Content Include="Project\rfid.aspx" />
     <Content Include="Project\payroll.aspx" />
+    <Content Include="Project\PayrollDetailList.aspx" />
+    <Content Include="Project\PayrollReport.aspx" />
+    <Content Include="Project\PayrollReportReal.aspx" />
+    <Content Include="Project\PayrollStaff.aspx" />
+    <Content Include="Project\PayslipPage.aspx" />
+    <Content Include="Project\rfid.aspx" />
     <Content Include="Project\sideBar.css" />
     <Content Include="Project\style.css" />
     <Content Include="Project\Login.aspx" />
-    <Content Include="Project\UserProfile.aspx" />
     <Content Include="Project\staffReport.aspx" />
+    <Content Include="Project\UserProfile.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -152,12 +159,26 @@
     <Compile Include="Project\AttendanceReportG.aspx.designer.cs">
       <DependentUpon>AttendanceReportG.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project\ClaimDetails.aspx.cs">
       <DependentUpon>ClaimDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Project\ClaimDetails.aspx.designer.cs">
       <DependentUpon>ClaimDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ClaimList.aspx.cs">
+      <DependentUpon>ClaimList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ClaimList.aspx.designer.cs">
+      <DependentUpon>ClaimList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\ClaimType.aspx.cs">
       <DependentUpon>ClaimType.aspx</DependentUpon>
@@ -190,6 +211,16 @@
     <Compile Include="Project\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Project\DataSetForPayroll.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetForPayroll.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Project\DataSetForPayslip.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetForPayslip.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Project\LeaveDetailsStaff.aspx.cs">
       <DependentUpon>LeaveDetailsStaff.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -211,12 +242,73 @@
     <Compile Include="Project\LeaveStaff.aspx.designer.cs">
       <DependentUpon>LeaveStaff.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project\payroll.aspx.cs">
+      <DependentUpon>payroll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\payroll.aspx.designer.cs">
+      <DependentUpon>payroll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\PayrollDetailList.aspx.cs">
+      <DependentUpon>PayrollDetailList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\PayrollDetailList.aspx.designer.cs">
+      <DependentUpon>PayrollDetailList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\PayrollReport.aspx.cs">
+      <DependentUpon>PayrollReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\PayrollReport.aspx.designer.cs">
+      <DependentUpon>PayrollReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\PayrollReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayrollReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Project\PayrollReportReal.aspx.cs">
+      <DependentUpon>PayrollReportReal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\PayrollReportReal.aspx.designer.cs">
+      <DependentUpon>PayrollReportReal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\PayrollStaff.aspx.cs">
+      <DependentUpon>PayrollStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\PayrollStaff.aspx.designer.cs">
+      <DependentUpon>PayrollStaff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Payslip.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Payslip.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Project\PayslipPage.aspx.cs">
+      <DependentUpon>PayslipPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\PayslipPage.aspx.designer.cs">
+      <DependentUpon>PayslipPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Project\staffReport.aspx.cs">
       <DependentUpon>staffReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Project\staffReport.aspx.designer.cs">
       <DependentUpon>staffReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\WeekAttendanceReport.cs">
       <DependentUpon>WeekAttendanceReport.rpt</DependentUpon>
@@ -250,24 +342,10 @@
     <Compile Include="Project\attendanceStaff.aspx.designer.cs">
       <DependentUpon>attendanceStaff.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Project\ChangePassword.aspx.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project\ChangePassword.aspx.designer.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Project\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Project\ClaimList.aspx.cs">
-      <DependentUpon>ClaimList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project\ClaimList.aspx.designer.cs">
-      <DependentUpon>ClaimList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\EmployeeList.aspx.cs">
       <DependentUpon>EmployeeList.aspx</DependentUpon>
@@ -297,20 +375,6 @@
     <Compile Include="Project\rfid.aspx.designer.cs">
       <DependentUpon>rfid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project\payroll.aspx.cs">
-      <DependentUpon>payroll.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project\payroll.aspx.designer.cs">
-      <DependentUpon>payroll.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Project\UserProfile.aspx.cs">
-      <DependentUpon>UserProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Project\UserProfile.aspx.designer.cs">
-      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Project\Site1.Master.cs">
@@ -357,6 +421,28 @@
     <Content Include="Project\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <Content Include="Project\DataSetForPayroll.xsc">
+      <DependentUpon>DataSetForPayroll.xsd</DependentUpon>
+    </Content>
+    <None Include="Project\DataSetForPayroll.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetForPayroll.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Project\DataSetForPayroll.xss">
+      <DependentUpon>DataSetForPayroll.xsd</DependentUpon>
+    </Content>
+    <Content Include="Project\DataSetForPayslip.xsc">
+      <DependentUpon>DataSetForPayslip.xsd</DependentUpon>
+    </Content>
+    <None Include="Project\DataSetForPayslip.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetForPayslip.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Project\DataSetForPayslip.xss">
+      <DependentUpon>DataSetForPayslip.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\fypHRMS - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -369,6 +455,14 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Project\PayrollReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PayrollReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Project\Payslip.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Payslip.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\WeekAttendanceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>WeekAttendanceReport.cs</LastGenOutput>

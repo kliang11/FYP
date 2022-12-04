@@ -18,6 +18,12 @@ namespace FYP.Project
             {
                 this.BindGrid();
             }
+            else if (gvList.Rows.Count != 0)
+            {
+                gvList.UseAccessibleHeader = true;
+                gvList.HeaderRow.TableSection = TableRowSection.TableHeader;
+                gvList.FooterRow.TableSection = TableRowSection.TableFooter;
+            }
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -44,11 +50,11 @@ namespace FYP.Project
                     (e.Row.FindControl("btnReject") as ImageButton).Visible = true;
                 }
 
-                var img = e.Row.FindControl("imgBtnClaimAttachment") as ImageButton;
-                if (img.ImageUrl != "")
-                {
-                    img.ImageUrl = "data:image/png;base64," + Convert.ToBase64String((byte[])(((DataRowView)e.Row.DataItem))["ClaimAttachment"]);
-                }
+                //var img = e.Row.FindControl("imgBtnClaimAttachment") as ImageButton;
+                //if (img.ImageUrl != "")
+                //{
+                //    img.ImageUrl = "data:image/png;base64," + Convert.ToBase64String((byte[])(((DataRowView)e.Row.DataItem))["ClaimAttachment"]);
+                //}
             }
         }
         private void BindGrid()

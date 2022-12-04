@@ -66,7 +66,7 @@ namespace FYP.Project
             }
             lblStoreClaimType.Text = abc;
 
-            Session["id"] = "7"; //temp
+            Session["id"] = "6"; //temp
 
             con = new SqlConnection();
             strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -171,7 +171,7 @@ namespace FYP.Project
             bytes = imageBytes;
             string claimTypeID = ddlClaimType.SelectedItem.Value.ToString();
             string status = "Pending";
-            string staffId = "7"; //Session["id"].ToString() //temp
+            string staffId = "6"; //Session["id"].ToString() //temp
 
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))

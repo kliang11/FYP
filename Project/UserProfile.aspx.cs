@@ -17,20 +17,19 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //IsPostBack = false
+            if (!IsPostBack)
             {
-                // return;
                 ResetAllDefault();
-                //load database and update to panel
                 string id = "";
-                id = Request.QueryString["id"];   //temp
+                string payrollListID, payperiod, date;
+                id = Request.QueryString["id"];
+                payrollListID = Request.QueryString["payrollListID"];
+                payperiod = Request.QueryString["payperiod"];
+                date = Request.QueryString["date"];
+
                 if (id != null)
                 {
                     BindData(id);
-                }
-                else
-                {
-                    //do something
                 }
 
                 if (txtName.Text != "-")
@@ -38,7 +37,11 @@ namespace FYP.Project
                     lblTitle.Text = txtName.Text;
                 }
 
-
+                if (payrollListID != null)
+                {
+                    btnSalary_Click(btnSalary, EventArgs.Empty);
+                    btnEditt_Click(btnEditt, EventArgs.Empty);
+                }
 
             }
         }
@@ -88,12 +91,12 @@ namespace FYP.Project
                 if (rd["JobType"].ToString() != "")
                     ddlJobType.SelectedValue = rd["JobType"].ToString();
 
-                if (rd["SalaryEffectiveDate"].ToString() != "")
-                {
-                    string s = rd["SalaryEffectiveDate"].ToString();
-                    var date = DateTime.ParseExact(s, "d/M/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
-                    txtSalaryEffectiveDate.Text = date.ToString("yyyy-MM-dd");
-                }
+                //if (rd["SalaryEffectiveDate"].ToString() != "")
+                //{
+                //    string s = rd["SalaryEffectiveDate"].ToString();
+                //    var date = DateTime.ParseExact(s, "d/M/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                //    txtSalaryEffectiveDate.Text = date.ToString("yyyy-MM-dd");
+                //}
                 if (rd["Salary"].ToString() != "")
                     txtBasicSalary.Text = rd["Salary"].ToString();
                 if (rd["HourlyRate"].ToString() != "")
@@ -151,7 +154,7 @@ namespace FYP.Project
             txtPosition.Text = "";
             ddlJobType.SelectedValue = "Permenant";
 
-            txtSalaryEffectiveDate.Text = "";
+            //txtSalaryEffectiveDate.Text = "";
             txtBasicSalary.Text = "0";
             txtHourlyRate.Text = "0";
             txtOvertimeRate.Text = "0";
@@ -199,7 +202,7 @@ namespace FYP.Project
             txtPosition.Enabled = false;
             ddlJobType.Enabled = false;
 
-            txtSalaryEffectiveDate.Enabled = false;
+            //txtSalaryEffectiveDate.Enabled = false;
             txtBasicSalary.Enabled = false;
             txtHourlyRate.Enabled = false;
             txtOvertimeRate.Enabled = false;
@@ -229,11 +232,11 @@ namespace FYP.Project
             FileUpload1.Visible = true;
             string defaultImageUrl = "data:Image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA/UExURUxpcRAQEAwMDCIiIgUFBQYGBhMTEwEBAQcHBwICAj09PQ8PDyIiIhMTEwkJCRISEi0tLTs7O1RUVH5+fgAAADZOelUAAAAUdFJOUwA7F+sF0U79Kr2k+W+L5qbJ+4ztAhpVBgAABoVJREFUeNrtnYtW4yAQhgdCGBJISCvv/6wLaau92QYYJOzpePZ41Kqfs3+AuQAAT0wI4ExVNqYg0vi4DNXNSCZAbCRWZhq024FhZ7d6WfboX78Lc26w8j2xYMHJ4eW7cHVw36BeisQ/f1a73Zm2/BU1H/xftjfmIJIXGjH9boRxhz2b38QxabdH5JUaJ/F0Qplwr8wnav6Eetot8Zn7gVrwvTO7Jwox+2d22ghxM6X0rgHqmf2M1wLU7BowdMOVrMWwfz+fqH9kLRg2wRwE8jM1NuLoG4HIRpBX7PN83sZTeLHV1QJMS8wOpUcWwjpsCdqGGcaroyVNu1k1MYE/6APk4BozH+oe+yIB6Xc4XUAfRxjnP9AhbZz7BV9I6uHwbx6sHcdpGsdl6Vdvk7ocPTSpR1H3k7mOMIQZB4203v6CAyVzN8nHtCGXY6fpsBEPhNAeWa1T7H0GCLgyi3aE0JrKy/OkBDzNBIXPqbEjCvYRNVBF+AsD+DV5Ff4aORKlVYigfcw5vU+B82NHpBAgYZ7Nlty3kMtuoNF1ErZl7NlCMmIDEfNGo6EGAm1sZxaemuBphPxn0ESVoGSXT50N/TwH+8LZJp86Wx6Liq726crQGCHo74rfUlceiKOAeOq5JrQf7RQk2Jip6jxoPYkU6NwRBPIczVKYQVjEep5Oc7R3dV6uBXIcrSWkUfOhFrQfozkkmqmn6THR0X4JMleDNqmOXovwNaD92JGsDpFXas2BXiAdeqwFPWZAH5uE1pWgpxzorg40pkMDHA91hjxtGoTOGKZFLegcedSDzhs9us84vR3atgjd5DSeGGydA65aQUD6mFdxPT2KVHVIXQva9SrV01OtcKvNwBbR8mRJV4MOWTHx9+rITNYkZmtU7ypmmNISkGKqm+p1KaqWVVO9aZEAz+7lya659CzuWQwtdbVrLogLj6EWuRlTGui7Vuy3Q3RfvyS3Uscx5xtFmXkztQCajniSgr5XyMaCPk0XP03rhB63zOeCosRMBf3dWPNmfCbbsUTUDhT6VPi6z/V3Nw9kO5ZooE/ODu01T7DFuu1gIuxyo4Jep3QrH3vcxNqZZzvC30MJ7f2ou0k+7LCSZphpWyApPX3u2xyPRjK+GjPHcdDk+19JoR2eOmSxOyyrdUjfH0sO7Z7JgL6Jmhz62+Vler5LQpe1D/QH+gP9gf5Af6D3CB1/PMrH0wkLOr9+XpZxu1lrQ0iQt1rNqSN64mGSKrLpO8SLfd5urpxCUf8YW20+NKnPiXOTobEzSiQXP0HJjN1ckKiM3nAAyKD23j7gH0KjO9XicpDDN7PU3VyQwtyNHEgscScGpDAbAUTGlj/xNLoDHTMAT+mhgHhmCZQmEqq3EO9noDUev0EAYvV8FEBOXdTTIeVPzpxQPIqDxoVDATOR4zVEMRM/hFcPYyloL46jECWYY88YiZLHokCUcnUMdQy0NlDKVF/G0+jKPIXnjsgimo6sgRfdOAcR8wovCB11RlEE9CQKQoPS9PLw4x2DktQ8Qh/bodN7NLdBLyWgbVF1gIjYmb1d0xOUpY5YgEDEzFISWgDrqKEzOnj/a2jVFZBHi9AzK/wgRjSCf6D/avWxHbrshBja1+mhC8/iYYMz/Sqv5x/o/0MeRR7E4tCfcbrlabxJaDSF5SHpg4Di4RZEJCEBt0LPqmw0vjmwRdx8cGXpvEfEKTYaus3QsyzIHLNxLupc054VGzp4TD3xEHHsLZbKT3vmMaIUEHlWL9oS1IE5qujioWM6GHBgYa+CIKpinH+QWmLqAKi/1it+IqjniXjhJJiJqsith2aLqO2B3iWzHY+rGSNPxoKd7lLjN3a5YO1k8tuMt+PZ7By7/cX6/20W9S2npn99OFt3Z/2Ndc/scGVaY3Q3UzgIXmRtPL9us1s9hugub+780c2r8b5FJ7qhIETYFNtHb+GffO3nq/m/KlxuIBq7KABPS2TVtwR9uRvFNHg1CvC+wUtovKtbgb46sIrbVi5Wsi1eYXW9hhCqCVnjXUZgasHV0+3qUuxf1oiWoNGs3mh3FVpa3LWzh6cLeU65S5razbP9JfgQZt4lNeLLig+b5l1eCdu/biSWO1zyvYlLfXSs7Lyba45XDG3VlgMtrN7HhdKrl+3GtJaQQ7eHK5rDLU0RmTjO3l2S3g9rvD2Ed0N/+mjoScz/7GB2koxHbPEIdyGx+8vhL+mLFyZ/3tLtnEXh4oLyaP8AdQQMq6fJbkwAAAAASUVORK5CYII=";
             //if (imgProfile.ImageUrl.ToString() == defaultImageUrl)
-                //btnDelete.Visible = false;
+            //btnDelete.Visible = false;
             //else
-                //btnDelete.Visible = true;
+            //btnDelete.Visible = true;
             txtName.Enabled = true;
-           // txtEmail.Enabled = true;
+            // txtEmail.Enabled = true;
             ddlGender.Enabled = true;
             txtNationality.Enabled = true;
             txtIC.Enabled = true;
@@ -265,7 +268,7 @@ namespace FYP.Project
             txtPosition.Enabled = true;
             ddlJobType.Enabled = true;
 
-            txtSalaryEffectiveDate.Enabled = true;
+            //txtSalaryEffectiveDate.Enabled = true;
             txtBasicSalary.Enabled = true;
             txtHourlyRate.Enabled = true;
             txtOvertimeRate.Enabled = true;
@@ -398,20 +401,29 @@ namespace FYP.Project
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string staff_id = txtStaffID.Text.ToString();
-
+            string action = "";
 
             byte[] bytes = null;
             byte[] imageBytes = null;
-            using (BinaryReader br = new BinaryReader(FileUpload1.PostedFile.InputStream))
+            var azzz = FileUpload1.PostedFile;
+            if (azzz != null)
             {
-                imageBytes = br.ReadBytes(FileUpload1.PostedFile.ContentLength);
+                using (BinaryReader br = new BinaryReader(FileUpload1.PostedFile.InputStream))
+                {
+                    imageBytes = br.ReadBytes(FileUpload1.PostedFile.ContentLength);
+                }
+                if (imageBytes.Length == 0)
+                {
+                    string abc = "~/Image/defaultProfileImg.png";
+                    imageBytes = System.IO.File.ReadAllBytes(HttpContext.Current.Server.MapPath(abc));
+                }
+                bytes = imageBytes;
+                action = "UPDATE";
             }
-            if (imageBytes.Length == 0)
+            else 
             {
-                string abc = "~/Image/defaultProfileImg.png";
-                imageBytes = System.IO.File.ReadAllBytes(HttpContext.Current.Server.MapPath(abc));
+                action = "UPDATEWITHOUTPHOTO";
             }
-            bytes = imageBytes;
             string name = txtName.Text.ToString();
             string email = txtEmail.Text.ToString();
             string gender = ddlGender.SelectedValue.ToString();
@@ -430,7 +442,7 @@ namespace FYP.Project
             //var dateJoin = DateTime.ParseExact(s, "d/M/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
             //txtDateJoin.Text = dateJoin.ToString("dd/MM/yyyy");
             //dateJoin = DateTime.ParseExact(txtDateJoin.Text.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            
+
 
 
 
@@ -439,7 +451,7 @@ namespace FYP.Project
             string position = txtPosition.Text.ToString();
             string jobtype = ddlJobType.SelectedValue.ToString();
 
-            DateTime salaryEffectiveDate = DateTime.ParseExact(txtSalaryEffectiveDate.Text.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            //DateTime salaryEffectiveDate = DateTime.ParseExact(txtSalaryEffectiveDate.Text.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture);
             decimal salary = decimal.Parse(txtBasicSalary.Text.ToString()); salary = decimal.Round(salary, 2);
             decimal hourlyRate = decimal.Parse(txtHourlyRate.Text.ToString()); hourlyRate = decimal.Round(hourlyRate, 2);
             decimal overtimeRate = decimal.Parse(txtOvertimeRate.Text.ToString()); overtimeRate = decimal.Round(overtimeRate, 2);
@@ -463,9 +475,10 @@ namespace FYP.Project
                 using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Action", "UPDATE");
-                    cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(staff_id)); 
-                    cmd.Parameters.AddWithValue("@Photo", bytes);
+                    cmd.Parameters.AddWithValue("@Action", action);
+                    cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(staff_id));
+                    if(action == "UPDATE")
+                        cmd.Parameters.AddWithValue("@Photo", bytes);
                     cmd.Parameters.AddWithValue("@Name", name);
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Gender", gender);
@@ -482,7 +495,7 @@ namespace FYP.Project
                     cmd.Parameters.AddWithValue("@Department", department);
                     cmd.Parameters.AddWithValue("@Position", position);
                     cmd.Parameters.AddWithValue("@JobType", jobtype);
-                    cmd.Parameters.AddWithValue("@SalaryEffectiveDate", salaryEffectiveDate);
+                    //cmd.Parameters.AddWithValue("@SalaryEffectiveDate", salaryEffectiveDate);
                     cmd.Parameters.AddWithValue("@Salary", salary);
                     cmd.Parameters.AddWithValue("@HourlyRate", hourlyRate);
                     cmd.Parameters.AddWithValue("@OvertimeRate", overtimeRate);
@@ -527,12 +540,19 @@ namespace FYP.Project
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Project/EmployeeList.aspx");
+            string payrollListID, payperiod, date;
+            payrollListID = Request.QueryString["payrollListID"];
+            payperiod = Request.QueryString["payperiod"];
+            date = Request.QueryString["date"];
+            if (payrollListID == null)
+            {
+                Response.Redirect("~/Project/EmployeeList.aspx");
+            }
+            else
+            {
+                Response.Redirect(string.Format("~/Project/PayrollDetailList.aspx?id={0}&payperiod={1}&date={2}", payrollListID, payperiod, date));
+            }
         }
 
-        //protected void Button1_Click(object sender, EventArgs e)
-        //{
-        //    string abc = "";
-        //}
     }
 }

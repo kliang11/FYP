@@ -11,142 +11,106 @@ namespace FYP.Project
 {
 
 
-    public partial class payroll
+    public partial class PayrollReport1
     {
 
         /// <summary>
-        /// btnAdd control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// btnLeftWeek control.
+        /// reportPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeftWeek;
+        protected global::System.Web.UI.WebControls.Panel reportPanel;
 
         /// <summary>
-        /// txtSelectWeek control.
+        /// ddlSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSelectWeek;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ddlSelect;
 
         /// <summary>
-        /// btnRightWeek control.
+        /// lblSelectError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRightWeek;
+        protected global::System.Web.UI.WebControls.Label lblSelectError;
 
         /// <summary>
-        /// btnLeftMonth control.
+        /// txtMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLeftMonth;
+        protected global::System.Web.UI.WebControls.TextBox txtMonth;
 
         /// <summary>
-        /// txtSelectMonth control.
+        /// lblMonthError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSelectMonth;
+        protected global::System.Web.UI.WebControls.Label lblMonthError;
 
         /// <summary>
-        /// btnRightMonth control.
+        /// rqvMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRightMonth;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqvMonth;
 
         /// <summary>
-        /// ddlMonthWeek control.
+        /// txtDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMonthWeek;
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
-        /// gvList control.
+        /// lblDateError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvList;
+        protected global::System.Web.UI.WebControls.Label lblDateError;
 
         /// <summary>
-        /// addPayrollListPopup control.
+        /// rqvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel addPayrollListPopup;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqvDate;
 
         /// <summary>
-        /// btnRejectClose control.
+        /// btnGenerateReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRejectClose;
-
-        /// <summary>
-        /// ddlPayperiodPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPayperiodPopUp;
-
-        /// <summary>
-        /// txtDatePopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDatePopUp;
-
-        /// <summary>
-        /// lbl_DatePopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_DatePopUp;
-
-        /// <summary>
-        /// btnSubmitPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmitPopUp;
+        protected global::System.Web.UI.WebControls.Button btnGenerateReport;
     }
 }
