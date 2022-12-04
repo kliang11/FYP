@@ -272,6 +272,7 @@ namespace FYP.Project
             int id = (int)gvList.DataKeys[row.RowIndex].Value; //payslip id
             //int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow rows = gvList.Rows[row.RowIndex];
+            double salary = Convert.ToDouble((rows.FindControl("lblBasicSalary") as Label).Text);
             double bonus = Convert.ToDouble((rows.FindControl("txtBonus") as TextBox).Text);
             double unpaidLeaveSalary = Convert.ToDouble((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text);
             string payperiod = Request.QueryString["payperiod"];
@@ -282,7 +283,7 @@ namespace FYP.Project
                 case "Processing":
                     {
                         int staffID = getStaffID(id);
-                        double salary = 0.0, hourlyRate = 0.0, overtimeRate = 0.0, employerEpfRate = 0.0, employeeEpfRate = 0.0;
+                        double hourlyRate = 0.0, overtimeRate = 0.0, employerEpfRate = 0.0, employeeEpfRate = 0.0;
                         string paymentMethod = "", socsoCategory = "", eisContribution = "", taxStatus = "", jobType = "",
                             selfDisable = "", spouseDisable = "", spouseWorking = "", maritalStatus = "";
                         int numChild = 0, numberOfLate = 0;
@@ -302,7 +303,6 @@ namespace FYP.Project
                                     SqlDataReader rd = cmd.ExecuteReader();
                                     while (rd.Read())
                                     {
-                                        salary = Convert.ToDouble(rd["Salary"].ToString());
                                         paymentMethod = rd["PaymentMethod"].ToString();
                                         hourlyRate = Convert.ToDouble(rd["HourlyRate"].ToString());
                                         overtimeRate = Convert.ToDouble(rd["OvertimeRate"].ToString());
@@ -460,7 +460,9 @@ namespace FYP.Project
                                         SqlDataReader rd = cmd.ExecuteReader();
                                         while (rd.Read())
                                         {
-                                            numberOfLate = Int16.Parse(rd["LateCount"].ToString());
+                                            string abcd  = rd["LateCount"].ToString();
+                                            if (abcd != "")
+                                                numberOfLate = Int16.Parse(abc);
                                         }
                                         con.Close();
                                     }

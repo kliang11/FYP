@@ -148,6 +148,7 @@ namespace FYP.Project
                             crp.SetParameterValue("Socso_employer", socsoEmployer);
                             crp.SetParameterValue("EIS_employer", eisEmployer);
                             crp.SetParameterValue("Employer_total", employerTotal.ToString());
+                            crp.SetParameterValue("StatutoryBelow", statutory.ToString());
                             crp.SetParameterValue("Epf_employee", epfEmployee);
                             crp.SetParameterValue("Socso_employee", socsoEmployee);
                             crp.SetParameterValue("EIS_employee", eisEmployee);
