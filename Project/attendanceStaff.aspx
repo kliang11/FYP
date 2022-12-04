@@ -63,12 +63,12 @@
             <p class="text-primary m-0 fw-bold" style="font-size: 21px;">Attendance</p>
         </div>
         <div style="position: absolute; margin-top: 16px; margin-right: 21px; top: 0; right: 0;">
-            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="btnReport_Click" CssClass="btn btn-primary" OnClientClick="SetTarget();" ImageUrl="~/Image/download.png" Style="padding: 10px 11px;" />
+            <asp:ImageButton ID="ImageButton1" runat="server" OnClick="btnReport_Click" CssClass="btn btn-primary" ImageUrl="~/Image/download.png" Style="padding: 10px 11px;" />
         </div>
         <div class="card-body" style="overflow-y: hidden;">
             <div class="table-responsive">
                 <div style="text-align: center">
-                    <asp:Button ID="btnLeft" runat="server" Text="<" OnClick="minusMonth" CssClass="btnDateStlye" />
+                    <asp:Button ID="btnLeft" runat="server" Text="<" OnClick="minusMonth" CssClass="btnDateStlye" OnClientClick="aspnetForm.target ='_self';" />
                     <asp:TextBox ID="txtSelectMonth" runat="server" AutoPostBack="true" TextMode="Month" OnTextChanged="txtSelectMonth_TextChanged" Style="border: 1px solid #cccccc"></asp:TextBox>
                     <asp:Button ID="btnRight" runat="server" Text=">" OnClick="addMonth" CssClass="btnDateStlye" />
                 </div>
@@ -108,7 +108,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ButtonType="Image" ControlStyle-CssClass="gvbutton"
-                            ShowSelectButton="true" SelectImageUrl="~/Image/detail.png"
+                            ShowSelectButton="true" SelectImageUrl="~/Image/magnifier.png"
                             HeaderText="Actions" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" />
                     </Columns>
                 </asp:GridView>
@@ -116,10 +116,4 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function SetTarget() {
-            document.forms[0].target = "_blank";
-        }
-    </script>
 </asp:Content>

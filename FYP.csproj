@@ -76,12 +76,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database.mdf" />
-    <Content Include="App_Data\Database_log.ldf">
-      <DependentUpon>Database.mdf</DependentUpon>
-    </Content>
     <Content Include="Image\approved.png" />
     <Content Include="Image\detail.png" />
+    <Content Include="Image\magnifier.png" />
     <Content Include="Image\reject.png" />
     <Content Include="Project\ApplyClaim.aspx" />
     <Content Include="Project\AttendanceReportG.aspx" />
@@ -360,6 +357,7 @@
     <Content Include="Project\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\fypHRMS - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

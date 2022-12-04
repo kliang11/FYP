@@ -119,7 +119,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ButtonType="Image" ShowEditButton="true" EditImageUrl="~/Image/editing.png" ControlStyle-CssClass="gvbutton"
-                            UpdateImageUrl="~/Image/tick.png" CancelImageUrl="~/Image/cancel.png" DeleteImageUrl="~/Image/bin.png" ShowDeleteButton="true" ShowSelectButton="true" SelectImageUrl="~/Image/detail.png"
+                            UpdateImageUrl="~/Image/tick.png" CancelImageUrl="~/Image/cancel.png" DeleteImageUrl="~/Image/bin.png" ShowDeleteButton="true" ShowSelectButton="true" SelectImageUrl="~/Image/magnifier.png"
                             HeaderText="Actions" ItemStyle-Width="16.5%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" />
                     </Columns>
                 </asp:GridView>
