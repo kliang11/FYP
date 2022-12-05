@@ -19,30 +19,40 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                ResetAllDefault();
-                string id = "";
-                string payrollListID, payperiod, date;
-                id = Request.QueryString["id"];
-                payrollListID = Request.QueryString["payrollListID"];
-                payperiod = Request.QueryString["payperiod"];
-                date = Request.QueryString["date"];
-
-                if (id != null)
+                if (Session["email"] != null)
                 {
-                    BindData(id);
-                }
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    ResetAllDefault();
+                    string id = "";
+                    string payrollListID, payperiod, date;
+                    id = Request.QueryString["id"];
+                    payrollListID = Request.QueryString["payrollListID"];
+                    payperiod = Request.QueryString["payperiod"];
+                    date = Request.QueryString["date"];
 
-                if (txtName.Text != "-")
+                    if (id != null)
+                    {
+                        BindData(id);
+                    }
+
+                    if (txtName.Text != "-")
+                    {
+                        lblTitle.Text = txtName.Text;
+                    }
+
+                    if (payrollListID != null)
+                    {
+                        btnSalary_Click(btnSalary, EventArgs.Empty);
+                        btnEditt_Click(btnEditt, EventArgs.Empty);
+                    }
+                }
+                else
                 {
-                    lblTitle.Text = txtName.Text;
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fUserProfile.aspx");
                 }
-
-                if (payrollListID != null)
-                {
-                    btnSalary_Click(btnSalary, EventArgs.Empty);
-                    btnEditt_Click(btnEditt, EventArgs.Empty);
-                }
-
             }
         }
 
@@ -263,26 +273,29 @@ namespace FYP.Project
             }
             ddlSelfDisable.Enabled = true;
 
-            txtDateJoin.Enabled = true;
-            txtDepartment.Enabled = true;
-            txtPosition.Enabled = true;
-            ddlJobType.Enabled = true;
+            if(Session["role"].ToString() != "Normal Staff") //normal staff cannot modify these item
+            {
+                txtDateJoin.Enabled = true;
+                txtDepartment.Enabled = true;
+                txtPosition.Enabled = true;
+                ddlJobType.Enabled = true;
 
-            //txtSalaryEffectiveDate.Enabled = true;
-            txtBasicSalary.Enabled = true;
-            txtHourlyRate.Enabled = true;
-            txtOvertimeRate.Enabled = true;
-            txtBank.Enabled = true;
-            txtBankAccNo.Enabled = true;
-            ddlPayPeriod.Enabled = true;
-            ddlPayMethod.Enabled = true;
-            ddlEmployerEpfRate.Enabled = true;
-            ddlEmployeeEpfRate.Enabled = true;
-            txtEpfNo.Enabled = true;
-            ddlSocsoCategory.Enabled = true;
-            ddlEisContribution.Enabled = true;
-            txtTaxNo.Enabled = true;
-            ddlTaxStatus.Enabled = true;
+                //txtSalaryEffectiveDate.Enabled = true;
+                txtBasicSalary.Enabled = true;
+                txtHourlyRate.Enabled = true;
+                txtOvertimeRate.Enabled = true;
+                txtBank.Enabled = true;
+                txtBankAccNo.Enabled = true;
+                ddlPayPeriod.Enabled = true;
+                ddlPayMethod.Enabled = true;
+                ddlEmployerEpfRate.Enabled = true;
+                ddlEmployeeEpfRate.Enabled = true;
+                txtEpfNo.Enabled = true;
+                ddlSocsoCategory.Enabled = true;
+                ddlEisContribution.Enabled = true;
+                txtTaxNo.Enabled = true;
+                ddlTaxStatus.Enabled = true;
+            }            
         }
 
         protected void btnProfile_Click(object sender, EventArgs e)
