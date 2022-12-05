@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace FYP.Project
 {
@@ -53,7 +54,7 @@ namespace FYP.Project
             string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             con = new SqlConnection(strCon);
             con.Open();
-            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmail.Text.Trim() + "'" + " And Password = '" + txtPassword.Text + "'"; //temp id
+            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmail.Text.Trim() + "'" + " And Password = '" + txtPassword.Text + "'";
             SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
             SqlDataReader rd = cmdSelect.ExecuteReader();
 
@@ -63,7 +64,8 @@ namespace FYP.Project
                 Session["email"] = txtEmail.Text.ToString();
                 Session["role"] = rd["Role"].ToString();
                 Session["id"] = rd["Staff_ID"].ToString();
-                
+                Session["resetPW"] = rd["RenewPassword"].ToString();
+
                 if (chkbxRememberMe.Checked == true)
                 {
                     Response.Cookies["userEmail"].Value = txtEmail.Text;
@@ -79,7 +81,7 @@ namespace FYP.Project
             }
             con.Close();
 
-            //for wrong email or password   //temp
+            //for wrong email or password  
             if (IsWrong == true)
             {
                 lblErrorMsg.Visible = true;
@@ -87,45 +89,65 @@ namespace FYP.Project
             }
             else //successful login
             {
-                //Response.Redirect("home.aspx");  //temp
+                if (this.Request.QueryString["ReturnUrl"] != null)
+                {
+                    Response.Redirect("~/Project/"+Request.QueryString["ReturnUrl"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("attendance.aspx"); 
+                }
             }
-
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            bool IsEmailExist = true;
+            bool IsEmailExist = false;
             lblStoreResetEmail.Text = txtEmailPopUp.Text;
 
             SqlConnection con = new SqlConnection();
             string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             con = new SqlConnection(strCon);
             con.Open();
-            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmailPopUp.Text.Trim() + "'"; //temp id
+            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmailPopUp.Text.Trim() + "'";
             SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
             SqlDataReader rd = cmdSelect.ExecuteReader();
 
             while (rd.Read())
             {
-                IsEmailExist = false;
+                IsEmailExist = true;
                 lblStoreResetEmail.Text = "0";
             }
             con.Close();
 
-            if(IsEmailExist == true)
+            if(IsEmailExist == false) //email not exists
             {
                 lblStoreResetEmail.Text = "1";
                 txtEmailPopUp.Focus();
             }
-            else 
+            else  //email exists
             {
                 String pw = Membership.GeneratePassword(6, 2);
                 email(pw);
-                string message = "A temporary password has been sent to the entered email address.";
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection cons = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Action", "UPDATERESETPASSWORD");
+                        cmd.Parameters.AddWithValue("@Password", pw);
+                        cmd.Parameters.AddWithValue("@RenewPassword", "yes");
+                        cmd.Parameters.AddWithValue("@Email", txtEmailPopUp.Text.Trim());
+                        cmd.Connection = cons;
+                        cons.Open();
+                        int a = cmd.ExecuteNonQuery();
+                        cons.Close();
+                    }
+                }
+                string message = "A temporary password has been sent to the entered email address.";                
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-            }
-            
+            }            
         }
-
         private void email(String password)
         {
             //SmtpFYP
@@ -134,11 +156,11 @@ namespace FYP.Project
             //fyptarc99@gmail.com
             //Abc12345!
 
-            string to = "kuanliang176@gmail.com";//To address    //temp
+            string to = txtEmailPopUp.Text.Trim();//To address   
             string from = "fyptarc99@gmail.com"; //From address  
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Here is your temporary password: " + password + "<br>" + "Use this temporary password to log into your account.";   //temp
+            string mailbody = "Here is your temporary password: " + password + "<br>" + "Use this temporary password to log into your account."; 
             message.Subject = "Forgot Password";
             message.Body = mailbody;
             message.BodyEncoding = Encoding.UTF8;

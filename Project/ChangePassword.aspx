@@ -59,10 +59,10 @@
                 <asp:Label ID="lblErrorMsg" runat="server" Text="Label" class="errorMsg" Visible="False"></asp:Label>
 
                 <div>
-                    <asp:Button ID="btnChange" class="form-control btn btn-success rounded submit px-3 mt-3" runat="server" Text="Save" OnClick="btnChange_Click" />
+                    <asp:Button ID="btnChange" class="form-control btn btn-primary rounded submit px-3 mt-3" runat="server" Text="Save" OnClick="btnChange_Click" />
                 </div>
                 <div>
-                    <asp:Button ID="btnCancel" class="form-control btn btn-danger rounded submit px-3 mt-3" runat="server" Text="Back" OnClick="btnCancel_Click" />
+                    <asp:Button ID="btnCancel" class="form-control btn btn-secondary rounded submit px-3 mt-3" runat="server" Text="Back" OnClick="btnCancel_Click" />
                 </div>
             </div>
         </div>
