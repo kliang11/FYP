@@ -16,7 +16,25 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //if (Session["email"] != null)
+            //{
+            //    if (Session["resetPW"].ToString() == "yes")
+            //    {
+            //        Response.Redirect("~/Project/ChangePassword.aspx");
+            //    }
+            //    if (Session["role"].ToString() != "HR Staff")
+            //    {
+            //        txtDate.Visible=false;
+            //        txtMonth.Visible = false;
+            //        ddlSelect.Visible = false;
+            //        btnGenerateReport.Visible = false;
+            //        btnReset.Visible = false;
+            //    }
+            //}
+            //else
+            //{
+            //    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollReport.aspx");
+            //}
         }
 
         protected void btnGenerateReport_Click(object sender, EventArgs e)

@@ -21,6 +21,10 @@ namespace FYP.Project
             {
                 if (Session["email"] != null)
                 {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
                     if (Session["role"].ToString() != "Normal Staff")
                     {
                         if (Session["role"].ToString() == "Admin")
@@ -44,7 +48,7 @@ namespace FYP.Project
         }
         protected void gvList_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID"); 
+            Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID");
             string id = a.Text.ToString();
             Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
         }
@@ -60,7 +64,6 @@ namespace FYP.Project
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = gvList.Rows[e.RowIndex];
-
             string staff_id = gvList.DataKeys[e.RowIndex]["Staff_ID"].ToString();
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))

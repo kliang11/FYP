@@ -16,27 +16,34 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string id = Request.QueryString["id"];
-            string payperiod = Request.QueryString["payperiod"];
-            string firstday= Request.QueryString["date1"];
-            string lastday = Request.QueryString["date2"];            
-            string staffID = Request.QueryString["staffID"];            
-
-            if (id != null && payperiod != null && firstday != null)
+            if (Session["email"] != null)
             {
-                DateTime date = Convert.ToDateTime(firstday);
-                if (payperiod == "Weekly")
-                {
-                    firstday = date.ToString("d/M/yyyy");
-                    date = date.AddDays(6);
-                    firstday = firstday +" - "+ date.ToString("d/M/yyyy");
-                }
-                else
-                {
-                    firstday = date.ToString("MMMM yyyy");
-                }
+                string id = Request.QueryString["id"];
+                string payperiod = Request.QueryString["payperiod"];
+                string firstday = Request.QueryString["date1"];
+                string lastday = Request.QueryString["date2"];
+                string staffID = Request.QueryString["staffID"];
 
-                bindReport(id, payperiod, firstday, staffID);
+                if (id != null && payperiod != null && firstday != null)
+                {
+                    DateTime date = Convert.ToDateTime(firstday);
+                    if (payperiod == "Weekly")
+                    {
+                        firstday = date.ToString("d/M/yyyy");
+                        date = date.AddDays(6);
+                        firstday = firstday + " - " + date.ToString("d/M/yyyy");
+                    }
+                    else
+                    {
+                        firstday = date.ToString("MMMM yyyy");
+                    }
+
+                    bindReport(id, payperiod, firstday, staffID);
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayslipPage.aspx");
             }
         }
 
