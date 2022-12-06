@@ -50,37 +50,37 @@ namespace FYP.Project
                 return;
             }
 
-            SqlConnection con = new SqlConnection();
-            string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            con = new SqlConnection(strCon);
-            con.Open();
-            string strSqlQuery = "Select * from Staff Where Email = '" + txtEmail.Text.Trim() + "'" + " And Password = '" + txtPassword.Text + "'";
-            SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
-            SqlDataReader rd = cmdSelect.ExecuteReader();
-
-            while (rd.Read())
+            //admin login
+            if (txtEmail.Text.Trim() == "admin" && txtPassword.Text == "123456")
             {
                 IsWrong = false;
-                Session["email"] = txtEmail.Text.ToString();
-                Session["role"] = rd["Role"].ToString();
-                Session["id"] = rd["Staff_ID"].ToString();
-                Session["resetPW"] = rd["RenewPassword"].ToString();
-
-                if (chkbxRememberMe.Checked == true)
-                {
-                    Response.Cookies["userEmail"].Value = txtEmail.Text;
-                    Response.Cookies["userPassword"].Value = txtPassword.Text;
-                    Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(15);
-                    Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(15);
-                }
-                else
-                {
-                    Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
-                }                
+                Session["email"] = txtEmail.Text.Trim().ToString();
+                Session["role"] = "Admin";
+                Session["id"] = "0";
+                Session["resetPW"] = "no";
+                SaveCookies();
             }
-            con.Close();
-
+            else
+            {
+                SqlConnection con = new SqlConnection();
+                string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                con = new SqlConnection(strCon);
+                con.Open();
+                string strSqlQuery = "Select * from Staff Where Email = '" + txtEmail.Text.Trim() + "'" + " And Password = '" + txtPassword.Text + "'";
+                SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
+                SqlDataReader rd = cmdSelect.ExecuteReader();
+                while (rd.Read())
+                {
+                    IsWrong = false;
+                    Session["email"] = txtEmail.Text.ToString();
+                    Session["role"] = rd["Role"].ToString();
+                    Session["id"] = rd["Staff_ID"].ToString();
+                    Session["resetPW"] = rd["RenewPassword"].ToString();
+                    SaveCookies();
+                }
+                con.Close();
+            }
+            
             //for wrong email or password  
             if (IsWrong == true)
             {
@@ -99,6 +99,23 @@ namespace FYP.Project
                 }
             }
         }
+
+        private void SaveCookies()
+        {
+            if (chkbxRememberMe.Checked == true)
+            {
+                Response.Cookies["userEmail"].Value = txtEmail.Text;
+                Response.Cookies["userPassword"].Value = txtPassword.Text;
+                Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(15);
+                Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(15);
+            }
+            else
+            {
+                Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
+            }
+        }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             bool IsEmailExist = false;

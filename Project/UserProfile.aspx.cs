@@ -25,28 +25,24 @@ namespace FYP.Project
                     {
                         Response.Redirect("~/Project/ChangePassword.aspx");
                     }
-                    ResetAllDefault();
-                    string id = "";
-                    string payrollListID, payperiod, date;
-                    id = Request.QueryString["id"];
-                    payrollListID = Request.QueryString["payrollListID"];
-                    payperiod = Request.QueryString["payperiod"];
-                    date = Request.QueryString["date"];
-
-                    if (id != null)
+                    if (Session["role"].ToString() != "Admin")
                     {
-                        BindData(id);
-                    }
-
-                    if (txtName.Text != "-")
-                    {
-                        lblTitle.Text = txtName.Text;
-                    }
-
-                    if (payrollListID != null)
-                    {
-                        btnSalary_Click(btnSalary, EventArgs.Empty);
-                        btnEditt_Click(btnEditt, EventArgs.Empty);
+                        ResetAllDefault();
+                        string id = "";
+                        string payrollListID, payperiod, date;
+                        id = Request.QueryString["id"];
+                        payrollListID = Request.QueryString["payrollListID"];
+                        payperiod = Request.QueryString["payperiod"];
+                        date = Request.QueryString["date"];
+                        if (id != null)
+                            BindData(id);
+                        if (txtName.Text != "-")
+                            lblTitle.Text = txtName.Text;
+                        if (payrollListID != null)
+                        {
+                            btnSalary_Click(btnSalary, EventArgs.Empty);
+                            btnEditt_Click(btnEditt, EventArgs.Empty);
+                        }
                     }
                 }
                 else

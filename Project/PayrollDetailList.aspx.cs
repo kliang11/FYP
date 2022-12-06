@@ -17,191 +17,204 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
-                string id = Request.QueryString["id"];
-                string payperiod = Request.QueryString["payperiod"];
-                string date = Request.QueryString["date"];
-                if (id != null && payperiod != null && date != null)
+                if (Session["email"] != null)
                 {
-                    DateTime dateforlabel = Convert.ToDateTime(date);
-                    string strDate = "";
-                    if (payperiod == "Weekly")
-                        strDate = dateforlabel.ToShortDateString() + " - " + dateforlabel.AddDays(6).ToShortDateString();
-                    else
-                        strDate = dateforlabel.AddMonths(1).AddDays(-1).ToString("MMMM yyyy");
-                    lblTitle.Text = lblTitle.Text + strDate.ToString();
-                    List<int> staffIDList = new List<int>();
-                    List<int> payslipIDList = new List<int>();
-                    List<String> checkIsUpdate = new List<String>();
-                    string paymentMethod = ""; double basicSalary = 0.0, unpaidLeaveSalary = 0.0; int i = 0;
-                    //update staff info to payslip
-                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                    using (SqlConnection con = new SqlConnection(constr))
+                    if (Session["resetPW"].ToString() == "yes")
                     {
-                        using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@Action", "SELECT");
-                            cmd.Parameters.AddWithValue("@PayrollListID", id);
-                            cmd.Connection = con;
-                            con.Open();
-                            SqlDataReader rd = cmd.ExecuteReader();
-                            while (rd.Read())
-                            {
-                                int staffID = Int16.Parse(rd["Staff_ID"].ToString());
-                                staffIDList.Add(staffID);
-                                int payslipID = Int16.Parse(rd["PayslipID"].ToString());
-                                payslipIDList.Add(payslipID);
-                                string IsUpdate = rd["NetSalary"].ToString();
-                                checkIsUpdate.Add(IsUpdate);
-                            }
-                            con.Close();
-                        }
+                        Response.Redirect("~/Project/ChangePassword.aspx");
                     }
-
-                    foreach (int staffID in staffIDList)
+                    if (Session["role"].ToString() == "HR Staff")
                     {
-                        if (checkIsUpdate[i].ToString() == "")
+                        ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                        string id = Request.QueryString["id"];
+                        string payperiod = Request.QueryString["payperiod"];
+                        string date = Request.QueryString["date"];
+                        if (id != null && payperiod != null && date != null)
                         {
-                            constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                            using (SqlConnection con = new SqlConnection(constr))
-                            {
-                                using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
-                                {
-                                    cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@Action", "SELECTSTAFF");
-                                    cmd.Parameters.AddWithValue("@Staff_ID", staffID);
-                                    cmd.Connection = con;
-                                    con.Open();
-                                    SqlDataReader rd = cmd.ExecuteReader();
-                                    while (rd.Read())
-                                    {
-                                        paymentMethod = rd["PaymentMethod"].ToString();
-                                        basicSalary = Convert.ToDouble(rd["Salary"].ToString());
-                                    }
-                                    con.Close();
-                                }
-                            }
-
-                            int totalWorkingDay = 0, IntPresent = 0, IntUnpaidLeave = 0;
-                            string unpaidleave = "";
-                            DateTime firstDay = new DateTime(1975, 1, 1);
-                            DateTime lastDay = DateTime.MaxValue;
+                            DateTime dateforlabel = Convert.ToDateTime(date);
+                            string strDate = "";
                             if (payperiod == "Weekly")
-                            {
-                                firstDay = DateTime.Parse(date);
-                                lastDay = firstDay.AddDays(6);
-                            }
+                                strDate = dateforlabel.ToShortDateString() + " - " + dateforlabel.AddDays(6).ToShortDateString();
                             else
-                            {
-                                firstDay = DateTime.Parse(date);
-                                lastDay = firstDay.AddMonths(1).AddDays(-1);
-                            }
-                            constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                                strDate = dateforlabel.AddMonths(1).AddDays(-1).ToString("MMMM yyyy");
+                            lblTitle.Text = lblTitle.Text + strDate.ToString();
+                            List<int> staffIDList = new List<int>();
+                            List<int> payslipIDList = new List<int>();
+                            List<String> checkIsUpdate = new List<String>();
+                            string paymentMethod = ""; double basicSalary = 0.0, unpaidLeaveSalary = 0.0; int i = 0;
+                            //update staff info to payslip
+                            string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
-                                using (SqlCommand cmd = new SqlCommand("Attendance_CRUD"))
+                                using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
                                 {
                                     cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@Action", "COUNT");
-                                    cmd.Parameters.AddWithValue("@Staff_ID", staffID);
-                                    cmd.Parameters.AddWithValue("@Date1", firstDay);
-                                    cmd.Parameters.AddWithValue("@Date2", lastDay);
+                                    cmd.Parameters.AddWithValue("@Action", "SELECT");
+                                    cmd.Parameters.AddWithValue("@PayrollListID", id);
                                     cmd.Connection = con;
                                     con.Open();
                                     SqlDataReader rd = cmd.ExecuteReader();
                                     while (rd.Read())
                                     {
-                                        string present = rd["Present"].ToString();
-                                        unpaidleave = rd["Absent"].ToString();
-                                        if (present != "")
-                                            IntPresent = Int16.Parse(present);
-                                        if (unpaidleave != "")
-                                            IntUnpaidLeave = Int16.Parse(unpaidleave);
-
-                                        totalWorkingDay = IntPresent + IntUnpaidLeave;
+                                        int staffID = Int16.Parse(rd["Staff_ID"].ToString());
+                                        staffIDList.Add(staffID);
+                                        int payslipID = Int16.Parse(rd["PayslipID"].ToString());
+                                        payslipIDList.Add(payslipID);
+                                        string IsUpdate = rd["NetSalary"].ToString();
+                                        checkIsUpdate.Add(IsUpdate);
                                     }
                                     con.Close();
                                 }
                             }
-                            if (totalWorkingDay != 0)
-                                unpaidLeaveSalary = (IntUnpaidLeave / totalWorkingDay) * basicSalary;
-                            else
+
+                            foreach (int staffID in staffIDList)
                             {
-                                basicSalary = 0;
+                                if (checkIsUpdate[i].ToString() == "")
+                                {
+                                    constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                                    using (SqlConnection con = new SqlConnection(constr))
+                                    {
+                                        using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
+                                        {
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@Action", "SELECTSTAFF");
+                                            cmd.Parameters.AddWithValue("@Staff_ID", staffID);
+                                            cmd.Connection = con;
+                                            con.Open();
+                                            SqlDataReader rd = cmd.ExecuteReader();
+                                            while (rd.Read())
+                                            {
+                                                paymentMethod = rd["PaymentMethod"].ToString();
+                                                basicSalary = Convert.ToDouble(rd["Salary"].ToString());
+                                            }
+                                            con.Close();
+                                        }
+                                    }
+
+                                    int totalWorkingDay = 0, IntPresent = 0, IntUnpaidLeave = 0;
+                                    string unpaidleave = "";
+                                    DateTime firstDay = new DateTime(1975, 1, 1);
+                                    DateTime lastDay = DateTime.MaxValue;
+                                    if (payperiod == "Weekly")
+                                    {
+                                        firstDay = DateTime.Parse(date);
+                                        lastDay = firstDay.AddDays(6);
+                                    }
+                                    else
+                                    {
+                                        firstDay = DateTime.Parse(date);
+                                        lastDay = firstDay.AddMonths(1).AddDays(-1);
+                                    }
+                                    constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                                    using (SqlConnection con = new SqlConnection(constr))
+                                    {
+                                        using (SqlCommand cmd = new SqlCommand("Attendance_CRUD"))
+                                        {
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@Action", "COUNT");
+                                            cmd.Parameters.AddWithValue("@Staff_ID", staffID);
+                                            cmd.Parameters.AddWithValue("@Date1", firstDay);
+                                            cmd.Parameters.AddWithValue("@Date2", lastDay);
+                                            cmd.Connection = con;
+                                            con.Open();
+                                            SqlDataReader rd = cmd.ExecuteReader();
+                                            while (rd.Read())
+                                            {
+                                                string present = rd["Present"].ToString();
+                                                unpaidleave = rd["Absent"].ToString();
+                                                if (present != "")
+                                                    IntPresent = Int16.Parse(present);
+                                                if (unpaidleave != "")
+                                                    IntUnpaidLeave = Int16.Parse(unpaidleave);
+
+                                                totalWorkingDay = IntPresent + IntUnpaidLeave;
+                                            }
+                                            con.Close();
+                                        }
+                                    }
+                                    if (totalWorkingDay != 0)
+                                        unpaidLeaveSalary = (IntUnpaidLeave / totalWorkingDay) * basicSalary;
+                                    else
+                                    {
+                                        basicSalary = 0;
+                                    }
+
+                                    constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                                    using (SqlConnection con = new SqlConnection(constr))
+                                    {
+                                        using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
+                                        {
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@Action", "UPDATE");
+                                            cmd.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
+                                            cmd.Parameters.AddWithValue("@BasicSalary", basicSalary);
+                                            cmd.Parameters.AddWithValue("@UnpaidLeaveSalary", unpaidLeaveSalary);
+                                            cmd.Parameters.AddWithValue("@PayslipID", payslipIDList[i]);
+                                            cmd.Connection = con;
+                                            con.Open();
+                                            int a = cmd.ExecuteNonQuery();
+                                            con.Close();
+                                        }
+                                    }
+                                }
+                                i++;
                             }
 
+                            List<String> checkIsAllProcess = new List<String>();
+                            bool IsAllProcess = true; int IntIsAllProcess = 0;
                             constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
                                 using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
                                 {
                                     cmd.CommandType = CommandType.StoredProcedure;
-                                    cmd.Parameters.AddWithValue("@Action", "UPDATE");
-                                    cmd.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
-                                    cmd.Parameters.AddWithValue("@BasicSalary", basicSalary);
-                                    cmd.Parameters.AddWithValue("@UnpaidLeaveSalary", unpaidLeaveSalary);
-                                    cmd.Parameters.AddWithValue("@PayslipID", payslipIDList[i]);
+                                    cmd.Parameters.AddWithValue("@Action", "SELECT");
+                                    cmd.Parameters.AddWithValue("@PayrollListID", id);
                                     cmd.Connection = con;
                                     con.Open();
-                                    int a = cmd.ExecuteNonQuery();
+                                    SqlDataReader rd = cmd.ExecuteReader();
+                                    while (rd.Read())
+                                    {
+                                        string status = rd["ProcessStatus"].ToString();
+                                        checkIsAllProcess.Add(status);
+                                    }
                                     con.Close();
                                 }
                             }
-                        }
-                        i++;
-                    }
-
-                    List<String> checkIsAllProcess = new List<String>();
-                    bool IsAllProcess = true; int IntIsAllProcess = 0;
-                    constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                    using (SqlConnection con = new SqlConnection(constr))
-                    {
-                        using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@Action", "SELECT");
-                            cmd.Parameters.AddWithValue("@PayrollListID", id);
-                            cmd.Connection = con;
-                            con.Open();
-                            SqlDataReader rd = cmd.ExecuteReader();
-                            while (rd.Read())
+                            foreach (string status in checkIsAllProcess)
                             {
-                                string status = rd["ProcessStatus"].ToString();
-                                checkIsAllProcess.Add(status);
+                                if (status != "Processed" && IntIsAllProcess == 0)
+                                {
+                                    IsAllProcess = false;
+                                    IntIsAllProcess++;
+                                }
                             }
-                            con.Close();
-                        }
-                    }
-                    foreach (string status in checkIsAllProcess)
-                    {
-                        if(status != "Processed" && IntIsAllProcess == 0)
-                        {
-                            IsAllProcess = false;
-                            IntIsAllProcess++;
-                        }
-                    }
 
-                    if(IsAllProcess)
-                    {
-                        constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                        using (SqlConnection con = new SqlConnection(constr))
-                        {
-                            using (SqlCommand cmd = new SqlCommand("PayrollList_CRUD"))
+                            if (IsAllProcess)
                             {
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@Action", "UPDATE");
-                                cmd.Parameters.AddWithValue("@Status", "Processed");
-                                cmd.Parameters.AddWithValue("@PayrollListID", id);
-                                cmd.Connection = con;
-                                con.Open();
-                                int a = cmd.ExecuteNonQuery();
-                                con.Close();
+                                constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                                using (SqlConnection con = new SqlConnection(constr))
+                                {
+                                    using (SqlCommand cmd = new SqlCommand("PayrollList_CRUD"))
+                                    {
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        cmd.Parameters.AddWithValue("@Action", "UPDATE");
+                                        cmd.Parameters.AddWithValue("@Status", "Processed");
+                                        cmd.Parameters.AddWithValue("@PayrollListID", id);
+                                        cmd.Connection = con;
+                                        con.Open();
+                                        int a = cmd.ExecuteNonQuery();
+                                        con.Close();
+                                    }
+                                }
                             }
+                            this.BindGrid(Int16.Parse(id));
                         }
-                    }
-
-                    this.BindGrid(Int16.Parse(id));
+                    }                    
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollDetailList.aspx");
                 }
             }
         }
