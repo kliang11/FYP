@@ -17,25 +17,38 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) //IsPostBack = false
+            if (!IsPostBack)
             {
-                string role = "admin";// Session["role"].ToString();
-                if(role == "admin")
+                if (Session["email"] != null)
                 {
-                    this.gvList.Columns[5].Visible = true;
-                    this.gvList.Columns[6].Visible = false;
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() != "Normal Staff")
+                    {
+                        if (Session["role"].ToString() == "Admin")
+                        {
+                            this.gvList.Columns[5].Visible = true;
+                            this.gvList.Columns[6].Visible = false;
+                        }
+                        else if (Session["role"].ToString() == "HR Staff")
+                        {
+                            this.gvList.Columns[5].Visible = false;
+                            this.gvList.Columns[6].Visible = true;
+                        }
+                        this.BindGrid();
+                    }
                 }
-                else if(role == "hr")
+                else
                 {
-                    this.gvList.Columns[5].Visible = false;
-                    this.gvList.Columns[6].Visible = true;
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
                 }
-                this.BindGrid();
-            } 
+            }
         }
         protected void gvList_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID"); 
+            Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID");
             string id = a.Text.ToString();
             Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
         }
@@ -51,7 +64,6 @@ namespace FYP.Project
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = gvList.Rows[e.RowIndex];
-
             string staff_id = gvList.DataKeys[e.RowIndex]["Staff_ID"].ToString();
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
@@ -77,9 +89,9 @@ namespace FYP.Project
             {
                 using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                 {
-                    string staff_id = "2";  //session[id] //temp //this id is the id of the admin or hr
+                    string staff_id = Session["id"].ToString(); //this id is the id of the admin or hr
                     cmd.Parameters.AddWithValue("@Action", "SELECT");
-                    cmd.Parameters.AddWithValue("@Staff_ID", staff_id);  //temp
+                    cmd.Parameters.AddWithValue("@Staff_ID", staff_id);
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.CommandType = CommandType.StoredProcedure;

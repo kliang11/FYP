@@ -16,44 +16,44 @@ namespace FYP.Project
         {
             if (!IsPostBack) //IsPostBack = false
             {
-                txtCurrentPw.Attributes["type"] = "password";
-                txtNewPw.Attributes["type"] = "password";
-                txtConfirmNewPw.Attributes["type"] = "password";
-
-                //if from database check if reset Password = true, meaning the user forget their password & when they use the temp code to login,
-                //then they will see different design for this page
-
-
-                SqlConnection con = new SqlConnection();
-                string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                con = new SqlConnection(strCon);
-                con.Open();
-
-                string strSqlQuery = "Select * from Staff Where Staff_ID = " + "6"; //temp id
-                SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
-                SqlDataReader rd = cmdSelect.ExecuteReader();
-
-                while (rd.Read())
+                if (Session["email"] != null)
                 {
-                    lblStorePassword.Text = rd["Password"].ToString();
-                    lblNeedRenew.Text = rd["RenewPassword"].ToString();
+                    txtCurrentPw.Attributes["type"] = "password";
+                    txtNewPw.Attributes["type"] = "password";
+                    txtConfirmNewPw.Attributes["type"] = "password";                  
+
+                    SqlConnection con = new SqlConnection();
+                    string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    con = new SqlConnection(strCon);
+                    con.Open();
+                    string strSqlQuery = "Select * from Staff Where Staff_ID = " + Int16.Parse(Session["id"].ToString()); 
+                    SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
+                    SqlDataReader rd = cmdSelect.ExecuteReader();
+                    while (rd.Read())
+                    {
+                        lblStorePassword.Text = rd["Password"].ToString();
+                    }
+                    con.Close();
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        lblTitle.Text = "Reset Password";
+                        lblCurrentPassword.Visible = false;
+                        txtCurrentPw.Visible = false;
+                        lblStar.Visible = false;
+                        lblEye.Visible = false;
+                        btnCancel.Visible = false;
+                    }
                 }
-
-                if (lblNeedRenew.Text == "yes")
+                else
                 {
-                    lblTitle.Text = "Reset Password";
-                    lblCurrentPassword.Visible = false;
-                    txtCurrentPw.Visible = false;
-                    lblStar.Visible = false;
-                    lblEye.Visible = false;
-                    btnCancel.Visible = false;
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fChangePassword.aspx");
                 }
             }
         }
 
         protected void btnChange_Click(object sender, EventArgs e)
         {
-            if (lblNeedRenew.Text == "yes")
+            if (Session["resetPW"].ToString() == "yes")
             {
                 if (txtNewPw.Text == "")
                 {
@@ -92,6 +92,7 @@ namespace FYP.Project
                     return;
                 }
             }
+            //if wrong then will return, all fine then go line 97
 
             if (txtNewPw.Text != txtConfirmNewPw.Text)
             {
@@ -114,9 +115,6 @@ namespace FYP.Project
             string url = "";
             try
             {
-                string s = "6"; //temp                
-                int id = Int16.Parse(s);
-                //database
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -125,10 +123,21 @@ namespace FYP.Project
                     {
                         cmd.Parameters.AddWithValue("@Password", txtConfirmNewPw.Text);
                         cmd.Parameters.AddWithValue("@RenewPassword", "no");
-                        cmd.Parameters.AddWithValue("@Staff_ID", id);
+                        cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(Session["id"].ToString()));
                         cmd.Connection = con;
                         con.Open();
-                        cmd.ExecuteNonQuery();
+                        int a = cmd.ExecuteNonQuery();
+                        if (a > 0)
+                        {
+                            string redirect = Request.QueryString["redirect"];
+                            if (redirect == "") 
+                                url = "~/Project/attendance.aspx"; //happen when login then direct to this page
+                            else
+                            {
+                                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                                url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
+                            }
+                        }
                         con.Close();
                     }
                 }
@@ -136,18 +145,24 @@ namespace FYP.Project
             catch
             {
                 message = "Update unsuccessful. Please try again.";
-                url = "ChangePassword.aspx";
+                url = "~/Project/ChangePassword.aspx";
             }
-
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-            //back to home page  //temp
-            //Response.Redirect(url);
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);            
+            Response.Redirect(url);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            //back to home page  //temp
-            //Response.Redirect(".aspx");
+            string url = "";
+            string redirect = Request.QueryString["redirect"];
+            if (redirect == "")
+                url = "~/Project/attendance.aspx";
+            else
+            {
+                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                url = ViewState["RefUrl"].ToString(); 
+            }
+            Response.Redirect(url);
         }
     }
 }

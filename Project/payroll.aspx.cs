@@ -21,26 +21,38 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                btnAdd.Visible = false;
-                btnLeftWeek.Visible = false;
-                txtSelectWeek.Visible = false;
-                btnRightWeek.Visible = false;
-                btnLeftMonth.Visible = false;
-                txtSelectMonth.Visible = false;
-                btnRightMonth.Visible = false;
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                        btnAdd.Visible = false;
+                        btnLeftWeek.Visible = false;
+                        txtSelectWeek.Visible = false;
+                        btnRightWeek.Visible = false;
+                        btnLeftMonth.Visible = false;
+                        txtSelectMonth.Visible = false;
+                        btnRightMonth.Visible = false;
 
-                var cultureInfo = Thread.CurrentThread.CurrentCulture;
-                DateTime currentDate = DateTime.Today;
-                System.Globalization.Calendar cal = cultureInfo.Calendar;
-                int currentWeek = cal.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-                int currentYear = DateTime.Now.Year;
-                txtSelectWeek.Text = currentYear.ToString() + "-W" + currentWeek.ToString();
-                txtSelectMonth.Text = DateTime.Now.ToString("yyyy-MM");
-                txtDatePopUp.Text = DateTime.Now.ToString("yyyy-MM");
-
-                loadPayrollList();
-
-                this.BindGrid(ddlMonthWeek.SelectedValue);
+                        var cultureInfo = Thread.CurrentThread.CurrentCulture;
+                        DateTime currentDate = DateTime.Today;
+                        System.Globalization.Calendar cal = cultureInfo.Calendar;
+                        int currentWeek = cal.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+                        int currentYear = DateTime.Now.Year;
+                        txtSelectWeek.Text = currentYear.ToString() + "-W" + currentWeek.ToString();
+                        txtSelectMonth.Text = DateTime.Now.ToString("yyyy-MM");
+                        txtDatePopUp.Text = DateTime.Now.ToString("yyyy-MM");
+                        loadPayrollList();
+                        this.BindGrid(ddlMonthWeek.SelectedValue);
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fpayroll.aspx");
+                }
             }
         }
 

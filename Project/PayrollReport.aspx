@@ -34,8 +34,7 @@
             </div>
 
             <asp:Button runat="server" Text="Generate Report" OnClick="btnGenerateReport_Click" ID="btnGenerateReport" OnClientClick="SetTarget();" class="btn btn-primary" Style="float: right" />
-            <button type="button" class="btn btn-secondary" id="btnReset" onclick="Reset()" style="float: right; margin-right: 10px">Reset</button>
-
+            <asp:Button runat="server" Text="Reset" OnClientClick="return Reset()" ID="btnReset" class="btn btn-secondary" Style="float: right; margin-right: 10px;"/>
         </asp:Panel>
     </div>
 
@@ -75,11 +74,14 @@
         function Reset() {
             document.getElementById('<%= txtDate.ClientID %>').disabled = true;
             document.getElementById('<%= txtMonth.ClientID %>').disabled = false;
+            document.getElementById('<%= ddlSelect.ClientID %>').value = "Monthly";
+            document.getElementById('<%= txtMonth.ClientID %>').value = "";
             document.getElementById('<%= txtDate.ClientID %>').value = "";
             document.getElementById("<%= rqvMonth.ClientID%>").enabled = true;
             document.getElementById("<%= rqvDate.ClientID%>").style.visibility = "hidden";
             document.getElementById("<%= rqvMonth.ClientID%>").style.visibility = "visible";
             document.getElementById("<%= rqvDate.ClientID%>").enabled = false;
+            return false;
         }
     </script>
 
