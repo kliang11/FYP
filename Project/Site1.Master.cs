@@ -20,8 +20,6 @@ namespace FYP
                     name.InnerText = Session["name"].ToString();
                     role.InnerText = Session["role"].ToString();
 
-                    Session["role"] = "HR Staff"; //testing 
-
                     if (Session["role"].ToString() == "HR Staff") 
                     {
                         attendance.HRef = "~/Project/attendance.aspx";
