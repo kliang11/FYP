@@ -4,6 +4,7 @@
 
 <html>
 <head runat="server">
+    <link rel="shortcut icon" type="image/x-icon" href="../Image/company_logo.ico" />
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,10 +25,12 @@
 
     <form id="form1" runat="server">
         <div>
-            <nav class="navbar navbar-light" style="background-color: #6d7fcc;box-shadow: 0 0 25px rgb(0 0 0 / 10%);"> <%-- #51576a--%>
-                <a class="navbar-brand" href="#" style="margin-left: 4%">
-                    <img src="../Image/company_logo.png" width="50" height="40" alt="">
-                </a>
+            <nav class="navbar navbar-light" style="background-color: #6d7fcc; box-shadow: 0 0 25px rgb(0 0 0 / 10%);">
+                <%-- #51576a--%>
+
+                <button type="button" id="sidebarCollapse" class="btn btn-light btn-lg" style="background-color: #6d7fcc; border-color: #6d7fcc; cursor: pointer; color: white">
+                    <i class="fas fa-align-justify"></i>
+                </button>
 
                 <div class="form-inline my-2 my-lg-0" style="padding-right: 20px;">
                     <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,15 +50,18 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3 style="text-align: center;font-weight:700">HRMS</h3>
+                    <a class="navbar-brand" href="#" style="display: block; text-align: center">
+                        <img src="../Image/company_logo.png" width="50" height="40" alt="">
+                    </a>
+                    <h3 style="text-align: center; font-weight: 700; margin-right: 7%">HRMS</h3>
                 </div>
 
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
                     <li id="abc" runat="server">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="staff" runat="server">
                             <i class="fas fa-users"></i>
                             Staff
                         </a>
@@ -66,24 +72,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#attendanceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a id="attendance" runat="server">
                             <i class="fas fa-user-check"></i>
                             Attendance
                         </a>
-                        <ul class="collapse list-unstyled" id="attendanceSubmenu">
-                            <li>
-                                <a href="#">Home 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 3</a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
-                        <a href="#payrollSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#payrollSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="payroll" runat="server">
                             <i class="	fas fa-calculator"></i>
                             Payroll
                         </a>
@@ -100,38 +95,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#rfidCardSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fas fa-address-card"></i>
-                            RFID Card
-                        </a>
-                        <ul class="collapse list-unstyled" id="rfidCardSubmenu">
-                            <li>
-                                <a href="#">Page 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#leaveSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a id="leave" runat="server">
                             <i class="fas fa-calendar-times"></i>
                             Leave
                         </a>
-                        <ul class="collapse list-unstyled" id="leaveSubmenu">
-                            <li>
-                                <a href="#">Page 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
                         <a href="#claimSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -147,6 +114,26 @@
                             </li>
                             <li>
                                 <a href="ClaimList.aspx">Claim List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="~/Project/rfid.aspx" id="rfid" runat="server">
+                            <i class="fas fa-address-card"></i>
+                            RFID Card
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="report" runat="server">
+                            <i class="fas fa-download"></i>
+                            Report
+                        </a>
+                        <ul class="collapse list-unstyled" id="reportSubmenu">
+                            <li>
+                                <a href="../Project/AttendanceReport.aspx">Attendance Report</a>
+                            </li>
+                            <li>
+                                <a href="../Project/PayrollReport.aspx">Payroll Report</a>
                             </li>
                         </ul>
                     </li>

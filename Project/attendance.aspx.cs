@@ -16,9 +16,23 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                txtSelectDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                BindGrid();
-                
+                if (Session["email"] != null)
+                {
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                        txtSelectDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                        BindGrid();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
+
             }
             else if (gvList.Rows.Count != 0)
             {
@@ -26,7 +40,7 @@ namespace FYP.Project
                 gvList.HeaderRow.TableSection = TableRowSection.TableHeader;
                 gvList.FooterRow.TableSection = TableRowSection.TableFooter;
             }
-        }   
+        }
         private void BindGrid()
         {
 
@@ -58,13 +72,13 @@ namespace FYP.Project
                     }
                 }
             }
-            presentCount(constr,date);
-            pendingCount(constr,date);
+            presentCount(constr, date);
+            pendingCount(constr, date);
             onLeaveCount(constr, date);
-           
+
         }
 
-        private void pendingCount(string constr,DateTime date)
+        private void pendingCount(string constr, DateTime date)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -116,19 +130,20 @@ namespace FYP.Project
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvList.EditIndex)
             {
-                    
+
                 if ((e.Row.FindControl("lblAttendanceStatus") as Label).Text.Equals("Present"))
                     (e.Row.FindControl("lblAttendanceStatus") as Label).CssClass = "label_green";
                 else if ((e.Row.FindControl("lblAttendanceStatus") as Label).Text.Equals("Pending"))
                     (e.Row.FindControl("lblAttendanceStatus") as Label).CssClass = "label_yellow";
                 else if ((e.Row.FindControl("lblAttendanceStatus") as Label).Text.Equals("On Leave"))
                     (e.Row.FindControl("lblAttendanceStatus") as Label).CssClass = "label_grey";
-                else if((e.Row.FindControl("lblAttendanceStatus") as Label).Text.Equals("Absent"))
+                else if ((e.Row.FindControl("lblAttendanceStatus") as Label).Text.Equals("Absent"))
                     (e.Row.FindControl("lblAttendanceStatus") as Label).CssClass = "label_redAbsent";
 
                 var timeIn = (e.Row.FindControl("lblTimeIn") as Label).Text;
                 var timeOut = (e.Row.FindControl("lblTimeOut") as Label).Text;
-                if (timeIn.Equals("")) {
+                if (timeIn.Equals(""))
+                {
                     (e.Row.FindControl("lblTimeIn") as Label).Text = "-";
                 }
                 if (timeOut.Equals(""))
@@ -187,7 +202,8 @@ namespace FYP.Project
             Boolean yesTimeIn = false;
             Boolean yesTimeOut = false;
 
-            if (checkTimeIn != "-" && checkTimeIn != "") {
+            if (checkTimeIn != "-" && checkTimeIn != "")
+            {
                 DateTime timeIn = Convert.ToDateTime(checkTimeIn);
                 if (!checkOntime(timeIn))
                 {
@@ -197,13 +213,13 @@ namespace FYP.Project
                 attendanceStatus = "Present";
             }
 
-            if (checkTimeOut != "-" && checkTimeOut != "" )
+            if (checkTimeOut != "-" && checkTimeOut != "")
             {
-                calculateWorkingHour(checkTimeIn, checkTimeOut,ref workingHour, ref overtime);
+                calculateWorkingHour(checkTimeIn, checkTimeOut, ref workingHour, ref overtime);
                 yesTimeOut = true;
             }
 
-            string attendanceID = gvList.DataKeys[e.RowIndex]["AttendanceID"].ToString();                
+            string attendanceID = gvList.DataKeys[e.RowIndex]["AttendanceID"].ToString();
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -217,7 +233,7 @@ namespace FYP.Project
                     else { cmd.Parameters.AddWithValue("@AttendanceTimeIn", null); }
                     if (yesTimeOut) { cmd.Parameters.AddWithValue("@AttendanceTimeOut", Convert.ToDateTime(checkTimeOut)); }
                     else { cmd.Parameters.AddWithValue("@AttendanceTimeOut", null); }
-                    cmd.Parameters.AddWithValue("@WorkingHour", Math.Round(workingHour,2));
+                    cmd.Parameters.AddWithValue("@WorkingHour", Math.Round(workingHour, 2));
                     cmd.Parameters.AddWithValue("@Overtime", overtime);
                     cmd.Parameters.AddWithValue("@IsLate", isLate);
                     cmd.Connection = con;
@@ -234,11 +250,11 @@ namespace FYP.Project
         {
             int workHour = 9;
             int workMinutes = 1;
-            if (timeIn.Hour > workHour )
+            if (timeIn.Hour > workHour)
             {
                 return false;
             }
-            else if(timeIn.Hour == workHour && timeIn.Minute >= workMinutes)
+            else if (timeIn.Hour == workHour && timeIn.Minute >= workMinutes)
             {
                 return false;
             }
@@ -265,7 +281,7 @@ namespace FYP.Project
 
         protected void addAttendance(object sender, EventArgs e)
         {
-            string staffID = ddlStaffName.SelectedItem.Value.ToString() ;
+            string staffID = ddlStaffName.SelectedItem.Value.ToString();
             string date = txtDate.Text.ToString();
             string timeIn = txtTimeIn.Text.ToString();
             string timeOut = txtTimeOut.Text.ToString();
@@ -296,7 +312,7 @@ namespace FYP.Project
                     cmd.Parameters.AddWithValue("@WorkingHour", workingHour);
                     cmd.Parameters.AddWithValue("@Overtime", overtime);
                     cmd.Parameters.AddWithValue("@IsLate", isLate);
-                    cmd.Parameters.AddWithValue("@Staff_ID", staffID);                    
+                    cmd.Parameters.AddWithValue("@Staff_ID", staffID);
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -314,7 +330,7 @@ namespace FYP.Project
             DateTime date = Convert.ToDateTime(txtSelectDate.Text).AddDays(-1);
             txtSelectDate.Text = date.ToString("yyyy-MM-dd");
             BindGrid();
-            
+
         }
 
         protected void addDate(object sender, EventArgs e)
@@ -331,8 +347,8 @@ namespace FYP.Project
 
         protected void OnRowSelect(object sender, EventArgs e)
         {
-            Label a = (Label)gvList.SelectedRow.FindControl("lblAttendanceID"); 
-            string attendanceID = a.Text.ToString().Remove(0,1);
+            Label a = (Label)gvList.SelectedRow.FindControl("lblAttendanceID");
+            string attendanceID = a.Text.ToString().Remove(0, 1);
             Response.Redirect(string.Format("~/Project/attendanceDetails.aspx?id={0}", attendanceID));
         }
     }

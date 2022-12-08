@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Image\approved.png" />
+    <Content Include="Image\company_logo.ico" />
     <Content Include="Image\detail.png" />
     <Content Include="Image\magnifier.png" />
     <Content Include="Image\process.png" />

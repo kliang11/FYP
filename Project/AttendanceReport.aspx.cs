@@ -19,7 +19,21 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-
+                if (Session["email"] != null)
+                {
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                       
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
             }
 
         }
