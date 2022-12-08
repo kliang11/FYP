@@ -60,16 +60,11 @@
                     <li>
                         <a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
-                    <li id="staffList" runat="server">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <li>
+                        <a id="staffList" runat="server">
                             <i class="fas fa-users"></i>
                             Staff
                         </a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="EmployeeList.aspx">Staff List</a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
                         <a id="attendance" runat="server">
@@ -78,21 +73,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#payrollSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="payroll" runat="server">
+                        <%--<a href="#payrollSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" id="payroll" runat="server">--%>
+                        <a id="payroll" runat="server">
                             <i class="	fas fa-calculator"></i>
                             Payroll
                         </a>
-                        <ul class="collapse list-unstyled" id="payrollSubmenu">
+                        <%--<ul class="collapse list-unstyled" id="payrollSubmenu">
                             <li id="payrollList" runat="server">
                                 <a href="payroll.aspx">Payroll List</a>
-                            </li>
-                            <li id="payrollReport" runat="server">
-                                <a href="PayrollReport.aspx">Generate Payroll Report</a>
                             </li>
                             <li id="payrollStaff" runat="server">
                                 <a href="PayrollStaff.aspx">Payroll List</a>
                             </li>
-                        </ul>
+                        </ul>--%>
                     </li>
                     <li>
                         <a id="leave" runat="server">
@@ -101,11 +94,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#claimSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <a id="claim" runat="server">
                             <i class="fas fa-file-alt"></i>
                             Claim
                         </a>
-                        <ul class="collapse list-unstyled" id="claimSubmenu">
+<%--                        <ul class="collapse list-unstyled" id="claimSubmenu">
                             <li id="applyClaim" runat="server">
                                 <a href="ApplyClaim.aspx">Apply Claim</a>
                             </li>
@@ -115,7 +108,7 @@
                             <li id="claimList" runat="server">
                                 <a href="ClaimList.aspx">Claim List</a>
                             </li>
-                        </ul>
+                        </ul>--%>
                     </li>
                     <li>
                         <a href="~/Project/rfid.aspx" id="rfid" runat="server">
@@ -133,7 +126,7 @@
                                 <a href="../Project/AttendanceReport.aspx">Attendance Report</a>
                             </li>
                             <li>
-                                <a href="../Project/PayrollReport.aspx">Payroll Report</a>
+                                <a href="PayrollReport.aspx">Generate Payroll Report</a>
                             </li>
                         </ul>
                     </li>
