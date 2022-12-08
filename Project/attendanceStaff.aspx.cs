@@ -41,7 +41,7 @@ namespace FYP.Project
                 {
                     Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
                 }
-               
+
             }
             else if (gvList.Rows.Count != 0)
             {
@@ -56,7 +56,7 @@ namespace FYP.Project
             string staffID = "";
             if (Session["id"] != null)
             {
-                 staffID = Session["id"].ToString();
+                staffID = Session["id"].ToString();
             }
             DateTime date = Convert.ToDateTime(txtSelectMonth.Text);
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -166,7 +166,11 @@ namespace FYP.Project
                 if (status.Text.Equals("Present"))
                     status.CssClass = "label_green";
                 else if (status.Text.Equals("On Leave"))
+                {
                     status.CssClass = "label_grey";
+                    arrival.Text = "-";
+                    arrival.CssClass = "";
+                }
                 else if (status.Text.Equals("Absent"))
                 {
                     status.CssClass = "label_redAbsent";
@@ -174,7 +178,12 @@ namespace FYP.Project
                     arrival.CssClass = "";
                 }
                 else
+                {
                     status.CssClass = "label_yellow";
+                    arrival.Text = "-";
+                    arrival.CssClass = "";
+                }
+
 
                 var timeIn = (e.Row.FindControl("lblTimeIn") as Label).Text;
                 var timeOut = (e.Row.FindControl("lblTimeOut") as Label).Text;
