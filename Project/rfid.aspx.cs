@@ -17,8 +17,33 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                this.BindGrid();
-                ddlBind();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                        this.BindGrid();
+                        ddlBind();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
+            }
+            else if (gvList.Rows.Count != 0)
+            {
+                gvList.UseAccessibleHeader = true;
+                gvList.HeaderRow.TableSection = TableRowSection.TableHeader;
+                gvList.FooterRow.TableSection = TableRowSection.TableFooter;
             }
         }
         private void BindGrid()

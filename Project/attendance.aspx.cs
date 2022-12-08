@@ -18,6 +18,10 @@ namespace FYP.Project
             {
                 if (Session["email"] != null)
                 {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
                     if (Session["role"].ToString() == "HR Staff")
                     {
                         txtSelectDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
