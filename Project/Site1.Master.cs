@@ -12,15 +12,28 @@ namespace FYP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["email"] != null)
+            {
+                if (Session["role"].ToString() == "Admin")
+                {
+                    name.InnerText = "Admin";
+                }
+                else
+                {
+                    profileImg.Src = Session["profileImg"].ToString();
+                    name.InnerText = Session["name"].ToString();
+                }
+
+            }
+
             if (!IsPostBack)
             {
                 if (Session["email"] != null)
                 {
-                    profileImg.Src = Session["profileImg"].ToString();
-                    name.InnerText = Session["name"].ToString();
+
                     role.InnerText = Session["role"].ToString();
 
-                    if (Session["role"].ToString() == "HR Staff") 
+                    if (Session["role"].ToString() == "HR Staff")
                     {
                         attendance.HRef = "~/Project/attendance.aspx";
                         leave.HRef = "~/Project/LeaveList.aspx";
@@ -38,7 +51,7 @@ namespace FYP
                         payroll.HRef = "~/Project/PayrollStaff.aspx";
                         claim.HRef = "~/Project/ApplyClaim.aspx";
                     }
-                    else if(Session["role"].ToString() == "Admin")
+                    else if (Session["role"].ToString() == "Admin")
                     {
                         report.Style.Add("display", "none");
                         payroll.Style.Add("display", "none");

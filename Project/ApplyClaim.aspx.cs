@@ -127,7 +127,8 @@ namespace FYP.Project
             {
                 using (SqlCommand cmd = new SqlCommand("Claim_CRUD"))
                 {
-                    cmd.Parameters.AddWithValue("@Action", "SELECT");
+                    cmd.Parameters.AddWithValue("@Action", "SELECTFORSTAFF");
+                    cmd.Parameters.AddWithValue("@Staff_ID", Session["id"].ToString());
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.CommandType = CommandType.StoredProcedure;

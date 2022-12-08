@@ -479,7 +479,7 @@ namespace FYP.Project
                                         {
                                             string abcd  = rd["LateCount"].ToString();
                                             if (abcd != "")
-                                                numberOfLate = Int16.Parse(abc);
+                                                numberOfLate = Int16.Parse(abcd);
                                         }
                                         con.Close();
                                     }
