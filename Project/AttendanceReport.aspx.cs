@@ -19,13 +19,14 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
+
                 if (Session["email"] != null)
                 {
-                    if (Session["role"].ToString() == "HR Staff")
+                    if (Session["resetPW"].ToString() == "yes")
                     {
-                       
+                        Response.Redirect("~/Project/ChangePassword.aspx");
                     }
-                    else
+                    if (Session["role"].ToString() != "HR Staff")
                     {
                         Response.Redirect(string.Format("~/Project/403error.html"));
                     }

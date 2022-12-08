@@ -22,6 +22,11 @@ namespace FYP.Project
             {
                 if (Session["email"] != null)
                 {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+
                     if (Session["role"].ToString() == "Normal Staff")
                     {
                         txtSelectMonth.Text = DateTime.Now.ToString("yyyy-MM");

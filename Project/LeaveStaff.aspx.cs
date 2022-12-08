@@ -13,12 +13,30 @@ namespace FYP.Project
 {
     public partial class LeaveStaff : System.Web.UI.Page
     {
-        private string staffID = "2"; //staff id 
+       /* private string staffID = "2"; *///staff id 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                BindGrid();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "Normal Staff")
+                    {
+                        BindGrid();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
             }
             else if (gvList.Rows.Count != 0)
             {
@@ -30,6 +48,11 @@ namespace FYP.Project
 
         private void BindGrid()
         {
+            string staffID = "";
+            if (Session["id"] != null)
+            {
+                staffID = Session["id"].ToString();
+            }
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -57,11 +80,11 @@ namespace FYP.Project
                     }
                 }
             }
-            casualLeaveCount(constr);
-            sickLeaveCount(constr);
+            casualLeaveCount(constr,staffID);
+            sickLeaveCount(constr,staffID);
         }
 
-        private void casualLeaveCount(string constr)
+        private void casualLeaveCount(string constr,string staffID)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -78,7 +101,7 @@ namespace FYP.Project
             }
         }
 
-        private void sickLeaveCount(string constr)
+        private void sickLeaveCount(string constr,string staffID)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -118,6 +141,11 @@ namespace FYP.Project
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
             //check the count 
+            string staffID = "";
+            if (Session["id"] != null)
+            {
+                staffID = Session["id"].ToString();
+            }
             string leaveType = ddlLeaveType.SelectedValue.ToString();
             int dayCount = int.Parse(txtLeaveDay.Text.ToString());
 
