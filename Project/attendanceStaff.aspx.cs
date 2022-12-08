@@ -15,14 +15,28 @@ namespace FYP.Project
 {
     public partial class attendanceStaff : System.Web.UI.Page
     {
-        private string staffID = "2";  //staff id 
+        //private string staffID = "2";  //staff id 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                txtSelectMonth.Text = DateTime.Now.ToString("yyyy-MM");
-                BindGrid();
-
+                if (Session["email"] != null)
+                {
+                    if (Session["role"].ToString() == "Normal Staff")
+                    {
+                        txtSelectMonth.Text = DateTime.Now.ToString("yyyy-MM");
+                        BindGrid();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
+               
             }
             else if (gvList.Rows.Count != 0)
             {
@@ -34,7 +48,11 @@ namespace FYP.Project
 
         private void BindGrid()
         {
-
+            string staffID = "";
+            if (Session["id"] != null)
+            {
+                 staffID = Session["id"].ToString();
+            }
             DateTime date = Convert.ToDateTime(txtSelectMonth.Text);
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
@@ -64,13 +82,13 @@ namespace FYP.Project
                     }
                 }
             }
-            presentCount(constr, date);
-            absentCount(constr, date);
-            onLeaveCount(constr, date);
+            presentCount(constr, date, staffID);
+            absentCount(constr, date, staffID);
+            onLeaveCount(constr, date, staffID);
 
         }
 
-        private void absentCount(string constr, DateTime date)
+        private void absentCount(string constr, DateTime date, string staffID)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -88,7 +106,7 @@ namespace FYP.Project
             }
         }
 
-        private void presentCount(string constr, DateTime date)
+        private void presentCount(string constr, DateTime date, string staffID)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -105,7 +123,7 @@ namespace FYP.Project
             }
         }
 
-        private void onLeaveCount(string constr, DateTime date)
+        private void onLeaveCount(string constr, DateTime date, string staffID)
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
@@ -133,7 +151,8 @@ namespace FYP.Project
                     arrival.Text = "On Time";
                     arrival.CssClass = "label_green";
                 }
-                else if (arrival.Text.Equals("Y")) {
+                else if (arrival.Text.Equals("Y"))
+                {
                     arrival.Text = "Late";
                     arrival.CssClass = "label_red";
                 }
@@ -143,7 +162,8 @@ namespace FYP.Project
                     status.CssClass = "label_green";
                 else if (status.Text.Equals("On Leave"))
                     status.CssClass = "label_grey";
-                else if (status.Text.Equals("Absent")) { 
+                else if (status.Text.Equals("Absent"))
+                {
                     status.CssClass = "label_redAbsent";
                     arrival.Text = "-";
                     arrival.CssClass = "";
@@ -198,6 +218,11 @@ namespace FYP.Project
 
         protected void btnReport_Click(object sender, EventArgs e)
         {
+            string staffID = "";
+            if (Session["id"] != null)
+            {
+                staffID = Session["id"].ToString();
+            }
             string date = txtSelectMonth.Text;
             string url = string.Format("/Project/staffReport.aspx?date={0}&id={1}", date, staffID);
             StringBuilder sb = new StringBuilder();
@@ -206,7 +231,7 @@ namespace FYP.Project
             sb.Append(url);
             sb.Append("');");
             sb.Append("</script>");
-            ClientScript.RegisterStartupScript(this.GetType(),"script", sb.ToString());
+            ClientScript.RegisterStartupScript(this.GetType(), "script", sb.ToString());
 
 
         }

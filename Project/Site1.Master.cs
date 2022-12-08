@@ -13,6 +13,24 @@ namespace FYP
         {
             //temp 
             //abc.Style.Add("display", "none");
+            if (!IsPostBack)
+            {
+                Session["role"] = "HR Staff";
+
+                if (Session["role"].ToString() == "HR Staff")
+                {
+                    attendance.HRef = "~/Project/attendance.aspx";                   
+                    leave.HRef = "~/Project/LeaveList.aspx";
+                }
+                else if (Session["role"].ToString() == "Normal Staff")
+                {
+                    attendance.HRef = "~/Project/attendanceStaff.aspx";
+                    leave.HRef = "~/Project/LeaveStaff.aspx";
+                    rfid.Style.Add("display", "none");
+                    report.Style.Add("display", "none");
+                }
+
+            }
         }
     }
 }

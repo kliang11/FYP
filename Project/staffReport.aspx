@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="staffReport.aspx.cs" Inherits="FYP.Project.WebForm1" %>
+﻿<%@ Page Title="Attendance Report" Language="C#" AutoEventWireup="true" CodeBehind="staffReport.aspx.cs" Inherits="FYP.Project.WebForm1" %>
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
