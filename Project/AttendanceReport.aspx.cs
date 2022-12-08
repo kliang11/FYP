@@ -20,6 +20,21 @@ namespace FYP.Project
             if (!IsPostBack)
             {
 
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() != "HR Staff")
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
             }
 
         }

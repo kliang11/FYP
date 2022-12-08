@@ -14,9 +14,29 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-               this.BindGrid();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                        this.BindGrid();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fEmployeeList.aspx");
+                }
+
             }
             else if (gvList.Rows.Count != 0)
             {

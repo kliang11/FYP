@@ -16,13 +16,28 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
-                string id = Request.QueryString["id"];
-                if (id != null)
+                if (Session["email"] != null)
                 {
-                    databind(id);
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                    string id = Request.QueryString["id"];
+                    if (id != null)
+                    {
+                        databind(id);
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                    }
+                    ResetAllDefault();
                 }
-                ResetAllDefault();
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fApplyClaim.aspx");
+                }
             }
         }
 

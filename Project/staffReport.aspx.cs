@@ -16,13 +16,28 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string id = Request.QueryString["id"];
-            string date = Request.QueryString["date"];
-            if(id!=null && date != null)
+            if (Session["email"] != null)
             {
-                 bindReport(id,date);
+                if (Session["resetPW"].ToString() == "yes")
+                {
+                    Response.Redirect("~/Project/ChangePassword.aspx");
+                }
+                string id = Request.QueryString["id"];
+                string date = Request.QueryString["date"];
+                if (id != null && date != null)
+                {
+                    bindReport(id, date);
+                }
+                else
+                {
+                    Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                }
             }
-           
+            else
+            {
+                Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fApplyClaim.aspx");
+            }
+
         }
 
         private void bindReport(string id, string date) {
