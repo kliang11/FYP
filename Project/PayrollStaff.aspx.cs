@@ -22,9 +22,13 @@ namespace FYP.Project
                     {
                         Response.Redirect("~/Project/ChangePassword.aspx");
                     }
-                    if (Session["role"].ToString() == "Normal Staff")
+                    if (Session["role"].ToString() != "Admin")  //temp  //not sure want let HR check or not
                     {
                         this.BindGrid();
+                    }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
                     }
                 }
                 else

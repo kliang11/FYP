@@ -54,7 +54,7 @@
                     <li>
                         <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
-                    <li id="abc" runat="server">
+                    <li id="staffList" runat="server">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fas fa-users"></i>
                             Staff
@@ -88,13 +88,13 @@
                             Payroll
                         </a>
                         <ul class="collapse list-unstyled" id="payrollSubmenu">
-                            <li>
+                            <li id="payrollList" runat="server">
                                 <a href="payroll.aspx">Payroll List</a>
                             </li>
-                            <li>
+                            <li id="payrollReport" runat="server">
                                 <a href="PayrollReport.aspx">Generate Payroll Report</a>
                             </li>
-                            <li>
+                            <li id="payrollStaff" runat="server">
                                 <a href="PayrollStaff.aspx">Payroll List</a>
                             </li>
                         </ul>
@@ -139,13 +139,13 @@
                             Claim
                         </a>
                         <ul class="collapse list-unstyled" id="claimSubmenu">
-                            <li>
+                            <li id="applyClaim" runat="server">
                                 <a href="ApplyClaim.aspx">Apply Claim</a>
                             </li>
-                            <li>
-                                <a href="ClaimType.apsx">Claim Type Management</a>
+                            <li id="claimType" runat="server">
+                                <a href="ClaimType.aspx">Claim Type Management</a>
                             </li>
-                            <li>
+                            <li id="claimList" runat="server">
                                 <a href="ClaimList.aspx">Claim List</a>
                             </li>
                         </ul>

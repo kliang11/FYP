@@ -18,6 +18,10 @@ namespace FYP.Project
         {
             if (Session["email"] != null)
             {
+                if (Session["resetPW"].ToString() == "yes")
+                {
+                    Response.Redirect("~/Project/ChangePassword.aspx");
+                }
                 string id = Request.QueryString["id"];
                 string payperiod = Request.QueryString["payperiod"];
                 string firstday = Request.QueryString["date1"];
@@ -39,6 +43,10 @@ namespace FYP.Project
                     }
 
                     bindReport(id, payperiod, firstday, staffID);
+                }
+                else
+                {
+                    Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
                 }
             }
             else

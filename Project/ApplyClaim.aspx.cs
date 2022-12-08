@@ -31,7 +31,7 @@ namespace FYP.Project
                     }
                     else
                     {
-                        Panel1.Visible = false;
+                        Response.Redirect(string.Format("~/Project/403error.html"));
                     }
                 }
                 else

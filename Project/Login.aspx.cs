@@ -63,7 +63,7 @@ namespace FYP.Project
             }
 
             //admin login
-            if (txtEmail.Text.Trim() == "admin" && txtPassword.Text == "123456")
+            if (txtEmail.Text.Trim() == "admin@gmail.com" && txtPassword.Text == "123456")
             {
                 IsWrong = false;
                 Session["email"] = txtEmail.Text.Trim().ToString();

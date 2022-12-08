@@ -124,7 +124,7 @@ namespace FYP.Project
             }
             else if (!validateGuidRegex.IsMatch(txtConfirmNewPw.Text))
             {
-                lblErrorMsg.Text = "Password need at least 1 character, number and special character.";
+                lblErrorMsg.Text = "Password need at least 1 upper & lower character, number and special character.";
                 lblErrorMsg.Visible = true;
                 return;
             }
