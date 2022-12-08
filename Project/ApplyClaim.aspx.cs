@@ -17,9 +17,27 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                this.BindGrid();
-                ddlBind();
-                LoadMaxClaim();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "Normal Staff")
+                    {
+                        this.BindGrid();
+                        ddlBind();
+                        LoadMaxClaim();
+                    }
+                    else
+                    {
+                        Panel1.Visible = false;
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fApplyClaim.aspx");
+                }
             }
         }
 
@@ -66,8 +84,6 @@ namespace FYP.Project
             }
             lblStoreClaimType.Text = abc;
 
-            Session["id"] = "6"; //temp
-
             con = new SqlConnection();
             strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             con = new SqlConnection(strCon);
@@ -82,9 +98,7 @@ namespace FYP.Project
                 xyz += "Id=" + claimIDList[i] + " Total=" + amount.ToString()+", ";
             }
             con.Close();
-
             lblStoreTotalClaimAmount.Text = xyz;
-
         }
 
         private void ddlBind()
@@ -171,7 +185,7 @@ namespace FYP.Project
             bytes = imageBytes;
             string claimTypeID = ddlClaimType.SelectedItem.Value.ToString();
             string status = "Pending";
-            string staffId = "6"; //Session["id"].ToString() //temp
+            string staffId = Session["id"].ToString();
 
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))

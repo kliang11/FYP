@@ -83,8 +83,8 @@
                 }
     </style>
 
-
-    <div class="card shadow mb-4">
+    <asp:Panel ID="Panel1" runat="server">
+        <div class="card shadow mb-4">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold" style="font-size: 21px;">Claim Apply List</p>
         </div>
@@ -125,6 +125,8 @@
             </div>
         </div>
     </div>
+    </asp:Panel>
+    
 
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
