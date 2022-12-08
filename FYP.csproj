@@ -82,6 +82,8 @@
     <Content Include="Image\process.png" />
     <Content Include="Image\reject.png" />
     <Content Include="Image\send.png" />
+    <Content Include="Project\403error.html" />
+    <Content Include="Project\404error.html" />
     <Content Include="Project\ApplyClaim.aspx" />
     <Content Include="Project\AttendanceReportG.aspx" />
     <Content Include="Project\ChangePassword.aspx" />
@@ -118,8 +120,11 @@
     <Content Include="Project\attendanceDetails.aspx" />
     <Content Include="Project\AttendanceReport.aspx" />
     <Content Include="Project\attendanceStaff.aspx" />
+    <Content Include="Project\ContactAdmin.html" />
     <Content Include="Project\EmployeeList.aspx" />
     <Content Include="Image\loader.gif" />
+    <Content Include="Project\exceptionStyle.css" />
+    <Content Include="Project\Global.asax" />
     <Content Include="Project\LeaveDetailsStaff.aspx" />
     <Content Include="Project\LeaveList.aspx" />
     <Content Include="Project\LeaveStaff.aspx" />
@@ -220,6 +225,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetForPayslip.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Project\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Project\LeaveDetailsStaff.aspx.cs">
       <DependentUpon>LeaveDetailsStaff.aspx</DependentUpon>
@@ -443,7 +451,11 @@
     <Content Include="Project\DataSetForPayslip.xss">
       <DependentUpon>DataSetForPayslip.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\fypHRMS - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\fyphrms.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -455,26 +467,26 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Project\PayrollReport.rpt">
+    <Content Include="Project\PayrollReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PayrollReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Project\Payslip.rpt">
+    </Content>
+    <Content Include="Project\Payslip.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Payslip.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Project\WeekAttendanceReport.rpt">
+    </Content>
+    <Content Include="Project\WeekAttendanceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>WeekAttendanceReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Project\StaffAttendanceReport.rpt">
+    </Content>
+    <Content Include="Project\StaffAttendanceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StaffAttendanceReport.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Project\AttendanceReport.rpt">
+    </Content>
+    <Content Include="Project\AttendanceReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AttendanceReport.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
