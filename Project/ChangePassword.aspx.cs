@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,6 +19,11 @@ namespace FYP.Project
             {
                 if (Session["email"] != null)
                 {
+                    if (Request.UrlReferrer != null)
+                        ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                    else
+                        ViewState["RefUrl"] = "~/Project/attendance.aspx";
+
                     txtCurrentPw.Attributes["type"] = "password";
                     txtNewPw.Attributes["type"] = "password";
                     txtConfirmNewPw.Attributes["type"] = "password";                  
@@ -92,7 +98,7 @@ namespace FYP.Project
                     return;
                 }
             }
-            //if wrong then will return, all fine then go line 97
+            //if wrong then will return, all fine then go line below
 
             if (txtNewPw.Text != txtConfirmNewPw.Text)
             {
@@ -108,6 +114,19 @@ namespace FYP.Project
                     lblErrorMsg.Visible = true;
                     return;
                 }
+            }
+            Regex validateGuidRegex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$");
+            if(txtConfirmNewPw.Text.Length < 8 || txtConfirmNewPw.Text.Length > 20)
+            {
+                lblErrorMsg.Text = "Password length must within 8-20 characters.";
+                lblErrorMsg.Visible = true;
+                return;
+            }
+            else if (!validateGuidRegex.IsMatch(txtConfirmNewPw.Text))
+            {
+                lblErrorMsg.Text = "Password need at least 1 character, number and special character.";
+                lblErrorMsg.Visible = true;
+                return;
             }
             lblErrorMsg.Visible = false;
 
@@ -129,12 +148,13 @@ namespace FYP.Project
                         int a = cmd.ExecuteNonQuery();
                         if (a > 0)
                         {
+                            Session["resetPW"] = "no";
                             string redirect = Request.QueryString["redirect"];
                             if (redirect == "") 
                                 url = "~/Project/attendance.aspx"; //happen when login then direct to this page
                             else
                             {
-                                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                                //ViewState["RefUrl"] = Request.UrlReferrer.ToString(); asd
                                 url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
                             }
                         }
@@ -159,7 +179,7 @@ namespace FYP.Project
                 url = "~/Project/attendance.aspx";
             else
             {
-                ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                //ViewState["RefUrl"] = Request.UrlReferrer.ToString();asd
                 url = ViewState["RefUrl"].ToString(); 
             }
             Response.Redirect(url);

@@ -16,7 +16,21 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                this.BindGrid();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "HR Staff")
+                    {
+                        this.BindGrid();
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fClaimList.aspx");
+                }
             }
             else if (gvList.Rows.Count != 0)
             {
@@ -49,17 +63,10 @@ namespace FYP.Project
                     (e.Row.FindControl("btnApprove") as ImageButton).Visible = true;
                     (e.Row.FindControl("btnReject") as ImageButton).Visible = true;
                 }
-
-                //var img = e.Row.FindControl("imgBtnClaimAttachment") as ImageButton;
-                //if (img.ImageUrl != "")
-                //{
-                //    img.ImageUrl = "data:image/png;base64," + Convert.ToBase64String((byte[])(((DataRowView)e.Row.DataItem))["ClaimAttachment"]);
-                //}
             }
         }
         private void BindGrid()
         {
-            //asd
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -86,12 +93,10 @@ namespace FYP.Project
                     }
                 }
             }
-
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            //lblStoreRejectReason.Text = "1";
             rejectReasonPopup.Visible = false;
             string id = lblPopUpID.Text.Remove(0, 10);
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;

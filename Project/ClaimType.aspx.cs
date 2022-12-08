@@ -16,7 +16,17 @@ namespace FYP
         {
             if (!IsPostBack)
             {
-                this.BindGrid();
+                if (Session["email"] != null)
+                {
+                    if (Session["role"].ToString() == "Admin")
+                    {
+                        this.BindGrid();
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fClaimType.aspx");
+                }
             }
         }
 
