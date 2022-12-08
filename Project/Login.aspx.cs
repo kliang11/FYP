@@ -21,9 +21,21 @@ namespace FYP.Project
         {
             if (!IsPostBack) //IsPostBack = false
             {
+                if (Session["email"] != null)
+                {
+                    if(Request.UrlReferrer != null)
+                    {
+                        bool contains = Request.UrlReferrer.ToString().IndexOf("ChangePassword", StringComparison.OrdinalIgnoreCase) >= 0;
+                        if (contains)
+                        {
+                            Response.Redirect("~/Project/" + Request.QueryString["ReturnUrl"].ToString());
+                        }
+                    }                    
+                }
+
                 if (Request.Cookies["userEmail"] != null && Request.Cookies["userPassword"] != null)
                 {
-                    txtEmail.Text = Request.Cookies["userEmail"].Value;                   
+                    txtEmail.Text = Request.Cookies["userEmail"].Value;
                     txtPassword.Text = Request.Cookies["userPassword"].Value;
                     txtPassword.Attributes["type"] = "password";
                     chkbxRememberMe.Checked = true;
@@ -76,11 +88,13 @@ namespace FYP.Project
                     Session["role"] = rd["Role"].ToString();
                     Session["id"] = rd["Staff_ID"].ToString();
                     Session["resetPW"] = rd["RenewPassword"].ToString();
+                    Session["name"] = rd["Name"].ToString();
+                    Session["profileImg"] = "data:Image/png;base64," + Convert.ToBase64String((byte[])rd["Photo"]);
                     SaveCookies();
                 }
                 con.Close();
             }
-            
+
             //for wrong email or password  
             if (IsWrong == true)
             {
@@ -91,11 +105,11 @@ namespace FYP.Project
             {
                 if (this.Request.QueryString["ReturnUrl"] != null)
                 {
-                    Response.Redirect("~/Project/"+Request.QueryString["ReturnUrl"].ToString());
+                    Response.Redirect("~/Project/" + Request.QueryString["ReturnUrl"].ToString());
                 }
                 else
                 {
-                    Response.Redirect("attendance.aspx"); 
+                    Response.Redirect("attendance.aspx");
                 }
             }
         }
@@ -136,7 +150,7 @@ namespace FYP.Project
             }
             con.Close();
 
-            if(IsEmailExist == false) //email not exists
+            if (IsEmailExist == false) //email not exists
             {
                 lblStoreResetEmail.Text = "1";
                 txtEmailPopUp.Focus();
@@ -161,9 +175,9 @@ namespace FYP.Project
                         cons.Close();
                     }
                 }
-                string message = "A temporary password has been sent to the entered email address.";                
+                string message = "A temporary password has been sent to the entered email address.";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-            }            
+            }
         }
         private void email(String password)
         {
@@ -177,7 +191,17 @@ namespace FYP.Project
             string from = "fyptarc99@gmail.com"; //From address  
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Here is your temporary password: " + password + "<br>" + "Use this temporary password to log into your account."; 
+
+            string mailbody = "<div style=\"padding: 20px; background-color: rgb(255, 255, 255);\">" +
+            " <div style=\"color: rgb(0, 0, 0); text-align: left;\">" +
+            " <h1 style=\"margin: 1rem 0\">Temporary Password </h1>" +
+            " <p style=\"padding-bottom: 16px\">Please use the temporary password below to sign in.</p>" +
+            " <p style=\"padding-bottom: 16px\"><strong style=\"font-size: 130 %\">" + password + "</strong></p>" +
+            " </div>" +
+            " </div>";
+
+
+            //string mailbody = "Here is your temporary password: " + password + "<br>" + "Use this temporary password to log into your account.";
             message.Subject = "Forgot Password";
             message.Body = mailbody;
             message.BodyEncoding = Encoding.UTF8;

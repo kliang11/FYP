@@ -16,7 +16,21 @@ namespace FYP.Project
         {
             if (!IsPostBack)
             {
-                this.BindGrid();
+                if (Session["email"] != null)
+                {
+                    if (Session["resetPW"].ToString() == "yes")
+                    {
+                        Response.Redirect("~/Project/ChangePassword.aspx");
+                    }
+                    if (Session["role"].ToString() == "Normal Staff")
+                    {
+                        this.BindGrid();
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollStaff.aspx");
+                }
             }
         }
 
@@ -28,7 +42,7 @@ namespace FYP.Project
                 using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
                 {
                     cmd.Parameters.AddWithValue("@Action", "SELECTWITHSTAFFID");
-                    cmd.Parameters.AddWithValue("@Staff_ID", "6"); //temp
+                    cmd.Parameters.AddWithValue("@Staff_ID", Session["id"].ToString());
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -89,17 +103,6 @@ namespace FYP.Project
                     }
                 }
             }
-
-            //if(payperiod == "Weekly")
-            //{
-            //    date = Convert.ToDateTime(firstDay);
-            //    firstDay = date.ToShortDateString() + date.AddDays(6).ToShortDateString();
-            //}
-            //else
-            //{
-            //    date = Convert.ToDateTime(firstDay);
-
-            //}
 
             Response.Redirect(string.Format("~/Project/PayslipPage.aspx?id={0}&payperiod={1}&date1={2}&date2={3}&staffID={4}", id, payperiod, firstDay, "", staffID));
 

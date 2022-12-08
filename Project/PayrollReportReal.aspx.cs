@@ -16,32 +16,20 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string date = Request.QueryString["date"];
-            string payrollListID = Request.QueryString["payrollListID"];
-            string title = Request.QueryString["title"];
-            if (date != null && payrollListID != null && title != null)
+            if (Session["resetPW"].ToString() == "yes")
             {
-                bindReport(date, payrollListID, title);
+                string date = Request.QueryString["date"];
+                string payrollListID = Request.QueryString["payrollListID"];
+                string title = Request.QueryString["title"];
+                if (date != null && payrollListID != null && title != null)
+                {
+                    bindReport(date, payrollListID, title);
+                }
             }
-            //BasicSalaryTotal
-            //OTTotal
-            //BonusTotal
-            //ClaimTotal
-            //UnpaidTotal
-            //LateTotal
-            //EpfTotal_e
-            //SocsoTotal_e
-            //EisTotal_e
-            //PcbTotal
-            //EpfTotal_r
-            //SocsoTotal_r
-            //EisTotal_r
-            //NetTotal
-
-
-            //SELECTSUMFORREPORT
-
-
+            else
+            {
+                Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollReportReal.aspx");
+            }
         }
 
         private void bindReport(string date, string payrollListID, string title)
