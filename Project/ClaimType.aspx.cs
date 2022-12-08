@@ -22,6 +22,10 @@ namespace FYP
                     {
                         this.BindGrid();
                     }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
                 }
                 else
                 {

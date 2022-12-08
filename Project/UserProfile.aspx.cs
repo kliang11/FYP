@@ -44,6 +44,10 @@ namespace FYP.Project
                             btnEditt_Click(btnEditt, EventArgs.Empty);
                         }
                     }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
                 }
                 else
                 {

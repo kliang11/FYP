@@ -48,6 +48,10 @@ namespace FYP.Project
                         loadPayrollList();
                         this.BindGrid(ddlMonthWeek.SelectedValue);
                     }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
                 }
                 else
                 {

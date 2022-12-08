@@ -16,8 +16,12 @@ namespace FYP.Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["resetPW"].ToString() == "yes")
+            if (Session["email"] != null)
             {
+                if (Session["resetPW"].ToString() == "yes")
+                {
+                    Response.Redirect("~/Project/ChangePassword.aspx");
+                }
                 string date = Request.QueryString["date"];
                 string payrollListID = Request.QueryString["payrollListID"];
                 string title = Request.QueryString["title"];
@@ -25,11 +29,19 @@ namespace FYP.Project
                 {
                     bindReport(date, payrollListID, title);
                 }
+                else
+                {
+                    Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                }
             }
             else
             {
                 Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollReportReal.aspx");
             }
+
+            
+
+
         }
 
         private void bindReport(string date, string payrollListID, string title)

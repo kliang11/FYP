@@ -211,6 +211,10 @@ namespace FYP.Project
                             this.BindGrid(Int16.Parse(id));
                         }
                     }
+                    else
+                    {
+                        Response.Redirect(string.Format("~/Project/403error.html"));
+                    }
                 }
                 else
                 {
