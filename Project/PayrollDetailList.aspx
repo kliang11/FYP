@@ -64,7 +64,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Action" ItemStyle-Width="20%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnProcess" runat="server" CssClass="button" Style="cursor: pointer" ImageUrl="~/Image/process.png" AlternateText="process" CommandName="Processing" CausesValidation="false" />
+                                <asp:ImageButton ID="btnProcess" runat="server" CssClass="button" Style="cursor: pointer" ImageUrl="~/Image/tick.png" AlternateText="process" CommandName="Processing" CausesValidation="false" />
                                 <%--<asp:ImageButton ID="btnSend" runat="server" CssClass="button" Style="cursor: pointer" ImageUrl="~/Image/send.png" AlternateText="send" CommandName="Sending" CausesValidation="false" />--%>
                                 <asp:ImageButton ID="btnEdit" runat="server" CssClass="button" Style="cursor: pointer" ImageUrl="~/Image/editing.png" AlternateText="edit" CommandName="Editing" CausesValidation="false" />
                                 <asp:ImageButton ID="btnViewDetail" runat="server" CssClass="button" Style="cursor: pointer" ImageUrl="~/Image/detail.png" AlternateText="detail" CommandName="Detailing" CausesValidation="false" />
