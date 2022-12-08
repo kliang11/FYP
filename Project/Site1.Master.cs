@@ -20,15 +20,13 @@ namespace FYP
                     name.InnerText = Session["name"].ToString();
                     role.InnerText = Session["role"].ToString();
 
-                    Session["role"] = "HR Staff"; //testing 
-
                     if (Session["role"].ToString() == "HR Staff") 
                     {
                         attendance.HRef = "~/Project/attendance.aspx";
                         leave.HRef = "~/Project/LeaveList.aspx";
-                        payrollStaff.Style.Add("display", "none");
-                        applyClaim.Style.Add("display", "none");
-                        claimType.Style.Add("display", "none");
+                        staffList.HRef = "~/Project/EmployeeList.aspx";
+                        payroll.HRef = "~/Project/payroll.aspx";
+                        claim.HRef = "~/Project/ClaimList.aspx";
                     }
                     else if (Session["role"].ToString() == "Normal Staff")
                     {
@@ -37,18 +35,15 @@ namespace FYP
                         rfid.Style.Add("display", "none");
                         report.Style.Add("display", "none");
                         staffList.Style.Add("display", "none");
-                        payrollList.Style.Add("display", "none");
-                        payrollReport.Style.Add("display", "none");
-                        claimType.Style.Add("display", "none");
-                        claimList.Style.Add("display", "none");
+                        payroll.HRef = "~/Project/PayrollStaff.aspx";
+                        claim.HRef = "~/Project/ApplyClaim.aspx";
                     }
                     else if(Session["role"].ToString() == "Admin")
                     {
-                        payrollList.Style.Add("display", "none");
-                        payrollReport.Style.Add("display", "none");
-                        payrollStaff.Style.Add("display", "none");
-                        applyClaim.Style.Add("display", "none");
-                        claimList.Style.Add("display", "none");
+                        report.Style.Add("display", "none");
+                        payroll.Style.Add("display", "none");
+                        claim.HRef = "~/Project/ClaimType.aspx";
+                        staffList.HRef = "~/Project/EmployeeList.aspx";
                     }
                 }
             }
