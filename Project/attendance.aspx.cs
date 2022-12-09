@@ -118,7 +118,7 @@ namespace FYP.Project
         {
             using (SqlConnection mycon = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Leave WHERE (LeaveDateStart= @date AND LeaveStatus='Approved') OR (LeaveDateEnd= @date AND LeaveStatus='Approved')", mycon))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Attendance WHERE (AttendanceStatus= 'On Leave') AND AttendanceDate =@date", mycon))
                 {
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.CommandType = CommandType.Text;
