@@ -76,10 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\App_Data\Database.mdf" />
-    <Content Include="App_Data\App_Data\Database_log.ldf">
-      <DependentUpon>Database.mdf</DependentUpon>
-    </Content>
     <Content Include="Image\approved.png" />
     <Content Include="Image\company_logo.ico" />
     <Content Include="Image\detail.png" />
@@ -458,6 +454,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\fypHRMS - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fyphrms.pubxml" />
