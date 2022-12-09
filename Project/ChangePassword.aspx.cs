@@ -22,7 +22,12 @@ namespace FYP.Project
                     if (Request.UrlReferrer != null)
                         ViewState["RefUrl"] = Request.UrlReferrer.ToString();
                     else
-                        ViewState["RefUrl"] = "~/Project/attendance.aspx";
+                    {
+                        if (Session["role"].ToString() == "HR Staff")
+                            ViewState["RefUrl"] = "~/Project/attendance.aspx";
+                        else if (Session["role"].ToString() == "Normal Staff")
+                            ViewState["RefUrl"] = "~/Project/attendanceStaff.aspx";
+                    }
 
                     txtCurrentPw.Attributes["type"] = "password";
                     txtNewPw.Attributes["type"] = "password";
@@ -102,6 +107,7 @@ namespace FYP.Project
 
             if (txtNewPw.Text != txtConfirmNewPw.Text)
             {
+                txtConfirmNewPw.Focus();
                 lblErrorMsg.Text = "'New Password' and 'Confirm New Password' is not match.";
                 lblErrorMsg.Visible = true;
                 return;
@@ -110,6 +116,7 @@ namespace FYP.Project
             {
                 if(txtNewPw.Text == lblStorePassword.Text && txtConfirmNewPw.Text == lblStorePassword.Text)
                 {
+                    txtNewPw.Focus();
                     lblErrorMsg.Text = "New Password cannot be match as old password.";
                     lblErrorMsg.Visible = true;
                     return;
@@ -118,12 +125,14 @@ namespace FYP.Project
             Regex validateGuidRegex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$");
             if(txtConfirmNewPw.Text.Length < 8 || txtConfirmNewPw.Text.Length > 20)
             {
+                txtNewPw.Focus();
                 lblErrorMsg.Text = "Password length must within 8-20 characters.";
                 lblErrorMsg.Visible = true;
                 return;
             }
             else if (!validateGuidRegex.IsMatch(txtConfirmNewPw.Text))
             {
+                txtNewPw.Focus();
                 lblErrorMsg.Text = "Password need at least 1 upper & lower character, number and special character.";
                 lblErrorMsg.Visible = true;
                 return;
@@ -150,11 +159,15 @@ namespace FYP.Project
                         {
                             Session["resetPW"] = "no";
                             string redirect = Request.QueryString["redirect"];
-                            if (redirect == "") 
-                                url = "~/Project/attendance.aspx"; //happen when login then direct to this page
+                            if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
+                            {
+                                if (Session["role"].ToString() == "HR Staff")
+                                    url = "~/Project/attendance.aspx";
+                                else if (Session["role"].ToString() == "Normal Staff")
+                                    url = "~/Project/attendanceStaff.aspx";
+                            }
                             else
                             {
-                                //ViewState["RefUrl"] = Request.UrlReferrer.ToString(); asd
                                 url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
                             }
                         }
@@ -167,7 +180,7 @@ namespace FYP.Project
                 message = "Update unsuccessful. Please try again.";
                 url = "~/Project/ChangePassword.aspx";
             }
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);            
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
             Response.Redirect(url);
         }
 
@@ -176,11 +189,16 @@ namespace FYP.Project
             string url = "";
             string redirect = Request.QueryString["redirect"];
             if (redirect == "")
-                url = "~/Project/attendance.aspx";
+            {
+                if (Session["role"].ToString() == "HR Staff")
+                    url = "~/Project/attendance.aspx";
+                else if (Session["role"].ToString() == "Normal Staff")
+                    url = "~/Project/attendanceStaff.aspx";
+            }
             else
             {
                 //ViewState["RefUrl"] = Request.UrlReferrer.ToString();asd
-                url = ViewState["RefUrl"].ToString(); 
+                url = ViewState["RefUrl"].ToString();
             }
             Response.Redirect(url);
         }

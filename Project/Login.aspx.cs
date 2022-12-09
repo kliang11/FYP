@@ -20,7 +20,7 @@ namespace FYP.Project
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) //IsPostBack = false
-            {
+            {                
                 if (Session["email"] != null)
                 {
                     if(Request.UrlReferrer != null)
@@ -46,6 +46,33 @@ namespace FYP.Project
                 txtPassword.Attributes["type"] = "password";
             }
         }
+
+        private void clearCookieSession()
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
+            try
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Buffer = true;
+                Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
+                Response.Expires = -1000;
+                Response.CacheControl = "no-cache";
+                Response.Cookies["userEmail"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+        }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             //for focus the textbox that not fill up
@@ -71,6 +98,7 @@ namespace FYP.Project
                 Session["id"] = "0";
                 Session["resetPW"] = "no";
                 SaveCookies();
+                Response.Redirect("~/Project/EmployeeList.aspx");
             }
             else
             {
@@ -109,7 +137,10 @@ namespace FYP.Project
                 }
                 else
                 {
-                    Response.Redirect("attendance.aspx");
+                    if(Session["role"].ToString()== "HR Staff")
+                        Response.Redirect("~/Project/attendance.aspx");
+                    else if(Session["role"].ToString() == "Normal Staff")
+                        Response.Redirect("~/Project/attendanceStaff.aspx");
                 }
             }
         }

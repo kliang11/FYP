@@ -18,13 +18,13 @@
         <asp:Panel ID="personalPanel" runat="server" CssClass="profileContentPanel mt-2 mb-2" ScrollBars="Auto">
             <label class="subtitle">Personal</label>
 
-            <asp:Image ID="imgProfile" runat="server" class="profileImage" alt="profileImage" ClientIDMode="Static" ImageUrl="~/Image/defaultProfileImg.png" />
+            <asp:Image ID="imgProfile" runat="server" class="profileImage" alt="profileImage" ClientIDMode="Static" ImageUrl="" />
             <div style="text-align: center; margin-bottom: 1%;">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Display="Dynamic" ErrorMessage="Image must be in .jpg, .jpeg, .png format only." ForeColor="Red" ValidationExpression="^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))+(.jpg|.JPG|.jpeg|.JPEG|.png|.PNG)$" ControlToValidate="FileUpload1"></asp:RegularExpressionValidator>
             </div>
 
             <div style="text-align: center; position: relative;">
-                <asp:LinkButton ID="btnDeletes" runat="server" CssClass="btn btn-light mb-2" OnClientClick="hideDeleteButton()" OnClick="btnDelete_Click" CausesValidation="False" Style="display: inline-block;"><i class="fas fa-save"></i> Delete </asp:LinkButton>
+                <asp:LinkButton ID="btnDeletes" runat="server" CssClass="btn btn-light mb-2" OnClientClick="hideDeleteButton()" OnClick="btnDelete_Click" CausesValidation="False" Style="display: inline-block;"><i class="fas fa-trash"></i> Delete </asp:LinkButton>
                 <%--<span class="hint">Delete</span>--%>
             </div>
 
@@ -343,7 +343,7 @@
             <asp:Button ID="btnJob" runat="server" Text="Job" CssClass="profileMenuButton" CausesValidation="False" OnClick="btnJob_Click" />
             <asp:Button ID="btnSalary" runat="server" Text="Salary" CssClass="profileMenuButton" CausesValidation="False" OnClick="btnSalary_Click" />
         </footer>
-
+        
     </div>
 
     <script type="text/javascript">
@@ -367,10 +367,11 @@
                         var reader = new FileReader();
                         reader.onload = function (e) {
 
-                            document.getElementById("imgProfile").setAttribute("src", e.target.result);
-                        }
-                        reader.readAsDataURL(input.files[0]);
+                            document.getElementById("imgProfile").setAttribute("src", e.target.result);e;
 
+                        }
+                        reader.readAsDataURL(input.files[0]
+);
                     }
                 }
                 document.getElementById('<%= btnDeletes.ClientID %>').style.display = "inline-block";
