@@ -20,7 +20,16 @@ namespace FYP.Project
                 if (Session["email"] != null)
                 {
                     if (Request.UrlReferrer != null)
-                        ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                    {
+                        try
+                        {
+                            ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                        }
+                        catch
+                        {
+                            Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                        }
+                    }
                     else
                     {
                         if (Session["role"].ToString() == "HR Staff")

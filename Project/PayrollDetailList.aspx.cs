@@ -25,7 +25,14 @@ namespace FYP.Project
                     }
                     if (Session["role"].ToString() == "HR Staff")
                     {
-                        ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                        try
+                        {
+                            ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                        }
+                        catch
+                        {
+                            Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                        }
                         string id = Request.QueryString["id"];
                         string payperiod = Request.QueryString["payperiod"];
                         string date = Request.QueryString["date"];
