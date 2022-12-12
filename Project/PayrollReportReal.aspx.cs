@@ -37,11 +37,7 @@ namespace FYP.Project
             else
             {
                 Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fPayrollReportReal.aspx");
-            }
-
-            
-
-
+            }          
         }
 
         private void bindReport(string date, string payrollListID, string title)

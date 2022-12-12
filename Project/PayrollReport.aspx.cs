@@ -60,7 +60,6 @@ namespace FYP.Project
                 lastDay = firstDay.AddMonths(1).AddDays(-1);
                 dateForPass = firstDay.ToString("MMMM yyyy");
                 title = "Monthly Payroll Report";
-
             }
 
             string payrollListID = "";
@@ -70,7 +69,10 @@ namespace FYP.Project
             {
                 using (SqlCommand cmd = new SqlCommand("PayrollList_CRUD"))
                 {
-                    cmd.Parameters.AddWithValue("@Action", "SELECTFORREPORT");
+                    if (txtMonth.Text != "")
+                        cmd.Parameters.AddWithValue("@Action", "SELECTFORREPORTMONTH");
+                    else
+                        cmd.Parameters.AddWithValue("@Action", "SELECTFORREPORTWEEK");
                     cmd.Parameters.AddWithValue("@Date", firstDay);
                     cmd.Parameters.AddWithValue("@DateTwo", lastDay);
                     using (SqlDataAdapter sda = new SqlDataAdapter())
