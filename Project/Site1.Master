@@ -50,16 +50,13 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <a class="navbar-brand" href="#" style="display: block; text-align: center">
+                    <a class="navbar-brand" style="display: block; text-align: center">
                         <img src="../Image/company_logo.png" width="50" height="40" alt="">
                     </a>
                     <h3 style="text-align: center; font-weight: 700; margin-right: 7%">HRMS</h3>
                 </div>
 
                 <ul class="list-unstyled components">
-                    <li>
-                        <a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                    </li>
                     <li>
                         <a id="staffList" runat="server">
                             <i class="fas fa-users"></i>
@@ -115,7 +112,7 @@
                                 <a href="../Project/AttendanceReport.aspx">Attendance Report</a>
                             </li>
                             <li>
-                                <a href="PayrollReport.aspx">Generate Payroll Report</a>
+                                <a href="PayrollReport.aspx">Payroll Report</a>
                             </li>
                         </ul>
                     </li>
