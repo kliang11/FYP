@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -157,7 +159,7 @@ namespace FYP.Project
             string claimID = a.Text.ToString();
             Response.Redirect(string.Format("~/Project/ClaimDetails.aspx?id={0}", claimID));
         }
-
+        
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvList.EditIndex)

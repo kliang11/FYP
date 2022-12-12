@@ -22,7 +22,14 @@ namespace FYP.Project
                     {
                         Response.Redirect("~/Project/ChangePassword.aspx");
                     }
-                    ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                    try
+                    {
+                        ViewState["RefUrl"] = Request.UrlReferrer.ToString();
+                    }
+                    catch
+                    {
+                        Response.Redirect(string.Format("~/Project/ContactAdmin.html"));
+                    }
                     string id = "";
                     id = Request.QueryString["id"];
                     if (id != null)
