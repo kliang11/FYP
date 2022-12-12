@@ -134,7 +134,8 @@ namespace FYP.Project
         private void resetDefault()
         {
             txtStaffEmailPopUp.Text = "";
-            txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none";
+            //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none";
+            txtStaffEmailPopUp.BorderColor = System.Drawing.Color.Empty;
             lbl_EmailError.Attributes["style"] = "display:none;";
             ddlRole.SelectedValue = "Normal Staff";
         }
@@ -166,10 +167,12 @@ namespace FYP.Project
             {
                 //message = "Email has been registered. Please enter another email.";
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-                txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none;";
+                //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"Red\";"; //display: none;
+                txtStaffEmailPopUp.BorderColor = System.Drawing.Color.Red;
                 rejectReasonPopup.Visible = true;
-                lbl_EmailError.Text = "Email has been registered. Please enter another email.";
-                txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:block";
+                lbl_EmailError.Text = "This email address already exists in the system. Please enter another email.";
+                //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"Red\"; display:block";
+                lbl_EmailError.Attributes["style"] = "display:block;";
                 this.BindGrid();
             }
             else //input email is not exists in database
