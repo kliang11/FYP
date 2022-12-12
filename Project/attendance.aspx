@@ -142,7 +142,7 @@
                         <span style="color: #FF0000">* </span>
                         <label for="recipient-name" class="col-form-label">Staff Name:</label>
                         <asp:DropDownList ID="ddlStaffName" runat="server" DataSourceID="SqlDataSource1" CssClass="form-control" DataTextField="Name" DataValueField="Staff_ID"></asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Name], [Staff_ID] FROM [Staff]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Name], [Staff_ID] FROM [Staff] where [ROLE] = 'Normal Staff'"></asp:SqlDataSource>
                     </div>
                     <div class="form-group" style="margin: 0px 3px 10px">
                         <span style="color: #FF0000">* </span>

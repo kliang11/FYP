@@ -155,7 +155,7 @@ namespace FYP.Project
                 DropDownList ddList = (DropDownList)e.Row.FindControl("ddlEditName");
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(constr);
-                SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL", con);
+                SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL AND Staff.role='Normal Staff'", con);
                 DataTable dt = new DataTable();
                 adpt.Fill(dt);
                 ddList.DataSource = dt;
@@ -245,7 +245,7 @@ namespace FYP.Project
         {
             string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constr);
-            SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL", con);
+            SqlDataAdapter adpt = new SqlDataAdapter("SELECT Staff.name, Staff.Staff_ID FROM Staff LEFT JOIN RFID ON RFID.StaffID = Staff.Staff_ID WHERE RFID.StaffID IS NULL AND Staff.role='Normal Staff'", con);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
             ddlStaffName.DataSource = dt;
