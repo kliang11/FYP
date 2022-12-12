@@ -118,7 +118,7 @@ namespace FYP.Project
                     using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFID");
+                        cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFIDFORPAYROLL");
                         cmd.Parameters.AddWithValue("@PaymentPeriod", "Monthly");
                         cmd.Connection = con;
                         con.Open();
@@ -140,7 +140,7 @@ namespace FYP.Project
                     using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFID");
+                        cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFIDFORPAYROLL");
                         cmd.Parameters.AddWithValue("@PaymentPeriod", "Weekly");
                         cmd.Connection = con;
                         con.Open();
@@ -707,7 +707,7 @@ namespace FYP.Project
                 using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFID");
+                    cmd.Parameters.AddWithValue("@Action", "SELECTSTAFFIDFORPAYROLL");
                     cmd.Parameters.AddWithValue("@PaymentPeriod", payPeriod);
                     cmd.Connection = con;
                     con.Open();

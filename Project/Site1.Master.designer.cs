@@ -60,6 +60,24 @@ namespace FYP
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl role;
 
         /// <summary>
+        /// dropdownprofile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dropdownprofile;
+
+        /// <summary>
+        /// dropdownchangePW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dropdownchangePW;
+
+        /// <summary>
         /// staffList control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace FYP
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor staffList;
+
+        /// <summary>
+        /// claim control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor claim;
 
         /// <summary>
         /// attendance control.
@@ -94,15 +121,6 @@ namespace FYP
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor leave;
-
-        /// <summary>
-        /// claim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor claim;
 
         /// <summary>
         /// rfid control.

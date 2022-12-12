@@ -55,6 +55,11 @@ namespace FYP
                     {
                         report.Style.Add("display", "none");
                         payroll.Style.Add("display", "none");
+                        attendance.Style.Add("display", "none");
+                        leave.Style.Add("display", "none");
+                        rfid.Style.Add("display", "none");
+                        dropdownprofile.Style.Add("display", "none");
+                        dropdownchangePW.Style.Add("display", "none");
                         claim.HRef = "~/Project/ClaimType.aspx";
                         staffList.HRef = "~/Project/EmployeeList.aspx";
                     }

@@ -557,7 +557,7 @@ namespace FYP.Project
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.Parameters.AddWithValue("@Action", "UPDATECLAIMRECEIVE");
                                 cmd.Parameters.AddWithValue("@Staff_ID", staffID);
-                                cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID + id);
+                                cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID.ToString() + id.ToString());
                                 cmd.Connection = con;
                                 con.Open();
                                 int a = cmd.ExecuteNonQuery();
@@ -759,7 +759,7 @@ namespace FYP.Project
             {
                 using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
                 {
-                    cmd.Parameters.AddWithValue("@Action", "SELECT");
+                    cmd.Parameters.AddWithValue("@Action", "SELECTWITHSTAFFNAME");
                     cmd.Parameters.AddWithValue("@PayrollListID", id);
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
