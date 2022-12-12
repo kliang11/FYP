@@ -16,19 +16,19 @@
                     OnRowDataBound="OnRowDataBound" EmptyDataText="No records has been added." DataKeyNames="PayslipID,PayrollListID,Staff_ID,DateGenerated,NetSalary"
                     OnSelectedIndexChanged="gvList_SelectedIndexChanged">
                     <Columns>
-                        <asp:TemplateField HeaderText="Payroll Date" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                        <asp:TemplateField HeaderText="Payslip ID" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblPayslipID" runat="server" Text='<%# Eval("PayslipID") %>'></asp:Label>
                                 <asp:Label ID="lblPayrollListID" runat="server" Text='<%# Eval("PayrollListID") %>' Style="display: none"></asp:Label>
                                 <asp:Label ID="lblStaffID" runat="server" Text='<%# Eval("Staff_ID") %>' Style="display: none"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Status" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                        <asp:TemplateField HeaderText="Date Generated" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Label ID="lblDate" runat="server" Text='<%# Eval("DateGenerated")  %>'></asp:Label>
+                                <asp:Label ID="lblDate" runat="server" Text='<%# Eval("DateGenerated","{0:d}")  %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Pay Period" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                        <asp:TemplateField HeaderText="Net Salary" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblNetSalary" runat="server" Text='<%# Eval("NetSalary") %>'></asp:Label>
                             </ItemTemplate>

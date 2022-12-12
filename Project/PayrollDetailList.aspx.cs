@@ -759,7 +759,7 @@ namespace FYP.Project
             {
                 using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
                 {
-                    cmd.Parameters.AddWithValue("@Action", "SELECT");
+                    cmd.Parameters.AddWithValue("@Action", "SELECTWITHSTAFFNAME");
                     cmd.Parameters.AddWithValue("@PayrollListID", id);
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {

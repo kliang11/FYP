@@ -31,6 +31,11 @@
                                 <asp:Label ID="lblPayslipID" runat="server" Text='<%# Eval("PayslipID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Staff Name" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                            <ItemTemplate>
+                                <asp:Label ID="lblName" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Payment Method" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblPaymentMethod" runat="server" Text='<%# Eval("PaymentMethod") %>'></asp:Label>
@@ -52,7 +57,7 @@
                                 <asp:Label ID="lblUnpaidLeaveSalary" runat="server" Text='<%# Eval("UnpaidLeaveSalary") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-<%--                        <asp:TemplateField HeaderText="Bonus" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                        <%--                        <asp:TemplateField HeaderText="Bonus" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtBonus" runat="server" Text='<%# Eval("Bonus")  %>'></asp:TextBox>
                             </ItemTemplate>
