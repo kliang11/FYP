@@ -40,8 +40,8 @@
                             <h5 id="name" runat="server" class="mb-0 text-white nav-user-name">Name</h5>
                             <span id="role" runat="server" class="status"></span><span class="ml-2"></span>
                         </div>
-                        <a class="dropdown-item" href="UserProfile.aspx?redirect=yes"><i class="fas fa-user mr-2"></i>Profile</a>
-                        <a class="dropdown-item" href="ChangePassword.aspx?redirect=yes"><i class="fas fa-cog mr-2"></i>Change Password</a>
+                        <a class="dropdown-item" href="UserProfile.aspx?redirect=yes" id="dropdownprofile" runat="server"><i class="fas fa-user mr-2"></i>Profile</a>
+                        <a class="dropdown-item" href="ChangePassword.aspx?redirect=yes" id="dropdownchangePW" runat="server"><i class="fas fa-cog mr-2"></i>Change Password</a>
                         <a class="dropdown-item" href="Logout.aspx"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </div>
                 </div>
@@ -64,6 +64,12 @@
                         <a id="staffList" runat="server">
                             <i class="fas fa-users"></i>
                             Staff
+                        </a>
+                    </li>
+                    <li>
+                        <a id="claim" runat="server">
+                            <i class="fas fa-file-alt"></i>
+                            Claim
                         </a>
                     </li>
                     <li>
@@ -92,23 +98,6 @@
                             <i class="fas fa-calendar-times"></i>
                             Leave
                         </a>
-                    </li>
-                    <li>
-                        <a id="claim" runat="server">
-                            <i class="fas fa-file-alt"></i>
-                            Claim
-                        </a>
-<%--                        <ul class="collapse list-unstyled" id="claimSubmenu">
-                            <li id="applyClaim" runat="server">
-                                <a href="ApplyClaim.aspx">Apply Claim</a>
-                            </li>
-                            <li id="claimType" runat="server">
-                                <a href="ClaimType.aspx">Claim Type Management</a>
-                            </li>
-                            <li id="claimList" runat="server">
-                                <a href="ClaimList.aspx">Claim List</a>
-                            </li>
-                        </ul>--%>
                     </li>
                     <li>
                         <a href="~/Project/rfid.aspx" id="rfid" runat="server">

@@ -557,7 +557,7 @@ namespace FYP.Project
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.Parameters.AddWithValue("@Action", "UPDATECLAIMRECEIVE");
                                 cmd.Parameters.AddWithValue("@Staff_ID", staffID);
-                                cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID + id);
+                                cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID.ToString() + id.ToString());
                                 cmd.Connection = con;
                                 con.Open();
                                 int a = cmd.ExecuteNonQuery();
