@@ -122,7 +122,7 @@ namespace FYP.Project
                 {
                     cmd.Parameters.AddWithValue("@Action", "SELECTFORPAYSLIP");
                     cmd.Parameters.AddWithValue("@Staff_ID", staffID);
-                    cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID+payslipID);
+                    cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID.ToString() + payslipID.ToString());
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
