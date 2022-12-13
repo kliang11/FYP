@@ -101,7 +101,8 @@ namespace FYP.Project
                 Session["id"] = "0";
                 Session["resetPW"] = "no";                
                 Application["email"] = Session["email"].ToString();
-                Application["name"] = "Admin";
+                if(Application["name"] == null)
+                    Application["name"] = "Admin";
                 Application["role"] = Session["role"].ToString();
                 Application["id"] = Session["id"].ToString();
                 Application["resetPW"] = Session["resetPW"].ToString();
