@@ -41,6 +41,20 @@ namespace FYP.Project
                     Server.ClearError();
                     Server.Transfer("404error.html");
                 }
+
+                else if (serverError.GetHttpCode() == 403)
+                {
+                    Server.ClearError();
+                    Server.Transfer("403error.html");
+                }
+
+                else
+                {
+                    Server.ClearError();
+                    Server.Transfer("ContactAdmin.html");
+                }
+
+
             }
         }
 

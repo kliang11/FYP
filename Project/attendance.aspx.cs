@@ -199,6 +199,14 @@ namespace FYP.Project
             GridViewRow row = gvList.Rows[e.RowIndex];
             string checkTimeIn = (row.FindControl("txtTimeIn") as TextBox).Text;
             string checkTimeOut = (row.FindControl("txtTimeOut") as TextBox).Text;
+
+            if(TimeSpan.Compare(Convert.ToDateTime(checkTimeIn).TimeOfDay, Convert.ToDateTime(checkTimeOut).TimeOfDay) == 1)
+            {
+                (row.FindControl("lbltxtFalse") as Label).Style.Add("display", "block");
+                return;
+            }
+
+
             string attendanceStatus = "Pending";
             string isLate = "N";
             double workingHour = 0;

@@ -42,6 +42,16 @@ body {
     border-radius: 25px;
 }
 
+.label_redInUse {
+    color: #bd0000;
+    background-color: #ffafaf;
+    width: 129px;
+    text-align: center;
+    padding: 6px 36px;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
+
 .label_yellow {
     color: #bb8c02;
     background-color: #ffebad;
