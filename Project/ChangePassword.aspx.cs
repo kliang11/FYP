@@ -148,7 +148,7 @@ namespace FYP.Project
             }
             lblErrorMsg.Visible = false;
 
-            string message = "Update successful.";
+            string message = "Password has been updated.";
             string url = "";
             try
             {
@@ -186,11 +186,16 @@ namespace FYP.Project
             }
             catch
             {
-                message = "Update unsuccessful. Please try again.";
+                message = "Password update unsuccessful. Please try again.";
                 url = "~/Project/ChangePassword.aspx";
             }
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-            Response.Redirect(url);
+            //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", false);
+            var page = HttpContext.Current.CurrentHandler as Page;
+            ScriptManager.RegisterStartupScript(page, page.GetType(), "alert", "alert('" + message + "');window.location ='" + url + "';", true);
+            //if (txtCurrentPw.Visible == false)                                
+            //    Response.Redirect(url);
+            //else
+            //    Response.Redirect(url);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
