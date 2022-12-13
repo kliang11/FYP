@@ -27,6 +27,12 @@ namespace FYP.Project
                     if (Session["role"].ToString() != "Normal Staff")
                     {
                         ResetDisable();
+                        if (Session["role"].ToString() == "Admin")
+                        {
+                            btnDeletes.Visible = false;
+                            FileUpload1.Visible = false;
+                            lblFileUpload.Visible = false;
+                        }
                         string id = "";
                         id = Request.QueryString["id"];
                         string redirect = Request.QueryString["redirect"]; //from masterpage
@@ -44,28 +50,38 @@ namespace FYP.Project
                 }
                 else
                 {
-                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fUserProfile.aspx");
-                }                
+                    Response.Redirect("~/Project/Login.aspx?ReturnUrl=%2fProfilePage.aspx");
+                }
             }
         }
 
         private void BindData(string id)
         {
-            SqlConnection con = new SqlConnection();
-            string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            con = new SqlConnection(strCon);
-            con.Open();
-            string strSqlQuery = "Select * from Staff Where Staff_ID = " + id;
-            SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
-            SqlDataReader rd = cmdSelect.ExecuteReader();
-            while (rd.Read())
+            if (Session["role"].ToString() == "Admin")
             {
-                imgProfile.ImageUrl = "data:Image/png;base64," + Convert.ToBase64String((byte[])rd["Photo"]);
-                txtStaffID.Text = rd["Staff_ID"].ToString();
-                txtName.Text = rd["Name"].ToString();
-                txtEmail.Text = rd["Email"].ToString();
+                //imgProfile.ImageUrl = "data:Image/png;base64," + Convert.ToBase64String((byte[])rd["Photo"]);
+                txtStaffID.Text = Application["id"].ToString();
+                txtName.Text = Application["name"].ToString();
+                txtEmail.Text = Application["email"].ToString();
             }
-            con.Close();
+            else
+            {
+                SqlConnection con = new SqlConnection();
+                string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                con = new SqlConnection(strCon);
+                con.Open();
+                string strSqlQuery = "Select * from Staff Where Staff_ID = " + id;
+                SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
+                SqlDataReader rd = cmdSelect.ExecuteReader();
+                while (rd.Read())
+                {
+                    imgProfile.ImageUrl = "data:Image/png;base64," + Convert.ToBase64String((byte[])rd["Photo"]);
+                    txtStaffID.Text = rd["Staff_ID"].ToString();
+                    txtName.Text = rd["Name"].ToString();
+                    txtEmail.Text = rd["Email"].ToString();
+                }
+                con.Close();
+            }
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -76,6 +92,12 @@ namespace FYP.Project
         protected void btnEditt_Click(object sender, EventArgs e)
         {
             SetEnable();
+            if (Session["role"].ToString() == "Admin")
+            {
+                btnDeletes.Visible = false;
+                FileUpload1.Visible = false;
+                lblFileUpload.Visible = false;
+            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

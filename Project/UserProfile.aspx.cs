@@ -236,6 +236,9 @@ namespace FYP.Project
         private void SetEnable()
         {
             RegularExpressionValidator1.Enabled = true;
+            RangeValidator1.Enabled = true;
+            RangeValidator2.Enabled = true;
+            RangeValidator3.Enabled = true;
 
             btnEditt.Visible = false;
             btnSave.Visible = true;
@@ -351,7 +354,7 @@ namespace FYP.Project
             //{
             //    return;
             //}
-            string folderPath = Server.MapPath("~/Image/");
+            string folderPath = Server.MapPath("~/Images/");
             string fileName = "";
 
             //Check whether Directory (Folder) exists.
@@ -373,14 +376,14 @@ namespace FYP.Project
                 if (result == "jpg" || result == "JPG" || result == "jpeg" || result == "JPEG" || result == "png" || result == "PNG")
                 {
                     FileUpload1.SaveAs(folderPath + fileName);
-                    string checkFileExist = Server.MapPath("~/Image/tempProfile.png");
+                    string checkFileExist = Server.MapPath("~/Images/tempProfile.png");
                     if (File.Exists(checkFileExist))
                     {
                         //If folder exists, Delete it.
                         System.IO.File.Delete(checkFileExist);
                     }
                     System.IO.File.Move(folderPath + fileName, folderPath + "tempProfile.png");
-                    fileName = "~/Image/tempProfile.png";
+                    fileName = "~/Images/tempProfile.png";
                 }
                 else
                 {
@@ -604,6 +607,9 @@ namespace FYP.Project
                 }
             }
             ResetDisable();
+            RangeValidator1.Enabled = false;
+            RangeValidator2.Enabled = false;
+            RangeValidator3.Enabled = false;
             btnSave.Visible = false;
             btnEditt.Visible = true;
             BindData(txtStaffID.Text);

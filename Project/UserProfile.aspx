@@ -202,7 +202,8 @@
             <div class="form-group">
                 <label>
                     Basic Salary
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Basic Salary Required" ControlToValidate="txtBasicSalary" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Basic Salary Required" ControlToValidate="txtBasicSalary" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtBasicSalary" ErrorMessage="Only Numbers allowed" MinimumValue="0" Type="Double" ForeColor="Red"></asp:RangeValidator>
                 </label>
                 <asp:TextBox ID="txtBasicSalary" runat="server" CssClass="form-control" placeholder="Basic Salary*" Text="0" TextMode="Number" step="any" min="0"></asp:TextBox>
             </div>
@@ -211,11 +212,13 @@
                 <div class="rows">
                     <label class="column" style="margin-right: 2%">
                         Hourly Rate
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Hourly Rate Required" ControlToValidate="txtHourlyRate" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Hourly Rate Required" ControlToValidate="txtHourlyRate" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtHourlyRate" ErrorMessage="Only Numbers allowed" MinimumValue="0" Type="Double" ForeColor="Red"></asp:RangeValidator>                    
                     </label>
                     <label class="column">
                         Overtime Rate
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="Overtime Rate Required" ControlToValidate="txtOvertimeRate" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="Overtime Rate Required" ControlToValidate="txtOvertimeRate" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RangeValidator ID="RangeValidator3" runat="server" ControlToValidate="txtOvertimeRate" ErrorMessage="Only Numbers allowed" MinimumValue="0" Type="Double" ForeColor="Red"></asp:RangeValidator>                                        
                     </label>
                 </div>
                 <div class="rows">

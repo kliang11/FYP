@@ -496,8 +496,8 @@ namespace FYP.Project
                             totalWorkingHour = 0.0;
                         }
                         if (salary == 0)
-                            salary = totalWorkingHour;
-                        EpfCalculation(salary, employeeEpfRate, employerEpfRate);  //EPF
+                            salary = totalWorkingHour; 
+                        EpfCalculation(salary, employeeEpfRate, employerEpfRate, bonus);  //EPF
                         if (socsoCategory != "No Contribution")  //SOCSO
                         {
                             if (socsoCategory == "Employment Injury & Invalidity")
@@ -830,12 +830,12 @@ namespace FYP.Project
 
             return roundUpValue;
         }
-        private void EpfCalculation(double basicSalary, double EmployeePercentage, double EmployerPercentage)
+        private void EpfCalculation(double basicSalary, double EmployeePercentage, double EmployerPercentage, double bonus)
         {
             //epf calculation
             bool exit = false;
             double epfEmployer = 0.0, epfEmployee = 0.0;
-            double salary = basicSalary; //Convert.ToDouble(TextBox1.Text); //temp
+            double salary = basicSalary+bonus; //Convert.ToDouble(TextBox1.Text); //temp
             double increaseValue = 20.00;
             double bottomValue = 20.01, topValue = 40.00;
             double range = 0;
