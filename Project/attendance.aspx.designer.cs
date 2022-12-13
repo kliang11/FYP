@@ -132,6 +132,15 @@ namespace FYP.Project
         protected global::System.Web.UI.WebControls.Label lblTimeInError;
 
         /// <summary>
+        /// lblTimeInError2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTimeInError2;
+
+        /// <summary>
         /// txtTimeOut control.
         /// </summary>
         /// <remarks>

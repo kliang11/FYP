@@ -141,7 +141,7 @@ namespace FYP.Project
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvList.EditIndex)
             {
                 if ((e.Row.FindControl("lblCardStatus") as Label).Text.Equals("In Use"))
-                    (e.Row.FindControl("lblCardStatus") as Label).CssClass = "label_red";
+                    (e.Row.FindControl("lblCardStatus") as Label).CssClass = "label_redInUse";
                 else if ((e.Row.FindControl("lblCardStatus") as Label).Text.Equals("Available"))
                     (e.Row.FindControl("lblCardStatus") as Label).CssClass = "label_green";
                 if ((e.Row.FindControl("lblStaffName") as Label).Text.Equals(""))

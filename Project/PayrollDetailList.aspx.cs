@@ -298,7 +298,8 @@ namespace FYP.Project
             GridViewRow rows = gvList.Rows[row.RowIndex];
             double salary = Convert.ToDouble((rows.FindControl("lblBasicSalary") as Label).Text);
             double bonus = Convert.ToDouble((rows.FindControl("txtBonus") as TextBox).Text);
-            double unpaidLeaveSalary = Convert.ToDouble((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text);
+            double unpaidLeaveSalary = 0.0;
+            unpaidLeaveSalary = Convert.ToDouble((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text);
             string payperiod = Request.QueryString["payperiod"];
 
             string command = e.CommandName;
@@ -376,11 +377,11 @@ namespace FYP.Project
                                 }
                             }
                         }
-                        if (abc != "" && abc != null)                        
-                            totalEpfPaid = Convert.ToDouble(abc);                        
-                        if (xyz != "" && xyz != null)                        
-                            totalPcbPaid = Convert.ToDouble(xyz);                        
-                        if (qwe != "" && qwe != null)                        
+                        if (abc != "" && abc != null)
+                            totalEpfPaid = Convert.ToDouble(abc);
+                        if (xyz != "" && xyz != null)
+                            totalPcbPaid = Convert.ToDouble(xyz);
+                        if (qwe != "" && qwe != null)
                             totalSalaryGet = Convert.ToDouble(qwe);
 
                         abc = "";
@@ -399,7 +400,7 @@ namespace FYP.Project
                                     SqlDataReader rd = cmd.ExecuteReader();
                                     while (rd.Read())
                                     {
-                                        abc = rd["BasicSalary"].ToString();                                        
+                                        abc = rd["BasicSalary"].ToString();
                                     }
                                     con.Close();
                                 }
@@ -449,7 +450,7 @@ namespace FYP.Project
                                     {
                                         string aaa = rd["TotalWorkingHour"].ToString();
                                         string bbb = rd["TotalOvertime"].ToString();
-                                        if(aaa!="")
+                                        if (aaa != "")
                                             totalWorkingHour = Convert.ToDouble(abc);
                                         if (bbb != "")
                                             totalOvertime = Convert.ToDouble(bbb);
@@ -484,7 +485,7 @@ namespace FYP.Project
                                         SqlDataReader rd = cmd.ExecuteReader();
                                         while (rd.Read())
                                         {
-                                            string abcd  = rd["LateCount"].ToString();
+                                            string abcd = rd["LateCount"].ToString();
                                             if (abcd != "")
                                                 numberOfLate = Int16.Parse(abcd);
                                         }
@@ -496,19 +497,19 @@ namespace FYP.Project
                             totalWorkingHour = 0.0;
                         }
                         if (salary == 0)
-                            salary = totalWorkingHour; 
-                        EpfCalculation(salary, employeeEpfRate, employerEpfRate, bonus);  //EPF
+                            salary = totalWorkingHour;
+                        EpfCalculation(salary - unpaidLeaveSalary - lateDeduction, employeeEpfRate, employerEpfRate, bonus); //EPF
                         if (socsoCategory != "No Contribution")  //SOCSO
                         {
                             if (socsoCategory == "Employment Injury & Invalidity")
                             {
                                 firstCategory = true;
                             }
-                            SocsoCalculation(firstCategory, salary);
+                            SocsoCalculation(firstCategory, salary - unpaidLeaveSalary - lateDeduction);
                         }
                         if (eisContribution == "Yes")   //EIS
                         {
-                            EisCalculation(salary);
+                            EisCalculation(salary - unpaidLeaveSalary - lateDeduction);
                         }
                         if (taxStatus != "No Contribution")  //TAX
                         {
@@ -528,7 +529,7 @@ namespace FYP.Project
                                 IsSpouseWorking = true;
                             if (bonus != 0.0)
                                 IsAdditionalRemuneration = true;
-                            pcb = TaxCalculation(salary, isSelfDisable, isSpouseDisable, IsSpouseWorking, isSingle, IsAdditionalRemuneration, date, totalEpfPaid, numChild, totalPcbPaid, totalSalaryGet, bonus);
+                            pcb = TaxCalculation(salary - unpaidLeaveSalary - lateDeduction, isSelfDisable, isSpouseDisable, IsSpouseWorking, isSingle, IsAdditionalRemuneration, date, totalEpfPaid, numChild, totalPcbPaid, totalSalaryGet, bonus);
                         }
 
                         constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -567,10 +568,12 @@ namespace FYP.Project
                                 cmd.Parameters.AddWithValue("@ClaimReceiveDate", staffID.ToString() + id.ToString());
                                 cmd.Connection = con;
                                 con.Open();
-                                int a = cmd.ExecuteNonQuery();
+                                int a = cmd.ExecuteNonQuery();                               
                                 con.Close();
                             }
                         }
+
+
                         if (lblEmployeeEPF.Text.Trim() == "")
                             lblEmployeeEPF.Text = "0.0";
                         if (lblEmployeeSocso.Text.Trim() == "")
@@ -588,8 +591,9 @@ namespace FYP.Project
                              Convert.ToDouble(lblEmployeeEPF.Text.Trim()), Convert.ToDouble(lblEmployeeSocso.Text.Trim()), Convert.ToDouble(lblEmployeeEIS.Text.Trim()),
                              pcb, Convert.ToDouble(lblEmployerEPF.Text.Trim()), Convert.ToDouble(lblEmployerSocso.Text.Trim()), Convert.ToDouble(lblEmployerEIS.Text.Trim())
                              , totalClaimAmount, totalWorkingHour, totalOvertime);
-
-                        Response.Redirect(string.Format("~/Project/PayslipPage.aspx?id={0}&payperiod={1}&date1={2}&date2={3}&staffID={4}", id, payperiod, firstDay, lastDay, staffID));
+                        string iddd = Request.QueryString["id"];
+                        this.BindGrid(Int16.Parse(iddd));
+                        //Response.Redirect(string.Format("~/Project/PayslipPage.aspx?id={0}&payperiod={1}&date1={2}&date2={3}&staffID={4}", id, payperiod, firstDay, lastDay, staffID));
                         break;
                     }
 
@@ -835,14 +839,14 @@ namespace FYP.Project
             //epf calculation
             bool exit = false;
             double epfEmployer = 0.0, epfEmployee = 0.0;
-            double salary = basicSalary+bonus; //Convert.ToDouble(TextBox1.Text); //temp
+            double salary = basicSalary + bonus; //Convert.ToDouble(TextBox1.Text); //temp
             double increaseValue = 20.00;
             double bottomValue = 20.01, topValue = 40.00;
             double range = 0;
             double epfEmployeePercentage = EmployeePercentage, epfEmployerPercentage = EmployerPercentage;
             int age = 0;
 
-            if (salary == 0)
+            if (salary <= 0)
                 return;
             if (salary >= 0.01 && salary <= 10.00)
             {
@@ -924,7 +928,7 @@ namespace FYP.Project
             double bottomValue = 200.01, topValue = 300.00;
             double eisPercentage = 0.002;
 
-            if (salary == 0)
+            if (salary <= 0)
                 return;
             if (salary >= 0.01 && salary <= 30.00)
                 eisEmployer = eisEmployee = 0.05;
@@ -967,7 +971,7 @@ namespace FYP.Project
             double socsoEmployeePercentage = 0.005, socsoEmployerPercentage = 0.0175;
             bool firstCategory = IsfirstCategory;
 
-            if (salary == 0)
+            if (salary <= 0)
                 return;
             if (salary >= 0.01 && salary <= 30.00)
             {
@@ -1048,7 +1052,7 @@ namespace FYP.Project
         }
         private double TaxCalculation(double basicSalary, bool IsSelfDisable, bool IsSpouseDisable, bool IsMarriedSpouseWork, bool IsSingle, bool IsAdditionalRemuneration, string month, double totalEpfPaidBefore, int numChild, double totalPcbPaidBefore, double totalSalaryGetBefore, double bonus)
         {
-            if (basicSalary == 0)
+            if (basicSalary <= 0)
                 return 0;
             //tax, pcb or mtb
             //PCB for the current month = [ [ ( P – M ) R + B ] – ( Z + X ) ] / (n + 1)
@@ -1072,7 +1076,7 @@ namespace FYP.Project
             double zakat = 0.0;
             double salary = basicSalary;
             bool selfDisabled = IsSelfDisable, spouseDisable = IsSpouseDisable, married_spouseWork = IsMarriedSpouseWork;
-            bool additionalRemuneration =  IsAdditionalRemuneration;
+            bool additionalRemuneration = IsAdditionalRemuneration;
 
             //calculation for P
             //[∑(Y - K) + (Y1 - K1) +[(Y2 - K2)n] ]-(D + S + Du + Su + QC +∑LP + LP1)
@@ -1200,7 +1204,7 @@ namespace FYP.Project
             //normal pcb done for above code
 
 
-            if (additionalRemuneration) 
+            if (additionalRemuneration)
             {
                 //calculation for pcb(b)
                 double pcb_B = 0.0;

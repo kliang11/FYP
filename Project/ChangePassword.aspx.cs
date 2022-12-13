@@ -40,13 +40,13 @@ namespace FYP.Project
 
                     txtCurrentPw.Attributes["type"] = "password";
                     txtNewPw.Attributes["type"] = "password";
-                    txtConfirmNewPw.Attributes["type"] = "password";                  
+                    txtConfirmNewPw.Attributes["type"] = "password";
 
                     SqlConnection con = new SqlConnection();
                     string strCon = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                     con = new SqlConnection(strCon);
                     con.Open();
-                    string strSqlQuery = "Select * from Staff Where Staff_ID = " + Int16.Parse(Session["id"].ToString()); 
+                    string strSqlQuery = "Select * from Staff Where Staff_ID = " + Int16.Parse(Session["id"].ToString());
                     SqlCommand cmdSelect = new SqlCommand(strSqlQuery, con);
                     SqlDataReader rd = cmdSelect.ExecuteReader();
                     while (rd.Read())
@@ -106,7 +106,7 @@ namespace FYP.Project
                     return;
                 }
 
-                if(txtCurrentPw.Text != lblStorePassword.Text)
+                if (txtCurrentPw.Text != lblStorePassword.Text)
                 {
                     lblErrorMsg.Text = "'Current Password' is not match.";
                     lblErrorMsg.Visible = true;
@@ -123,9 +123,9 @@ namespace FYP.Project
                 lblErrorMsg.Visible = true;
                 return;
             }
-            else 
+            else
             {
-                if(txtNewPw.Text == lblStorePassword.Text && txtConfirmNewPw.Text == lblStorePassword.Text)
+                if (txtNewPw.Text == lblStorePassword.Text && txtConfirmNewPw.Text == lblStorePassword.Text)
                 {
                     txtNewPw.Focus();
                     lblErrorMsg.Text = "New Password cannot be match as old password.";
@@ -134,7 +134,7 @@ namespace FYP.Project
                 }
             }
             Regex validateGuidRegex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$");
-            if(txtConfirmNewPw.Text.Length < 8 || txtConfirmNewPw.Text.Length > 20)
+            if (txtConfirmNewPw.Text.Length < 8 || txtConfirmNewPw.Text.Length > 20)
             {
                 txtNewPw.Focus();
                 lblErrorMsg.Text = "Password length must within 8-20 characters.";
@@ -157,11 +157,8 @@ namespace FYP.Project
                 Application["password"] = txtConfirmNewPw.Text;
                 string redirect = Request.QueryString["redirect"];
                 if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
-                {
-                    if (Session["role"].ToString() == "HR Staff")
-                        url = "~/Project/attendance.aspx";
-                    else if (Session["role"].ToString() == "Normal Staff")
-                        url = "~/Project/attendanceStaff.aspx";
+                {                    
+                   url = "EmployeeList.aspx";
                 }
                 else
                 {
@@ -191,9 +188,16 @@ namespace FYP.Project
                                 if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
                                 {
                                     if (Session["role"].ToString() == "HR Staff")
-                                        url = "~/Project/attendance.aspx";
+                                    {
+                                        //url = "~/Project/attendance.aspx";
+                                        url = "attendance.aspx";
+
+                                    }
                                     else if (Session["role"].ToString() == "Normal Staff")
-                                        url = "~/Project/attendanceStaff.aspx";
+                                    {
+                                        //url = "~/Project/attendanceStaff.aspx";
+                                        url = "attendanceStaff.aspx";
+                                    }
                                 }
                                 else
                                 {
@@ -207,10 +211,11 @@ namespace FYP.Project
                 catch
                 {
                     message = "Password update unsuccessful. Please try again.";
-                    url = "~/Project/ChangePassword.aspx";
+                    //url = "~/Project/ChangePassword.aspx";
+                    url = "ChangePassword.aspx";
                 }
             }
-            
+
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", false);
 
 

@@ -78,8 +78,8 @@ namespace FYP.Project
                     while (rd.Read())
                     {
                         DateTime.TryParse(rd["Date"].ToString(), out dateForMonth);
-                        string abc = Convert.ToDateTime(dateForMonth).ToString("MM-dd-yyyy");
-                        dateForMonth = DateTime.Parse(abc);
+                        //string abc = Convert.ToDateTime(dateForMonth).ToString("dd-MM-yyyy");
+                        //dateForMonth = DateTime.Parse(abc);
                         payPeriodForMonth = rd["Payperiod"].ToString();
                         checkMonth = 1;
                     }
@@ -620,7 +620,7 @@ namespace FYP.Project
             if (txtDatePopUp.TextMode == TextBoxMode.Month)
             {
                 string abc = txtDatePopUp.Text.Trim() + "-01";
-                abc = Convert.ToDateTime(abc).ToString("MM-dd-yyyy");
+                abc = Convert.ToDateTime(abc).ToString("dd-MM-yyyy");
                 date = DateTime.Parse(abc);
                 stringDate = date.ToString("MMMM yyyy");
             }

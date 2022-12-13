@@ -153,7 +153,7 @@
                     Date Joined
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="Date Joined Required" ControlToValidate="txtDateJoin" ForeColor="Red"></asp:RequiredFieldValidator>
                 </label>
-                <asp:TextBox ID="txtDateJoin" runat="server" CssClass="form-control" placeholder="Date Joined*" type="date"></asp:TextBox>
+                <asp:TextBox ID="txtDateJoin" runat="server" CssClass="form-control" placeholder="Date Joined*" Text='DateTime.Now.ToString("yyyy-MM-dd")' TextMode="Date"></asp:TextBox>
             </div>
             <div class="form-group">
                 <label>

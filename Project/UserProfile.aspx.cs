@@ -97,7 +97,10 @@ namespace FYP.Project
                 if (rd["DateJoined"].ToString() != "")
                 {
                     string s = rd["DateJoined"].ToString();
-                    var date = DateTime.ParseExact(s, "d/M/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //var date = DateTime.ParseExact(s, "M/d/yyyy", CultureInfo.InvariantCulture);
+                    var date = Convert.ToDateTime(s);
+                    //txtDateJoin.Text = date.ToString("yyyy-MM-dd");
+                    //txtDateJoin.Text = Convert.ToDateTime(s).ToShortDateString().ToString();
                     txtDateJoin.Text = date.ToString("yyyy-MM-dd");
                 }
                 txtDepartment.Text = rd["Department"].ToString();
@@ -522,7 +525,11 @@ namespace FYP.Project
             string azz = txtDateJoin.Text.ToString();
             DateTime dateJoin = DateTime.MaxValue;
             if (azz != "")
-                dateJoin = DateTime.ParseExact(txtDateJoin.Text.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            {
+                //dateJoin = DateTime.ParseExact(txtDateJoin.Text.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                dateJoin = Convert.ToDateTime(azz);
+            }
+              
 
             string department = txtDepartment.Text.ToString();
             string position = txtPosition.Text.ToString();
