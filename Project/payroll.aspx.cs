@@ -618,7 +618,7 @@ namespace FYP.Project
             if (txtDatePopUp.TextMode == TextBoxMode.Month)
             {
                 string abc = txtDatePopUp.Text.Trim() + "-01";
-                abc = Convert.ToDateTime(abc).ToString("dd-MM-yyyy");
+                abc = Convert.ToDateTime(abc).ToString("MM-dd-yyyy");
                 date = DateTime.Parse(abc);
                 stringDate = date.ToString("MMMM yyyy");
             }

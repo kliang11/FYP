@@ -16,7 +16,10 @@ namespace FYP
             {
                 if (Session["role"].ToString() == "Admin")
                 {
-                    name.InnerText = "Admin";
+                    if (Application["name"] != null)
+                        name.InnerText = Application["name"].ToString();
+                    else
+                        name.InnerText = "Admin";
                 }
                 else
                 {
