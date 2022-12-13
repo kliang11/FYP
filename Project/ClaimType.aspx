@@ -48,7 +48,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Maximum Claim Amount" ItemStyle-Width="20%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblAmount" runat="server" Text='<%# (Eval("MaxClaim"))%>'></asp:Label>
+                                    <asp:Label ID="lblAmount" runat="server" Text='<%#"RM " + (Eval("MaxClaim"))%>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtAmount" runat="server" Text='<%# Eval("MaxClaim") %>' TextMode="Number" step="any"></asp:TextBox>
@@ -86,6 +86,7 @@
                         <label for="message-text" class="col-form-label">Amount (RM):</label>
                         <asp:TextBox ID="txt_Amount" runat="server" class="form-control" TextMode="Number" step="any" min="0" Text="0" placeholder="Amount* - eg.1000"></asp:TextBox>
                         <asp:Label ID="lbl_AmountError" Style="display: none" runat="server" ForeColor="Red" Font-Size="Smaller" Text="Amount is required"></asp:Label>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txt_Amount" ErrorMessage="Only Numbers allowed" MinimumValue="0" Type="Double" ForeColor="Red" Display="Dynamic" Font-Size="Smaller"></asp:RangeValidator>                    
                     </div>
                 </div>
                 <div class="modal-footer">

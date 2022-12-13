@@ -97,7 +97,10 @@ namespace FYP.Project
                 if (rd["DateJoined"].ToString() != "")
                 {
                     string s = rd["DateJoined"].ToString();
-                    var date = DateTime.ParseExact(s, "d/M/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //var date = DateTime.ParseExact(s, "M/d/yyyy", CultureInfo.InvariantCulture);
+                    var date = Convert.ToDateTime(s);
+                    //txtDateJoin.Text = date.ToString("yyyy-MM-dd");
+                    //txtDateJoin.Text = Convert.ToDateTime(s).ToShortDateString().ToString();
                     txtDateJoin.Text = date.ToString("yyyy-MM-dd");
                 }
                 txtDepartment.Text = rd["Department"].ToString();
@@ -236,6 +239,9 @@ namespace FYP.Project
         private void SetEnable()
         {
             RegularExpressionValidator1.Enabled = true;
+            RangeValidator1.Enabled = true;
+            RangeValidator2.Enabled = true;
+            RangeValidator3.Enabled = true;
 
             btnEditt.Visible = false;
             btnSave.Visible = true;
@@ -351,7 +357,7 @@ namespace FYP.Project
             //{
             //    return;
             //}
-            string folderPath = Server.MapPath("~/Image/");
+            string folderPath = Server.MapPath("~/Images/");
             string fileName = "";
 
             //Check whether Directory (Folder) exists.
@@ -373,14 +379,14 @@ namespace FYP.Project
                 if (result == "jpg" || result == "JPG" || result == "jpeg" || result == "JPEG" || result == "png" || result == "PNG")
                 {
                     FileUpload1.SaveAs(folderPath + fileName);
-                    string checkFileExist = Server.MapPath("~/Image/tempProfile.png");
+                    string checkFileExist = Server.MapPath("~/Images/tempProfile.png");
                     if (File.Exists(checkFileExist))
                     {
                         //If folder exists, Delete it.
                         System.IO.File.Delete(checkFileExist);
                     }
                     System.IO.File.Move(folderPath + fileName, folderPath + "tempProfile.png");
-                    fileName = "~/Image/tempProfile.png";
+                    fileName = "~/Images/tempProfile.png";
                 }
                 else
                 {
@@ -519,7 +525,11 @@ namespace FYP.Project
             string azz = txtDateJoin.Text.ToString();
             DateTime dateJoin = DateTime.MaxValue;
             if (azz != "")
-                dateJoin = DateTime.ParseExact(txtDateJoin.Text.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            {
+                //dateJoin = DateTime.ParseExact(txtDateJoin.Text.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                dateJoin = Convert.ToDateTime(azz);
+            }
+              
 
             string department = txtDepartment.Text.ToString();
             string position = txtPosition.Text.ToString();
@@ -604,6 +614,9 @@ namespace FYP.Project
                 }
             }
             ResetDisable();
+            RangeValidator1.Enabled = false;
+            RangeValidator2.Enabled = false;
+            RangeValidator3.Enabled = false;
             btnSave.Visible = false;
             btnEditt.Visible = true;
             BindData(txtStaffID.Text);

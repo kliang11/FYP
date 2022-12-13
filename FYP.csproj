@@ -135,6 +135,7 @@
     <Content Include="Project\PayrollReportReal.aspx" />
     <Content Include="Project\PayrollStaff.aspx" />
     <Content Include="Project\PayslipPage.aspx" />
+    <Content Include="Project\ProfilePage.aspx" />
     <Content Include="Project\rfid.aspx" />
     <Content Include="Project\sideBar.css" />
     <Content Include="Project\style.css" />
@@ -303,6 +304,13 @@
     </Compile>
     <Compile Include="Project\PayslipPage.aspx.designer.cs">
       <DependentUpon>PayslipPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\ProfilePage.aspx.cs">
+      <DependentUpon>ProfilePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ProfilePage.aspx.designer.cs">
+      <DependentUpon>ProfilePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\staffReport.aspx.cs">
       <DependentUpon>staffReport.aspx</DependentUpon>

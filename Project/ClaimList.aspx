@@ -81,7 +81,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Claim Amount" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblClaimAmount" runat="server" Text='<%# "RM"+ Eval("ClaimAmount")%>'></asp:Label>
+                                    <asp:Label ID="lblClaimAmount" runat="server" Text='<%# "RM "+ Eval("ClaimAmount")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-CssClass="hideGridColumn" HeaderStyle-CssClass="hideGridColumn">

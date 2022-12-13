@@ -90,15 +90,27 @@ namespace FYP.Project
             }
 
             //admin login
-            if (txtEmail.Text.Trim() == "admin@gmail.com" && txtPassword.Text == "123456")
+            if (Application["password"] == null) 
+                Application["password"] = "123456";
+            string x = Application["password"].ToString();
+            if (txtEmail.Text.Trim() == "admin@gmail.com" && txtPassword.Text == Application["password"].ToString())
             {
                 IsWrong = false;
                 Session["email"] = txtEmail.Text.Trim().ToString();
                 Session["role"] = "Admin";
                 Session["id"] = "0";
-                Session["resetPW"] = "no";
+                Session["resetPW"] = "no";                
+                Application["email"] = Session["email"].ToString();
+                if(Application["name"] == null)
+                    Application["name"] = "Admin";
+                Application["role"] = Session["role"].ToString();
+                Application["id"] = Session["id"].ToString();
+                Application["resetPW"] = Session["resetPW"].ToString();
                 SaveCookies();
-                Response.Redirect("~/Project/EmployeeList.aspx");
+                if (this.Request.QueryString["ReturnUrl"] != null)                
+                    Response.Redirect("~/Project/" + Request.QueryString["ReturnUrl"].ToString());
+                else
+                    Response.Redirect("~/Project/EmployeeList.aspx");
             }
             else
             {

@@ -17,7 +17,11 @@ namespace FYP.Project
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            if (Session["email"] == null)
+            {
+                //Redirect to Login Page if Session is null & Expires     
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -55,6 +59,17 @@ namespace FYP.Project
                 }
 
 
+            }
+            else if (serverError.GetHttpCode() == 403)
+            {
+                Server.ClearError();
+                Server.Transfer("403error.html");
+            }
+
+            else
+            {
+                Server.ClearError();
+                Server.Transfer("ContactAdmin.html");
             }
         }
 

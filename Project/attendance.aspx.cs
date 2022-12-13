@@ -201,11 +201,11 @@ namespace FYP.Project
             string checkTimeOut = (row.FindControl("txtTimeOut") as TextBox).Text;
 
             if(TimeSpan.Compare(Convert.ToDateTime(checkTimeIn).TimeOfDay, Convert.ToDateTime(checkTimeOut).TimeOfDay) == 1)
+
             {
                 (row.FindControl("lbltxtFalse") as Label).Style.Add("display", "block");
                 return;
             }
-
 
             string attendanceStatus = "Pending";
             string isLate = "N";

@@ -53,8 +53,12 @@ namespace FYP.Project
         protected void gvList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID");
+            Label b = (Label)gvList.SelectedRow.FindControl("lblStaffRole");
             string id = a.Text.ToString();
-            Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
+            if (b.Text == "Normal Staff")
+                Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
+            else
+                Response.Redirect(string.Format("~/Project/ProfilePage.aspx?id={0}", id));
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -62,6 +66,11 @@ namespace FYP.Project
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvList.EditIndex)
             {
                 (e.Row.Cells[5].Controls[0] as ImageButton).Attributes["onclick"] = "if(!confirm('Are you sure you want to delete?')) return false;";
+                //if ((e.Row.FindControl("lblStaffRole") as Label).Text.Equals("HR Staff"))
+                //{
+                //    //(e.Row.Cells[6].Controls[0] as ImageButton).Visible = false; // for HR is work but not work for admin
+                //    (e.Row.Cells[6].Controls[0] as ImageButton).Attributes["onclick"] = "if(!confirm('Are you sure you want to go?')) return false;";
+                //}
             }
         }
 
@@ -134,7 +143,8 @@ namespace FYP.Project
         private void resetDefault()
         {
             txtStaffEmailPopUp.Text = "";
-            txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none";
+            //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none";
+            txtStaffEmailPopUp.BorderColor = System.Drawing.Color.Empty;
             lbl_EmailError.Attributes["style"] = "display:none;";
             ddlRole.SelectedValue = "Normal Staff";
         }
@@ -166,10 +176,12 @@ namespace FYP.Project
             {
                 //message = "Email has been registered. Please enter another email.";
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", true);
-                txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:none;";
+                //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"Red\";"; //display: none;
+                txtStaffEmailPopUp.BorderColor = System.Drawing.Color.Red;
                 rejectReasonPopup.Visible = true;
-                lbl_EmailError.Text = "Email has been registered. Please enter another email.";
-                txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"\"; display:block";
+                lbl_EmailError.Text = "This email address already exists in the system. Please enter another email.";
+                //txtStaffEmailPopUp.Attributes["style"] = "borderColor: \"Red\"; display:block";
+                lbl_EmailError.Attributes["style"] = "display:block;";
                 this.BindGrid();
             }
             else //input email is not exists in database

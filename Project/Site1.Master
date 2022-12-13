@@ -40,7 +40,7 @@
                             <h5 id="name" runat="server" class="mb-0 text-white nav-user-name">Name</h5>
                             <span id="role" runat="server" class="status"></span><span class="ml-2"></span>
                         </div>
-                        <a class="dropdown-item" href="UserProfile.aspx?redirect=yes" id="dropdownprofile" runat="server"><i class="fas fa-user mr-2"></i>Profile</a>
+                        <a class="dropdown-item" href="ProfilePage.aspx?redirect=yes" id="dropdownprofile" runat="server"><i class="fas fa-user mr-2"></i>Profile</a>
                         <a class="dropdown-item" href="ChangePassword.aspx?redirect=yes" id="dropdownchangePW" runat="server"><i class="fas fa-cog mr-2"></i>Change Password</a>
                         <a class="dropdown-item" href="Logout.aspx"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </div>

@@ -57,7 +57,6 @@
                         </asp:TemplateField>
                         <asp:CommandField ButtonType="Image" ControlStyle-CssClass="button"
                             DeleteImageUrl="~/Image/bin.png" ShowDeleteButton="true"
-                            SelectImageUrl="~/Image/detail.png" ShowSelectButton="True"
                             HeaderText="Actions" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" />
                         <asp:CommandField ButtonType="Image" ControlStyle-CssClass="button"
                             SelectImageUrl="~/Image/detail.png" ShowSelectButton="True"
