@@ -50,6 +50,7 @@ namespace FYP
                         staffList.Style.Add("display", "none");
                         payroll.HRef = "~/Project/PayrollStaff.aspx";
                         claim.HRef = "~/Project/ApplyClaim.aspx";
+                        dropdownprofile.HRef = "~/Project/UserProfile.aspx?redirect=yes";
                     }
                     else if (Session["role"].ToString() == "Admin")
                     {
@@ -58,8 +59,8 @@ namespace FYP
                         attendance.Style.Add("display", "none");
                         leave.Style.Add("display", "none");
                         rfid.Style.Add("display", "none");
-                        dropdownprofile.Style.Add("display", "none");
-                        dropdownchangePW.Style.Add("display", "none");
+                        //dropdownprofile.Style.Add("display", "none");
+                        //dropdownchangePW.Style.Add("display", "none");
                         claim.HRef = "~/Project/ClaimType.aspx";
                         staffList.HRef = "~/Project/EmployeeList.aspx";
                     }

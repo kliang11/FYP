@@ -53,8 +53,12 @@ namespace FYP.Project
         protected void gvList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Label a = (Label)gvList.SelectedRow.FindControl("lblStaffID");
+            Label b = (Label)gvList.SelectedRow.FindControl("lblStaffRole");
             string id = a.Text.ToString();
-            Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
+            if (b.Text == "Normal Staff")
+                Response.Redirect(string.Format("~/Project/UserProfile.aspx?id={0}", id));
+            else
+                Response.Redirect(string.Format("~/Project/ProfilePage.aspx?id={0}", id));
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -62,6 +66,11 @@ namespace FYP.Project
             if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvList.EditIndex)
             {
                 (e.Row.Cells[5].Controls[0] as ImageButton).Attributes["onclick"] = "if(!confirm('Are you sure you want to delete?')) return false;";
+                //if ((e.Row.FindControl("lblStaffRole") as Label).Text.Equals("HR Staff"))
+                //{
+                //    //(e.Row.Cells[6].Controls[0] as ImageButton).Visible = false; // for HR is work but not work for admin
+                //    (e.Row.Cells[6].Controls[0] as ImageButton).Attributes["onclick"] = "if(!confirm('Are you sure you want to go?')) return false;";
+                //}
             }
         }
 
