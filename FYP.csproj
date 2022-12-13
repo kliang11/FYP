@@ -109,7 +109,6 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Image\bin.png" />
     <Content Include="Image\cancel.png" />
-    <Content Include="Image\company_logo.png" />
     <Content Include="Image\defaultProfileImg.png" />
     <Content Include="Image\download.png" />
     <Content Include="Image\editing.png" />
