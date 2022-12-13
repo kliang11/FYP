@@ -104,7 +104,7 @@ namespace FYP.Project
         {
             string staff_id = txtStaffID.Text.ToString();
             string action = "";
-
+            //===========================================
             byte[] bytes = null;
             byte[] imageBytes = null;
             var azzz = FileUpload1.PostedFile;
@@ -169,39 +169,48 @@ namespace FYP.Project
                     action = "UPDATEWITHOUTPHOTO";
                 }
             }
+            //===========================================
+
             string name = txtName.Text.ToString();
             string email = txtEmail.Text.ToString();
-            string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            if(Session["role"].ToString() == "Admin")
             {
-                using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
+                Application["name"] = name;
+            }
+            else
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Action", action);
-                    cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(staff_id));
-                    if (action == "UPDATE")
-                        cmd.Parameters.AddWithValue("@Photo", bytes);
-                    cmd.Parameters.AddWithValue("@Name", name);
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Connection = con;
-                    con.Open();
-                    int a = cmd.ExecuteNonQuery();
-                    con.Close();
-                    if (a == 0)
+                    using (SqlCommand cmd = new SqlCommand("Staff_CRUD"))
                     {
-                        string script = "alert('Save Unsuccessful. Please Try Again');";
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-                    }
-                    else
-                    {
-                        string script = "alert('Save Successfully.');";
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
-                        RegularExpressionValidator1.Enabled = false;
-                        Session["profileImg"] = "data:Image/png;base64," + Convert.ToBase64String(bytes);
-                        Session["name"] = name;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Action", action);
+                        cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(staff_id));
+                        if (action == "UPDATE")
+                            cmd.Parameters.AddWithValue("@Photo", bytes);
+                        cmd.Parameters.AddWithValue("@Name", name);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Connection = con;
+                        con.Open();
+                        int a = cmd.ExecuteNonQuery();
+                        con.Close();
+                        if (a == 0)
+                        {
+                            string script = "alert('Save Unsuccessful. Please Try Again');";
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+                        }
+                        else
+                        {
+                            string script = "alert('Save Successfully.');";
+                            ClientScript.RegisterClientScriptBlock(this.GetType(), "Alert", script, true);
+                            RegularExpressionValidator1.Enabled = false;
+                            Session["profileImg"] = "data:Image/png;base64," + Convert.ToBase64String(bytes);
+                            Session["name"] = name;
+                        }
                     }
                 }
-            }
+            }            
             ResetDisable();
             BindData(txtStaffID.Text);
 
