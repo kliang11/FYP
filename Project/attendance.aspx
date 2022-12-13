@@ -107,12 +107,14 @@
                                 <asp:Label ID="lblTimeIn" runat="server" Text='<%# Eval("AttendanceTimeIn")  %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtTimeIn" runat="server" Text='<%# Eval("AttendanceTimeIn") %>' TextMode="Time"></asp:TextBox>
+                                <asp:TextBox ID="txtTimeIn" runat="server" Text='<%# Eval("AttendanceTimeIn") %>' TextMode="Time" ></asp:TextBox>
+                                <br />
+                                <asp:Label ID="lbltxtFalse" runat="server" style="display:none;font-size:smaller;color:red" Text="Time In is longer than time out!"></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Time Out" ItemStyle-Width="16.5%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Label ID="lblTimeOut" runat="server" Text='<%# Eval("AttendanceTimeOut") %>'></asp:Label>
+                                <asp:Label ID="lblTimeOut" runat="server" Text='<%# Eval("AttendanceTimeOut") %>' ></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="txtTimeOut" runat="server" Text='<%# Eval("AttendanceTimeOut") %>' TextMode="Time"></asp:TextBox>
@@ -156,6 +158,7 @@
                         <label for="message-text" class="col-form-label">Time In:</label>
                         <asp:TextBox ID="txtTimeIn" runat="server" class="form-control" TextMode="Time"></asp:TextBox>
                         <asp:Label ID="lblTimeInError" Style="display: none" runat="server" ForeColor="Red" Font-Size="Smaller" Text="This field is required"></asp:Label>
+                        <asp:Label ID="lblTimeInError2" Style="display: none" runat="server" ForeColor="Red" Font-Size="Smaller" Text="Time In is longer than time out"></asp:Label>
                     </div>
 
                     <div class="form-group" style="margin: 0px 3px 10px">
@@ -182,6 +185,7 @@
             var timeOut = document.getElementById('<%= txtTimeOut.ClientID %>');
             var lblDateError = document.getElementById('<%= lbldateError.ClientID %>');
             var lblTimeInError = document.getElementById('<%= lblTimeInError.ClientID %>');
+            var lblTimeInError2 = document.getElementById('<%= lblTimeInError2.ClientID %>');
             var lblTimeOutError = document.getElementById('<%= lblTimeOutError.ClientID %>');
 
 
@@ -212,6 +216,15 @@
                 timeOut.style.borderColor = "";
                 lblTimeOutError.style.display = 'none';
             }
+            if (timeIn.value > timeOut.value) {
+                timeIn.style.borderColor = "Red";
+                lblTimeInError2.style.display = 'block';
+                validate = false;
+            }
+            else {
+                timeIn.style.borderColor = "";
+                lblTimeInError2.style.display = 'none';
+            }
             if (validate) {
                 document.getElementById("<%= btnConfirm.ClientID %>").click();
             }
@@ -222,6 +235,7 @@
             var timeOut = document.getElementById('<%= txtTimeOut.ClientID %>');
             var lblDateError = document.getElementById('<%= lbldateError.ClientID %>');
             var lblTimeInError = document.getElementById('<%= lblTimeInError.ClientID %>');
+            var lblTimeInError2 = document.getElementById('<%= lblTimeInError2.ClientID %>');
             var lblTimeOutError = document.getElementById('<%= lblTimeOutError.ClientID %>');
 
             date.value = "";
@@ -231,6 +245,7 @@
             lblDateError.style.display = 'none';
             timeIn.style.borderColor = "";
             lblTimeInError.style.display = 'none';
+            lblTimeInError2.style.display = 'none';
             timeOut.style.borderColor = "";
             lblTimeOutError.style.display = 'none';
         }

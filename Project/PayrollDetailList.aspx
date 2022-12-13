@@ -43,18 +43,18 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Basic Salary" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Label ID="lblBasicSalary" runat="server" Text='<%# Eval("BasicSalary") %>'></asp:Label>
+                                <asp:Label ID="lblBasicSalary" runat="server" Text='<%#"RM " + Eval("BasicSalary") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Bonus" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Label ID="lblBonus" runat="server" Text='<%# Eval("Bonus") %>' Visible="false"></asp:Label>
+                                <asp:Label ID="lblBonus" runat="server" Text='<%#"RM " +  Eval("Bonus") %>' Visible="false"></asp:Label>
                                 <asp:TextBox ID="txtBonus" runat="server" Text='<%# Eval("Bonus")  %>' CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Amount of unpaid leave" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
-                                <asp:Label ID="lblUnpaidLeaveSalary" runat="server" Text='<%# Eval("UnpaidLeaveSalary") %>'></asp:Label>
+                                <asp:Label ID="lblUnpaidLeaveSalary" runat="server" Text='<%#"RM " +  Eval("UnpaidLeaveSalary") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <%--                        <asp:TemplateField HeaderText="Bonus" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
