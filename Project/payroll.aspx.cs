@@ -78,6 +78,8 @@ namespace FYP.Project
                     while (rd.Read())
                     {
                         DateTime.TryParse(rd["Date"].ToString(), out dateForMonth);
+                        string abc = Convert.ToDateTime(dateForMonth).ToString("MM-dd-yyyy");
+                        dateForMonth = DateTime.Parse(abc);
                         payPeriodForMonth = rd["Payperiod"].ToString();
                         checkMonth = 1;
                     }
