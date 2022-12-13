@@ -25,7 +25,8 @@
             <div style="text-align: center; position: relative;">
                 <asp:LinkButton ID="btnDeletes" runat="server" CssClass="btn btn-light mb-2" OnClientClick="hideDeleteButton()" OnClick="btnDelete_Click" CausesValidation="False" Style="display: inline-block;"><i class="fas fa-trash"></i> Delete </asp:LinkButton>
             </div>
-            <label id="lblFileUpload" class="file-upload">
+
+            <label id="lblFileUpload" class="file-upload" runat="server">
                 <span><strong>Upload Image</strong></span>
                 <asp:FileUpload ID="FileUpload1" runat="server" onchange="showimagepreview(this)" accept="image/*" name="image"></asp:FileUpload>
             </label>
@@ -97,13 +98,12 @@
         var y = null;
         y = document.getElementById('<%= btnEditt.ClientID %>');
         if (x === null || y !== null) {
-            document.getElementById("lblFileUpload").style.display = "none";
+            document.getElementById('<%= lblFileUpload.ClientID %>').style.display = "none";
             document.getElementById('<%= btnDeletes.ClientID %>').style.display = "none";
         }
         else {
-            document.getElementById("lblFileUpload").style.display = "block";
+            document.getElementById('<%= lblFileUpload.ClientID %>').style.display = "block";
             document.getElementById('<%= btnDeletes.ClientID %>').style.display = "inline-block";
-
         }
         var url = "deleted!)^%$(!";
         url = document.getElementById("imgProfile").getAttribute("src");

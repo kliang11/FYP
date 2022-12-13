@@ -160,6 +160,7 @@
                         <label for="message-text" class="col-form-label">Claim Amount:</label>
                         <asp:TextBox ID="txt_Amount" runat="server" class="form-control" TextMode="Number" step="any" min="0"></asp:TextBox>
                         <asp:Label ID="lbl_Amount" Style="display: none" runat="server" ForeColor="Red" Font-Size="Smaller" Text="This field is required"></asp:Label>
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txt_Amount" ErrorMessage="Only Numbers allowed" MinimumValue="0" Type="Double" ForeColor="Red" Font-Size="Smaller"></asp:RangeValidator>                    
                     </div>
                     <div class="form-group" style="margin: 0px 3px 10px">
                         <span style="color: #FF0000">* </span>
@@ -284,6 +285,7 @@
                 lblDateToError.textContent = "The date is invalid";
                 dateTo.style.borderColor = "Red";
                 lblDateToError.style.display = 'block';
+                validate = false;
             }
             else {
                 dateTo.style.borderColor = "";

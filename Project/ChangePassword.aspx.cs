@@ -54,6 +54,8 @@ namespace FYP.Project
                         lblStorePassword.Text = rd["Password"].ToString();
                     }
                     con.Close();
+                    if (Session["role"].ToString() == "Admin")
+                        lblStorePassword.Text = Application["password"].ToString();
                     if (Session["resetPW"].ToString() == "yes")
                     {
                         lblTitle.Text = "Reset Password";
@@ -150,46 +152,68 @@ namespace FYP.Project
 
             string message = "Password has been updated.";
             string url = "";
-            try
+            if (Session["role"].ToString() == "Admin")
             {
-                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
+                Application["password"] = txtConfirmNewPw.Text;
+                string redirect = Request.QueryString["redirect"];
+                if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
                 {
-                    string sql = "UPDATE Staff SET Password = @Password, RenewPassword = @RenewPassword  WHERE Staff_ID = @Staff_ID";
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Password", txtConfirmNewPw.Text);
-                        cmd.Parameters.AddWithValue("@RenewPassword", "no");
-                        cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(Session["id"].ToString()));
-                        cmd.Connection = con;
-                        con.Open();
-                        int a = cmd.ExecuteNonQuery();
-                        if (a > 0)
-                        {
-                            Session["resetPW"] = "no";
-                            string redirect = Request.QueryString["redirect"];
-                            if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
-                            {
-                                if (Session["role"].ToString() == "HR Staff")
-                                    url = "~/Project/attendance.aspx";
-                                else if (Session["role"].ToString() == "Normal Staff")
-                                    url = "~/Project/attendanceStaff.aspx";
-                            }
-                            else
-                            {
-                                url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
-                            }
-                        }
-                        con.Close();
-                    }
+                    if (Session["role"].ToString() == "HR Staff")
+                        url = "~/Project/attendance.aspx";
+                    else if (Session["role"].ToString() == "Normal Staff")
+                        url = "~/Project/attendanceStaff.aspx";
+                }
+                else
+                {
+                    url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
                 }
             }
-            catch
+            else
             {
-                message = "Password update unsuccessful. Please try again.";
-                url = "~/Project/ChangePassword.aspx";
+                try
+                {
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        string sql = "UPDATE Staff SET Password = @Password, RenewPassword = @RenewPassword  WHERE Staff_ID = @Staff_ID";
+                        using (SqlCommand cmd = new SqlCommand(sql, con))
+                        {
+                            cmd.Parameters.AddWithValue("@Password", txtConfirmNewPw.Text);
+                            cmd.Parameters.AddWithValue("@RenewPassword", "no");
+                            cmd.Parameters.AddWithValue("@Staff_ID", Int16.Parse(Session["id"].ToString()));
+                            cmd.Connection = con;
+                            con.Open();
+                            int a = cmd.ExecuteNonQuery();
+                            if (a > 0)
+                            {
+                                Session["resetPW"] = "no";
+                                string redirect = Request.QueryString["redirect"];
+                                if (redirect == null && !ViewState["RefUrl"].ToString().Contains("ReturnUrl"))
+                                {
+                                    if (Session["role"].ToString() == "HR Staff")
+                                        url = "~/Project/attendance.aspx";
+                                    else if (Session["role"].ToString() == "Normal Staff")
+                                        url = "~/Project/attendanceStaff.aspx";
+                                }
+                                else
+                                {
+                                    url = ViewState["RefUrl"].ToString(); //happen when when user click the masterpage button
+                                }
+                            }
+                            con.Close();
+                        }
+                    }
+                }
+                catch
+                {
+                    message = "Password update unsuccessful. Please try again.";
+                    url = "~/Project/ChangePassword.aspx";
+                }
             }
+            
             //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + message + "');", false);
+
+
             var page = HttpContext.Current.CurrentHandler as Page;
             ScriptManager.RegisterStartupScript(page, page.GetType(), "alert", "alert('" + message + "');window.location ='" + url + "';", true);
             //if (txtCurrentPw.Visible == false)                                
