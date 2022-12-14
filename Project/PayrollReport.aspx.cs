@@ -116,15 +116,15 @@ namespace FYP.Project
                 }
                 if (payrollListID != "")
                 {
-                    //Response.Redirect(string.Format("~/Project/PayrollReportReal.aspx?payrollListID={0}&date={1}&title={2}", payrollListID, dateForPass, title));
-                    string url = string.Format("~/Project/PayrollReportReal.aspx?payrollListID={0}&date={1}&title={2}", payrollListID, dateForPass, title);
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("<script type = 'text/javascript'>");
-                    sb.Append("window.open('");
-                    sb.Append(url);
-                    sb.Append("');");
-                    sb.Append("</script>");
-                    ClientScript.RegisterStartupScript(this.GetType(), "script", sb.ToString());
+                    Response.Redirect(string.Format("~/Project/PayrollReportReal.aspx?payrollListID={0}&date={1}&title={2}", payrollListID, dateForPass, title));
+                    //string url = string.Format("~/Project/PayrollReportReal.aspx?payrollListID={0}&date={1}&title={2}", payrollListID, dateForPass, title);
+                    //StringBuilder sb = new StringBuilder();
+                    //sb.Append("<script type = 'text/javascript'>");
+                    //sb.Append("window.open('");
+                    //sb.Append(url);
+                    //sb.Append("');");
+                    //sb.Append("</script>");
+                    //ClientScript.RegisterStartupScript(this.GetType(), "script", sb.ToString());
                 }
             }
             else
