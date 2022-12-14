@@ -594,6 +594,57 @@ namespace FYP.Project
                         string iddd = Request.QueryString["id"];
                         this.BindGrid(Int16.Parse(iddd));
                         //Response.Redirect(string.Format("~/Project/PayslipPage.aspx?id={0}&payperiod={1}&date1={2}&date2={3}&staffID={4}", id, payperiod, firstDay, lastDay, staffID));
+
+                        List<String> checkIsAllProcess = new List<String>();
+                        bool IsAllProcess = true; int IntIsAllProcess = 0;
+                        string payrolllistID = Request.QueryString["id"];
+                        constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                        using (SqlConnection con = new SqlConnection(constr))
+                        {
+                            using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
+                            {
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@Action", "SELECT");
+                                cmd.Parameters.AddWithValue("@PayrollListID", payrolllistID);
+                                cmd.Connection = con;
+                                con.Open();
+                                SqlDataReader rd = cmd.ExecuteReader();
+                                while (rd.Read())
+                                {
+                                    string status = rd["ProcessStatus"].ToString();
+                                    checkIsAllProcess.Add(status);
+                                }
+                                con.Close();
+                            }
+                        }
+                        foreach (string status in checkIsAllProcess)
+                        {
+                            if (status != "Processed" && IntIsAllProcess == 0)
+                            {
+                                IsAllProcess = false;
+                                IntIsAllProcess++;
+                            }
+                        }
+
+                        if (IsAllProcess)
+                        {
+                            constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                            using (SqlConnection con = new SqlConnection(constr))
+                            {
+                                using (SqlCommand cmd = new SqlCommand("PayrollList_CRUD"))
+                                {
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@Action", "UPDATE");
+                                    cmd.Parameters.AddWithValue("@Status", "Processed");
+                                    cmd.Parameters.AddWithValue("@PayrollListID", payrolllistID);
+                                    cmd.Connection = con;
+                                    con.Open();
+                                    int a = cmd.ExecuteNonQuery();
+                                    con.Close();
+                                }
+                            }
+                        }
+
                         break;
                     }
 
