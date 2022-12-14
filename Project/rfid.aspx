@@ -86,7 +86,7 @@
                     <div class="form-group" style="margin: 0px 3px 10px">
                         <span style="color: #FF0000">* </span>
                         <label for="recipient-name" class="col-form-label">RFID ID:</label>
-                        <asp:TextBox ID="txt_rfidid" runat="server" class="form-control" MaxLength="10" onkeydown="return ((event.keyCode<=57 && event.keyCode>=48) && event.keyCode!=32 || event.keyCode == 8);"></asp:TextBox>
+                        <asp:TextBox ID="txt_rfidid" runat="server" class="form-control" min="1" max="9999999999" TextMode="Number" onkeydown="return ((event.keyCode<=57 && event.keyCode>=48) && event.keyCode!=32 && this.value.length < 10 || event.keyCode == 8 );"></asp:TextBox>
                         <asp:Label ID="lbl_rfidError" Style="display: none" runat="server" ForeColor="Red" Font-Size="Smaller" Text="This field is required"></asp:Label>
 
                     </div>
