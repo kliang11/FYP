@@ -4,6 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link rel="stylesheet" href="style.css">
+
+    <style type="text/css">
+        .hideGridColumn {
+            display: none;
+        }
+     </style>
     <div class="card-deck" style="margin-bottom: 25px">
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card">
@@ -76,10 +82,15 @@
                     OnRowDataBound="OnRowDataBound" OnSelectedIndexChanged="OnRowSelect" EmptyDataText="No records has been added." DataKeyNames="AttendanceDate,AttendanceID,WorkingHour,IsLate,
                     AttendanceTimeIn,AttendanceTimeOut,AttendanceStatus">
                     <Columns>
+                        <asp:TemplateField ItemStyle-CssClass="hideGridColumn" HeaderStyle-CssClass="hideGridColumn">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAttendanceID" runat="server" Text='<%#  Eval("AttendanceID")%>' Style="display: none"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         <asp:TemplateField HeaderText="Attendance Date" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
                             <ItemTemplate>
                                 <asp:Label ID="lblAttendanceDate" runat="server" Text='<%# Eval("AttendanceDate","{0:d}") %>'></asp:Label>
-                                <asp:Label ID="lblAttendanceID" runat="server" Text='<%#  Eval("AttendanceID")%>' Style="display: none"></asp:Label>
+                                <%--<asp:Label ID="lblAttendanceID" runat="server" Text='<%#  Eval("AttendanceID")%>' Style="display: none"></asp:Label>--%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Time In" ItemStyle-Width="15%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
