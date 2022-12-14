@@ -296,10 +296,10 @@ namespace FYP.Project
             int id = (int)gvList.DataKeys[row.RowIndex].Value; //payslip id
             //int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow rows = gvList.Rows[row.RowIndex];
-            double salary = Convert.ToDouble((rows.FindControl("lblBasicSalary") as Label).Text);
+            double salary = Convert.ToDouble(((rows.FindControl("lblBasicSalary") as Label).Text).Remove(0,3));
             double bonus = Convert.ToDouble((rows.FindControl("txtBonus") as TextBox).Text);
             double unpaidLeaveSalary = 0.0;
-            unpaidLeaveSalary = Convert.ToDouble((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text);
+            unpaidLeaveSalary = Convert.ToDouble(((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text).Remove(0, 3));
             string payperiod = Request.QueryString["payperiod"];
 
             string command = e.CommandName;
@@ -594,6 +594,57 @@ namespace FYP.Project
                         string iddd = Request.QueryString["id"];
                         this.BindGrid(Int16.Parse(iddd));
                         //Response.Redirect(string.Format("~/Project/PayslipPage.aspx?id={0}&payperiod={1}&date1={2}&date2={3}&staffID={4}", id, payperiod, firstDay, lastDay, staffID));
+
+                        List<String> checkIsAllProcess = new List<String>();
+                        bool IsAllProcess = true; int IntIsAllProcess = 0;
+                        string payrolllistID = Request.QueryString["id"];
+                        constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                        using (SqlConnection con = new SqlConnection(constr))
+                        {
+                            using (SqlCommand cmd = new SqlCommand("Payslip_CRUD"))
+                            {
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@Action", "SELECT");
+                                cmd.Parameters.AddWithValue("@PayrollListID", payrolllistID);
+                                cmd.Connection = con;
+                                con.Open();
+                                SqlDataReader rd = cmd.ExecuteReader();
+                                while (rd.Read())
+                                {
+                                    string status = rd["ProcessStatus"].ToString();
+                                    checkIsAllProcess.Add(status);
+                                }
+                                con.Close();
+                            }
+                        }
+                        foreach (string status in checkIsAllProcess)
+                        {
+                            if (status != "Processed" && IntIsAllProcess == 0)
+                            {
+                                IsAllProcess = false;
+                                IntIsAllProcess++;
+                            }
+                        }
+
+                        if (IsAllProcess)
+                        {
+                            constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                            using (SqlConnection con = new SqlConnection(constr))
+                            {
+                                using (SqlCommand cmd = new SqlCommand("PayrollList_CRUD"))
+                                {
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@Action", "UPDATE");
+                                    cmd.Parameters.AddWithValue("@Status", "Processed");
+                                    cmd.Parameters.AddWithValue("@PayrollListID", payrolllistID);
+                                    cmd.Connection = con;
+                                    con.Open();
+                                    int a = cmd.ExecuteNonQuery();
+                                    con.Close();
+                                }
+                            }
+                        }
+
                         break;
                     }
 
