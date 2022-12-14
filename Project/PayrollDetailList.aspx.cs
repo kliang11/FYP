@@ -296,10 +296,10 @@ namespace FYP.Project
             int id = (int)gvList.DataKeys[row.RowIndex].Value; //payslip id
             //int rowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow rows = gvList.Rows[row.RowIndex];
-            double salary = Convert.ToDouble((rows.FindControl("lblBasicSalary") as Label).Text);
+            double salary = Convert.ToDouble(((rows.FindControl("lblBasicSalary") as Label).Text).Remove(0,3));
             double bonus = Convert.ToDouble((rows.FindControl("txtBonus") as TextBox).Text);
             double unpaidLeaveSalary = 0.0;
-            unpaidLeaveSalary = Convert.ToDouble((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text);
+            unpaidLeaveSalary = Convert.ToDouble(((rows.FindControl("lblUnpaidLeaveSalary") as Label).Text).Remove(0, 3));
             string payperiod = Request.QueryString["payperiod"];
 
             string command = e.CommandName;
