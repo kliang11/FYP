@@ -973,12 +973,7 @@ namespace FYP.Project
         {
             //EIS calculation
             bool exit = false;
-            double eisEmployer = 0.0, eisEmployee = 0.0;
-            double salary = basicSalary;
-            double increaseValue = 100.00;
-            double bottomValue = 200.01, topValue = 300.00;
-            double eisPercentage = 0.002;
-
+            double eisEmployer = 0.0, eisEmployee = 0.0, salary = basicSalary, increaseValue = 100.00, bottomValue = 200.01, topValue = 300.00, eisPercentage = 0.002;
             if (salary <= 0)
                 return;
             if (salary >= 0.01 && salary <= 30.00)
