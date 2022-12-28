@@ -200,12 +200,20 @@ namespace FYP.Project
             string checkTimeIn = (row.FindControl("txtTimeIn") as TextBox).Text;
             string checkTimeOut = (row.FindControl("txtTimeOut") as TextBox).Text;
 
-            if(TimeSpan.Compare(Convert.ToDateTime(checkTimeIn).TimeOfDay, Convert.ToDateTime(checkTimeOut).TimeOfDay) == 1)
-
+            if(checkTimeIn =="" && checkTimeOut != "")
             {
-                (row.FindControl("lbltxtFalse") as Label).Style.Add("display", "block");
+                (row.FindControl("lbltxtNoTimeIn") as Label).Style.Add("display", "block");
                 return;
             }
+
+            if (checkTimeIn != "" && checkTimeOut != ""){
+                if (TimeSpan.Compare(Convert.ToDateTime(checkTimeIn).TimeOfDay, Convert.ToDateTime(checkTimeOut).TimeOfDay) == 1)
+                {
+                    (row.FindControl("lbltxtFalse") as Label).Style.Add("display", "block");
+                    return;
+                }
+            }
+
 
             string attendanceStatus = "Pending";
             string isLate = "N";
