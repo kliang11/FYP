@@ -56,7 +56,7 @@
 <body>
     <form id="form1" runat="server">
 
-            <h4>Loggin Out Please Wait...</h4>
+            <h4>Logging Out Please Wait...</h4>
             <div class="loader"></div>
 
 

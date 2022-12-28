@@ -36,6 +36,7 @@ namespace FYP.Project
                         {
                             this.gvList.Columns[5].Visible = false;
                             this.gvList.Columns[6].Visible = true;
+                            btnAdd.Visible = false;
                         }
                         this.BindGrid();
                     }
