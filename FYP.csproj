@@ -462,7 +462,9 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings1.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings2.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\fypHRMS - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\fyphrms.pubxml" />
     <None Include="Web.Debug.config">
